@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lmiis/views/employment_list_screens/widgets/employment_item.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/ResponsModels/DistrictsModel.dart';
 import '../../models/ResponsModels/MunicipalitiesModel.dart';
 import '../../models/ResponsModels/ViewAllJobsModel.dart';
 import '../../provider/JobProvider.dart';
@@ -12,7 +15,6 @@ import '../../utils/app_images.dart';
 import '../../utils/colors_resource.dart';
 import '../../utils/dimensions.dart';
 import '../news_information_see_more_screens/widgets/custtom_search_button.dart';
-import '../news_information_see_more_screens/widgets/search_text_field.dart';
 import '../widgets/showCustomSnackBar.dart';
 
 class EmploymentListScreen extends StatefulWidget {
@@ -25,9 +27,12 @@ class EmploymentListScreen extends StatefulWidget {
 class _EmploymentListScreenState extends State<EmploymentListScreen> {
   String locationHintValWord = AppConstants.Select_the_municipality;
   List<String> locationList = [AppConstants.Select_the_municipality];
+  String distrcitHintValWord = "Disreci";
+  List<String> districtList = ["AppConstants.Select_the_municipality"];
   List<int> locationListIdList = [0];
   int locationListId = 0;
-
+  List<int> distcitListIdList = [0];
+  int districtListId = 0;
   var gradValueWord = AppConstants.grade;
   String gradHintValWord = AppConstants.grade;
   List<String> gradList = [AppConstants.grade];
@@ -39,11 +44,11 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
   bool isSearching = false;
 
   List<MunicipalitiesData>? municipalitiesData;
-
+  List<DistrictsData>? distictsData;
   @override
   void initState() {
     municipalitiesData = [];
-
+    distictsData = [];
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<JobProvider>(context, listen: false).getVewAllJob(pageCount);
       Provider.of<JobProvider>(context, listen: false)
@@ -60,9 +65,16 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
 
       var municipalities =
           Provider.of<LocationProvider>(context, listen: false);
+      // log(municipalities.municipalitiesDataAll.toString());
       for (var element in municipalities.municipalitiesDataAll!) {
         locationList.add(element.districtName!);
         locationListIdList.add(element.id!);
+      }
+      var distrcits = Provider.of<LocationProvider>(context, listen: false);
+      log(distrcits.pleaseTheDistrictWordsFullData.toString());
+      for (var element in distrcits.pleaseTheDistrictWordsFullData!) {
+        districtList.add(element.name!);
+        distcitListIdList.add(element.id!);
       }
     });
     super.initState();
@@ -71,6 +83,18 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+          AppConstants.employment,
+        ),
+      ),
       body: Consumer2<JobProvider, LocationProvider>(
         builder: (context, jobProvider, locationProvider, child) => SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -78,45 +102,41 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
           child: Column(
             children: [
               Expanded(
-                flex: 5,
+                flex: 6,
                 child: Column(
                   children: [
                     Container(
-                      color: ColorsResource.PRAYMERY_COLOR,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.040,
-                        margin:
-                            const EdgeInsets.only(top: 40, left: 10, right: 10),
-                        child: Column(
-                          children: [
-                            //Toolbar
-                            Row(
-                              children: [
-                                InkWell(
-                                    onHover: (_) {},
-                                    onTap: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: SvgPicture.asset(
-                                        AppImages.ic_back_blue)),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width - 65,
-                                  child: Text(
-                                    AppConstants.employment,
-                                    style: TextStyle(
-                                        fontSize: Dimensions.BODY_20,
-                                        fontWeight:
-                                            Dimensions.FONT_MEDIUM_NORMUL,
-                                        color:
-                                            ColorsResource.PRAYMARY_TEXT_COLOR),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 5, left: 20, right: 20),
+                            width: MediaQuery.of(context).size.width - 80,
+                            child: selectDistrictLocationDropdown(),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 5, left: 20, right: 20),
+                            width: MediaQuery.of(context).size.width - 80,
+                            child: selectDistrictLocationDropdown(),
+                          )
+                        ],
                       ),
                     ),
                     Container(
@@ -379,6 +399,67 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  selectDistrictLocationDropdown() {
+    return Container(
+      height: 40,
+      width: MediaQuery.of(context).size.width / 1.1,
+      decoration: myBoxDecoration(),
+      child: Container(
+        margin: const EdgeInsets.only(left: 10, right: 10),
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: DropdownButton<String>(
+            elevation: 16,
+            isExpanded: true,
+            style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+            underline: Container(
+              height: 2,
+              color: Colors.transparent,
+            ),
+            hint: Text(
+              distrcitHintValWord,
+              style: TextStyle(
+                  fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+                  fontSize: Dimensions.BODY_16,
+                  color: locationHintValWord !=
+                          AppConstants.Select_the_municipality
+                      ? ColorsResource.TEXT_BLACK_COLOR
+                      : ColorsResource.TEXT_GRAY_COLOR),
+            ),
+            iconSize: 30,
+            //value: locationValueWord,
+            //add this parameter
+            items: districtList.map((String dropDownStringItem) {
+              return DropdownMenuItem(
+                value: dropDownStringItem,
+                child: Text(
+                  dropDownStringItem,
+                  style: TextStyle(
+                      fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+                      fontSize: Dimensions.BODY_16,
+                      color: dropDownStringItem !=
+                              AppConstants.Select_the_municipality
+                          ? ColorsResource.TEXT_BLACK_COLOR
+                          : ColorsResource.TEXT_GRAY_COLOR),
+                ),
+              );
+            }).toList(),
+            onChanged: (selectedValue) {
+              setState(() {
+                distrcitHintValWord = selectedValue!;
+                districtListId =
+                    distcitListIdList[districtList.indexOf(selectedValue)];
+
+                // print('${locationListIdList.indexOf(locationList.indexOf(selectedValue))}');
+                // print('${locationListIdList[locationList.indexOf(selectedValue)]} ');
+              });
+            },
           ),
         ),
       ),

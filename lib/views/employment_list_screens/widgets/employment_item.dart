@@ -8,6 +8,8 @@ import 'package:lmiis/utils/dimensions.dart';
 
 import '../../../models/ResponsModels/ViewAllJobsModel.dart';
 import '../../../utils/colors_resource.dart';
+import '../../Job_description_view_screens/Job_description_view_screen.dart';
+import '../../login_screens/logIn_screen.dart';
 
 class EmploymentItem extends StatelessWidget {
   ViewAllJobsData viewAllJobData;
@@ -15,19 +17,87 @@ class EmploymentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return InkWell(
       onHover: (_) {},
       onTap: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const AlertDialog(
-                title: Text("Please login"),
-                content: Text("Hello World"),
-              );
-            });
         final box = GetStorage();
         String? token = box.read(AppConstants.TOKEN) ?? '';
+        token.isEmpty
+            ? showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    insetPadding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 14),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    // title: const Text("कृपया लगइन गर्नुहोस्"),
+                    content: SizedBox(
+                      width: screenSize.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(
+                                  Icons.close,
+                                  size: 30,
+                                )),
+                          ),
+                          const Text(
+                            "कृपया लगइन गर्नुहोस्",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+
+                                shadowColor: Colors.greenAccent,
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32.0)),
+                                minimumSize: const Size(150, 50), //////// HERE
+                              ),
+                              onPressed: () {
+                                token.isEmpty
+                                    ? Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (ctx) =>
+                                                const LogInScreen()))
+                                    : Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                JobDescriptionViewScreen(
+                                                    viewAllJobData)));
+                              },
+                              child: const Text("Login")),
+                        ],
+                      ),
+                    ),
+                  );
+                })
+            : Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        JobDescriptionViewScreen(viewAllJobData)));
+
         // token == ""
         //     ? Navigator.push(context,
         //         MaterialPageRoute(builder: (ctx) => const LogInScreen()))
@@ -48,19 +118,42 @@ class EmploymentItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 80,
-                  height: 80,
-                  padding: const EdgeInsets.all(5),
-                  child: viewAllJobData.serviceProvider!.logo != null
-                      ? Image.network(
-                          '${Apis.URL}${viewAllJobData.serviceProvider!.logo}',
-                          height: 60,
-                          width: 60,
-                          fit: BoxFit.fill,
+                viewAllJobData.serviceProvider!.logo != null
+                    ? Container(
+                        width: 80,
+                        height: 80,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    '${Apis.URL}${viewAllJobData.serviceProvider!.logo}')))
+                        // viewAllJobData.serviceProvider!.logo != null
+                        //     ? Image.network(
+                        //         '${Apis.URL}${viewAllJobData.serviceProvider!.logo}',
+                        //         height: 60,
+                        //         width: 60,
+                        //         fit: BoxFit.fill,
+                        //       )
+
                         )
-                      : Container(),
-                )
+                    : const Text("sd")
+                // Container(
+                //     width: 80,
+                //     height: 80,
+                //     padding: const EdgeInsets.all(5),
+                //     decoration: const BoxDecoration(
+                //         image: DecorationImage(
+                //             image: NetworkImage(
+                //                 'https://www.name.edu.np/wp-content/uploads/2020/06/placeholder.png')))
+                //     // viewAllJobData.serviceProvider!.logo != null
+                //     //     ? Image.network(
+                //     //         '${Apis.URL}${viewAllJobData.serviceProvider!.logo}',
+                //     //         height: 60,
+                //     //         width: 60,
+                //     //         fit: BoxFit.fill,
+                //     //       )
+
+                //     )
               ],
             ),
             Column(

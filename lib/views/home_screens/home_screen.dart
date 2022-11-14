@@ -828,7 +828,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Expanded(child: Container()),
-                  token == " "
+                  token.isNotEmpty
                       ? Material(
                           color: Colors.transparent,
                           child: InkWell(
@@ -838,7 +838,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          const LogInScreen()),
+                                          const HomeScreen()),
                                   (Route<dynamic> route) => false);
                             },
                             onHover: (_) {},
