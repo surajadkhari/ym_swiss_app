@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_svg/svg.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lmiis/provider/AuthProvider.dart';
@@ -52,320 +53,330 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: ColorsResource.WHAIT,
-      drawer: drawerLayout(),
-      body: SingleChildScrollView(
-        child: Consumer<NewsNoticeProvider>(
-          builder: (context, newsNoticeProvider, child) => SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                //ToolBar
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          color: ColorsResource.PRAYMARY_TEXT_COLOR,
-                          height: 90,
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                left: 20, right: 20, top: 30),
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  onHover: (_) {},
-                                  onTap: () {
-                                    _scaffoldKey.currentState?.openDrawer();
-                                  },
-                                  child: SizedBox(
-                                    width: 30,
-                                    height: 30,
-                                    child: Container(
-                                        margin: const EdgeInsets.all(6),
-                                        child: SvgPicture.asset(
-                                            AppImages.ic_menu)),
-                                  ),
-                                ),
-                                Expanded(child: Container()),
-                                Text(
-                                  AppConstants.APP_NAME,
-                                  style: TextStyle(
-                                      color: ColorsResource.WHAIT,
-                                      fontSize: Dimensions.BODY_30,
-                                      fontWeight: Dimensions.FONT_BOLD),
-                                ),
-                                Expanded(child: Container()),
-                                InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const NotificationScreen()));
-                                    },
-                                    onHover: (_) {},
-                                    child: SvgPicture.asset(
-                                        AppImages.ic_notificaton))
-                              ],
-                            ),
-                          ),
-                        ),
-                        //topMenu
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 10, right: 5, top: 10, bottom: 10),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.92,
-                                  decoration: myBoxDecorationTop(),
-                                  height: MediaQuery.of(context).size.height *
-                                      0.150,
-                                  child: InkWell(
+    return riverpod.ProviderScope(
+      child: Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: ColorsResource.WHAIT,
+        drawer: drawerLayout(),
+        body: SingleChildScrollView(
+          child: Consumer<NewsNoticeProvider>(
+            builder: (context, newsNoticeProvider, child) => SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  //ToolBar
+                  Expanded(
+                    flex: 5,
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            color: ColorsResource.PRAYMARY_TEXT_COLOR,
+                            height: 90,
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                  left: 20, right: 20, top: 30),
+                              child: Row(
+                                children: [
+                                  InkWell(
                                     onHover: (_) {},
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const EmploymentListScreen()));
+                                      _scaffoldKey.currentState?.openDrawer();
                                     },
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                            AppImages.ic_employment),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          AppConstants.employment,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: ColorsResource
-                                                  .PRAYMARY_TEXT_COLOR,
-                                              fontSize: Dimensions.BODY_14,
-                                              fontWeight: Dimensions
-                                                  .FONT_MEDIUM_NORMUL),
-                                        ),
-                                      ],
+                                    child: SizedBox(
+                                      width: 30,
+                                      height: 30,
+                                      child: Container(
+                                          margin: const EdgeInsets.all(6),
+                                          child: SvgPicture.asset(
+                                              AppImages.ic_menu)),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 5, right: 5, top: 10, bottom: 10),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.92,
-                                  decoration: myBoxDecorationTop(),
-                                  height: MediaQuery.of(context).size.height *
-                                      0.150,
-                                  child: InkWell(
-                                    onHover: (_) {},
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const TrainingScreen()));
-                                    },
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(AppImages.ic_training),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          AppConstants.training,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: ColorsResource
-                                                  .PRAYMARY_TEXT_COLOR,
-                                              fontSize: Dimensions.BODY_14,
-                                              fontWeight: Dimensions
-                                                  .FONT_MEDIUM_NORMUL),
-                                        ),
-                                      ],
-                                    ),
+                                  Expanded(child: Container()),
+                                  Text(
+                                    AppConstants.APP_NAME,
+                                    style: TextStyle(
+                                        color: ColorsResource.WHAIT,
+                                        fontSize: Dimensions.BODY_30,
+                                        fontWeight: Dimensions.FONT_BOLD),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 5, right: 5, top: 10, bottom: 10),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.92,
-                                  decoration: myBoxDecorationTop(),
-                                  height: MediaQuery.of(context).size.height *
-                                      0.150,
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const EmploymentSupportServiceScreen()));
-                                    },
-                                    onHover: (_) {},
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(AppImages
-                                            .ic_employment_support_service_provider),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          AppConstants
-                                              .employment_support_service_provider,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: ColorsResource
-                                                  .PRAYMARY_TEXT_COLOR,
-                                              fontSize: Dimensions.BODY_14,
-                                              fontWeight: Dimensions
-                                                  .FONT_MEDIUM_NORMUL),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 5, right: 10, top: 10, bottom: 10),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.92,
-                                  decoration: myBoxDecorationTop(),
-                                  height: MediaQuery.of(context).size.height *
-                                      0.150,
-                                  child: InkWell(
-                                    onHover: (_) {},
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const TrainingServiceProvider()));
-                                    },
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(AppImages
-                                            .ic_employment_support_service_provider),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          AppConstants
-                                              .training_service_provider,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: ColorsResource
-                                                  .PRAYMARY_TEXT_COLOR,
-                                              fontSize: Dimensions.BODY_14,
-                                              fontWeight: Dimensions
-                                                  .FONT_MEDIUM_NORMUL),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //title button
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 10, right: 10),
-                          child: Row(
-                            children: [
-                              Text(
-                                AppConstants.information_news,
-                                style: TextStyle(
-                                    color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                              ),
-                              Expanded(child: Container()),
-                              CustomButton(
-                                  AppConstants.see_more,
-                                  () => {
+                                  Expanded(child: Container()),
+                                  InkWell(
+                                      onTap: () {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const NewsInformationSeeMoreScreen()))
+                                                    const NotificationScreen()));
                                       },
-                                  height: 25,
-                                  wight: 115,
-                                  textSize: Dimensions.BODY_10,
-                                  padding: 2)
-                            ],
+                                      onHover: (_) {},
+                                      child: SvgPicture.asset(
+                                          AppImages.ic_notificaton))
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, right: 10, top: 10),
-                          height: 1,
-                          width: MediaQuery.of(context).size.width,
-                          color: ColorsResource.PRAYMARY_TEXT_COLOR,
-                        ),
-                      ],
+                          //topMenu
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                        left: 10,
+                                        right: 5,
+                                        top: 10,
+                                        bottom: 10),
+                                    width: MediaQuery.of(context).size.width *
+                                        0.92,
+                                    decoration: myBoxDecorationTop(),
+                                    height: MediaQuery.of(context).size.height *
+                                        0.150,
+                                    child: InkWell(
+                                      onHover: (_) {},
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const EmploymentListScreen()));
+                                      },
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                              AppImages.ic_employment),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            AppConstants.employment,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: ColorsResource
+                                                    .PRAYMARY_TEXT_COLOR,
+                                                fontSize: Dimensions.BODY_14,
+                                                fontWeight: Dimensions
+                                                    .FONT_MEDIUM_NORMUL),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                        left: 5, right: 5, top: 10, bottom: 10),
+                                    width: MediaQuery.of(context).size.width *
+                                        0.92,
+                                    decoration: myBoxDecorationTop(),
+                                    height: MediaQuery.of(context).size.height *
+                                        0.150,
+                                    child: InkWell(
+                                      onHover: (_) {},
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const TrainingScreen()));
+                                      },
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                              AppImages.ic_training),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            AppConstants.training,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: ColorsResource
+                                                    .PRAYMARY_TEXT_COLOR,
+                                                fontSize: Dimensions.BODY_14,
+                                                fontWeight: Dimensions
+                                                    .FONT_MEDIUM_NORMUL),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                        left: 5, right: 5, top: 10, bottom: 10),
+                                    width: MediaQuery.of(context).size.width *
+                                        0.92,
+                                    decoration: myBoxDecorationTop(),
+                                    height: MediaQuery.of(context).size.height *
+                                        0.150,
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const EmploymentSupportServiceScreen()));
+                                      },
+                                      onHover: (_) {},
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(AppImages
+                                              .ic_employment_support_service_provider),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            AppConstants
+                                                .employment_support_service_provider,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: ColorsResource
+                                                    .PRAYMARY_TEXT_COLOR,
+                                                fontSize: Dimensions.BODY_14,
+                                                fontWeight: Dimensions
+                                                    .FONT_MEDIUM_NORMUL),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                        left: 5,
+                                        right: 10,
+                                        top: 10,
+                                        bottom: 10),
+                                    width: MediaQuery.of(context).size.width *
+                                        0.92,
+                                    decoration: myBoxDecorationTop(),
+                                    height: MediaQuery.of(context).size.height *
+                                        0.150,
+                                    child: InkWell(
+                                      onHover: (_) {},
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const TrainingServiceProvider()));
+                                      },
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(AppImages
+                                              .ic_employment_support_service_provider),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            AppConstants
+                                                .training_service_provider,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: ColorsResource
+                                                    .PRAYMARY_TEXT_COLOR,
+                                                fontSize: Dimensions.BODY_14,
+                                                fontWeight: Dimensions
+                                                    .FONT_MEDIUM_NORMUL),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          //title button
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            child: Row(
+                              children: [
+                                Text(
+                                  AppConstants.information_news,
+                                  style: TextStyle(
+                                      color:
+                                          ColorsResource.PRAYMARY_TEXT_COLOR),
+                                ),
+                                Expanded(child: Container()),
+                                CustomButton(
+                                    AppConstants.see_more,
+                                    () => {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const NewsInformationSeeMoreScreen()))
+                                        },
+                                    height: 25,
+                                    wight: 115,
+                                    textSize: Dimensions.BODY_10,
+                                    padding: 2)
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                left: 10, right: 10, top: 10),
+                            height: 1,
+                            width: MediaQuery.of(context).size.width,
+                            color: ColorsResource.PRAYMARY_TEXT_COLOR,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 11,
-                  child: newsNoticeProvider.newsNoticeModel != null
-                      ? ListView.builder(
-                          shrinkWrap: true,
-                          itemCount:
-                              newsNoticeProvider.newsNoticeDataList!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            NewsNoticeData newsNoticeData =
-                                newsNoticeProvider.newsNoticeDataList![index];
-                            return NewsInformationItem(newsNoticeData);
-                          },
-                        )
-                      : Container(
-                          child: const Align(
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator(),
+                  Expanded(
+                    flex: 11,
+                    child: newsNoticeProvider.newsNoticeModel != null
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            itemCount:
+                                newsNoticeProvider.newsNoticeDataList!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              NewsNoticeData newsNoticeData =
+                                  newsNoticeProvider.newsNoticeDataList![index];
+                              return NewsInformationItem(newsNoticeData);
+                            },
+                          )
+                        : Container(
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: CircularProgressIndicator(),
+                            ),
                           ),
-                        ),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

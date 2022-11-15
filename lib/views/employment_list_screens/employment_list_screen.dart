@@ -2,6 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lmiis/data/datasource/remote/dio/dio_client.dart';
+import 'package:lmiis/models/district_new_model.dart';
+import 'package:lmiis/models/new_grade_model.dart';
+import 'package:lmiis/models/new_muni_model.dart';
+import 'package:lmiis/models/pradeshModel.dart';
 import 'package:lmiis/views/employment_list_screens/widgets/employment_item.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +30,18 @@ class EmploymentListScreen extends StatefulWidget {
 }
 
 class _EmploymentListScreenState extends State<EmploymentListScreen> {
+  bool isProvinceSelected = false;
+  NewPradeshModel? newPradeshModel;
+
+  bool isDistrictSelected = false;
+  DistrictNewModel? districtNewModel;
+
+  bool isMuniSelcted = false;
+  NewMuniModel? newMuniModel;
+
+  bool isGradeSelected = false;
+  NewGradeModel? newGradeModel;
+
   String locationHintValWord = AppConstants.Select_the_municipality;
   List<String> locationList = [AppConstants.Select_the_municipality];
   String distrcitHintValWord = "Disreci";
@@ -45,8 +62,13 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
 
   List<MunicipalitiesData>? municipalitiesData;
   List<DistrictsData>? distictsData;
+
   @override
   void initState() {
+    isProvinceSelected = false;
+    isDistrictSelected = false;
+    isMuniSelcted = false;
+    isGradeSelected = false;
     municipalitiesData = [];
     distictsData = [];
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -71,7 +93,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
         locationListIdList.add(element.id!);
       }
       var distrcits = Provider.of<LocationProvider>(context, listen: false);
-      log(distrcits.pleaseTheDistrictWordsFullData.toString());
+
       for (var element in distrcits.pleaseTheDistrictWordsFullData!) {
         districtList.add(element.name!);
         distcitListIdList.add(element.id!);
@@ -114,11 +136,92 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                             width: 10,
                           ),
                           Container(
-                            margin: const EdgeInsets.only(
-                                top: 5, left: 20, right: 20),
-                            width: MediaQuery.of(context).size.width - 80,
-                            child: selectDistrictLocationDropdown(),
-                          )
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<List<NewPradeshModel>>(
+                                  future: ApiClient().getPradeshData(),
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      return Container(
+                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.1,
+                                        decoration: myBoxDecoration(),
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child:
+                                                DropdownButton<NewPradeshModel>(
+                                              elevation: 16,
+                                              isExpanded: true,
+                                              style: TextStyle(
+                                                  color: ColorsResource
+                                                      .TEXT_BLACK_COLOR),
+                                              underline: Container(
+                                                height: 2,
+                                                color: Colors.transparent,
+                                              ),
+                                              hint: Text(
+                                                "Select province",
+                                                style: TextStyle(
+                                                    fontWeight: Dimensions
+                                                        .FONT_MEDIUM_NORMUL,
+                                                    fontSize:
+                                                        Dimensions.BODY_16,
+                                                    color: locationHintValWord !=
+                                                            AppConstants
+                                                                .Select_the_municipality
+                                                        ? ColorsResource
+                                                            .TEXT_BLACK_COLOR
+                                                        : ColorsResource
+                                                            .TEXT_GRAY_COLOR),
+                                              ),
+                                              iconSize: 30,
+                                              value: newPradeshModel,
+                                              //add this parameter
+                                              items: snap.data!.map(
+                                                  (NewPradeshModel
+                                                      pradeshModel) {
+                                                return DropdownMenuItem(
+                                                  value: pradeshModel,
+                                                  child: Text(
+                                                    pradeshModel.name,
+                                                    style: TextStyle(
+                                                      fontWeight: Dimensions
+                                                          .FONT_MEDIUM_NORMUL,
+                                                      fontSize:
+                                                          Dimensions.BODY_16,
+                                                      color: isProvinceSelected
+                                                          ? ColorsResource
+                                                              .TEXT_BLACK_COLOR
+                                                          : ColorsResource
+                                                              .TEXT_GRAY_COLOR,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedValue) {
+                                                setState(() {
+                                                  isProvinceSelected = true;
+                                                  newPradeshModel =
+                                                      selectedValue;
+                                                  districtNewModel = null;
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }))
                         ],
                       ),
                     ),
@@ -131,11 +234,93 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                             width: 10,
                           ),
                           Container(
-                            margin: const EdgeInsets.only(
-                                top: 5, left: 20, right: 20),
-                            width: MediaQuery.of(context).size.width - 80,
-                            child: selectDistrictLocationDropdown(),
-                          )
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<List<DistrictNewModel>>(
+                                  future: ApiClient().getDistricts(),
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      return Container(
+                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.1,
+                                        decoration: myBoxDecoration(),
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: DropdownButton<
+                                                DistrictNewModel>(
+                                              elevation: 16,
+                                              isExpanded: true,
+                                              style: TextStyle(
+                                                  color: ColorsResource
+                                                      .TEXT_BLACK_COLOR),
+                                              underline: Container(
+                                                height: 2,
+                                                color: Colors.transparent,
+                                              ),
+                                              hint: Text(
+                                                "Select district",
+                                                style: TextStyle(
+                                                    fontWeight: Dimensions
+                                                        .FONT_MEDIUM_NORMUL,
+                                                    fontSize:
+                                                        Dimensions.BODY_16,
+                                                    color: isDistrictSelected
+                                                        ? ColorsResource
+                                                            .TEXT_BLACK_COLOR
+                                                        : ColorsResource
+                                                            .TEXT_GRAY_COLOR),
+                                              ),
+                                              iconSize: 30,
+                                              value: districtNewModel,
+                                              //add this parameter
+                                              items: snap.data!
+                                                  .where((element) =>
+                                                      element.pradeshId ==
+                                                      newPradeshModel?.id)
+                                                  .map((DistrictNewModel
+                                                      districtModel) {
+                                                return DropdownMenuItem(
+                                                  value: districtModel,
+                                                  child: Text(
+                                                    districtModel.name,
+                                                    style: TextStyle(
+                                                      fontWeight: Dimensions
+                                                          .FONT_MEDIUM_NORMUL,
+                                                      fontSize:
+                                                          Dimensions.BODY_16,
+                                                      color: isProvinceSelected
+                                                          ? ColorsResource
+                                                              .TEXT_BLACK_COLOR
+                                                          : ColorsResource
+                                                              .TEXT_GRAY_COLOR,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedValue) {
+                                                setState(() {
+                                                  isDistrictSelected = true;
+                                                  districtNewModel =
+                                                      selectedValue;
+                                                  newMuniModel = null;
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }))
                         ],
                       ),
                     ),
@@ -148,11 +333,90 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                             width: 10,
                           ),
                           Container(
-                            margin: const EdgeInsets.only(
-                                top: 5, left: 20, right: 20),
-                            width: MediaQuery.of(context).size.width - 80,
-                            child: selectLocationDropdown(),
-                          )
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<List<NewMuniModel>>(
+                                  future: ApiClient().getMunicipalities(),
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      return Container(
+                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.1,
+                                        decoration: myBoxDecoration(),
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: DropdownButton<NewMuniModel>(
+                                              elevation: 16,
+                                              isExpanded: true,
+                                              style: TextStyle(
+                                                  color: ColorsResource
+                                                      .TEXT_BLACK_COLOR),
+                                              underline: Container(
+                                                height: 2,
+                                                color: Colors.transparent,
+                                              ),
+                                              hint: Text(
+                                                "Select municipality",
+                                                style: TextStyle(
+                                                    fontWeight: Dimensions
+                                                        .FONT_MEDIUM_NORMUL,
+                                                    fontSize:
+                                                        Dimensions.BODY_16,
+                                                    color: isMuniSelcted
+                                                        ? ColorsResource
+                                                            .TEXT_BLACK_COLOR
+                                                        : ColorsResource
+                                                            .TEXT_GRAY_COLOR),
+                                              ),
+                                              iconSize: 30,
+                                              value: newMuniModel,
+                                              //add this parameter
+                                              items: snap.data!
+                                                  .where((element) =>
+                                                      element.districtId ==
+                                                      districtNewModel?.id)
+                                                  .map(
+                                                      (NewMuniModel muniModel) {
+                                                return DropdownMenuItem(
+                                                  value: muniModel,
+                                                  child: Text(
+                                                    muniModel.name,
+                                                    style: TextStyle(
+                                                      fontWeight: Dimensions
+                                                          .FONT_MEDIUM_NORMUL,
+                                                      fontSize:
+                                                          Dimensions.BODY_16,
+                                                      color: isMuniSelcted
+                                                          ? ColorsResource
+                                                              .TEXT_BLACK_COLOR
+                                                          : ColorsResource
+                                                              .TEXT_GRAY_COLOR,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedValue) {
+                                                setState(() {
+                                                  isMuniSelcted = true;
+                                                  newMuniModel = selectedValue;
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }))
                         ],
                       ),
                     ),
@@ -165,11 +429,88 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                             width: 10,
                           ),
                           Container(
-                            margin: const EdgeInsets.only(
-                                top: 5, left: 20, right: 20),
-                            width: MediaQuery.of(context).size.width - 80,
-                            child: selectGradeDropdown(),
-                          )
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<List<NewGradeModel>>(
+                                  future: ApiClient().getGrades(),
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      return Container(
+                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.1,
+                                        decoration: myBoxDecoration(),
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child:
+                                                DropdownButton<NewGradeModel>(
+                                              elevation: 16,
+                                              isExpanded: true,
+                                              style: TextStyle(
+                                                  color: ColorsResource
+                                                      .TEXT_BLACK_COLOR),
+                                              underline: Container(
+                                                height: 2,
+                                                color: Colors.transparent,
+                                              ),
+                                              hint: Text(
+                                                "Select grade",
+                                                style: TextStyle(
+                                                    fontWeight: Dimensions
+                                                        .FONT_MEDIUM_NORMUL,
+                                                    fontSize:
+                                                        Dimensions.BODY_16,
+                                                    color: isGradeSelected
+                                                        ? ColorsResource
+                                                            .TEXT_BLACK_COLOR
+                                                        : ColorsResource
+                                                            .TEXT_GRAY_COLOR),
+                                              ),
+                                              iconSize: 30,
+                                              value: newGradeModel,
+                                              //add this parameter
+                                              items: snap.data!.map(
+                                                  (NewGradeModel
+                                                      newGradeModel) {
+                                                return DropdownMenuItem(
+                                                  value: newGradeModel,
+                                                  child: Text(
+                                                    newGradeModel.name,
+                                                    style: TextStyle(
+                                                      fontWeight: Dimensions
+                                                          .FONT_MEDIUM_NORMUL,
+                                                      fontSize:
+                                                          Dimensions.BODY_16,
+                                                      color: isMuniSelcted
+                                                          ? ColorsResource
+                                                              .TEXT_BLACK_COLOR
+                                                          : ColorsResource
+                                                              .TEXT_GRAY_COLOR,
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedValue) {
+                                                setState(() {
+                                                  isGradeSelected = true;
+                                                  newGradeModel = selectedValue;
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }))
                         ],
                       ),
                     ),

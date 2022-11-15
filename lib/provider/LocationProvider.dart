@@ -110,6 +110,7 @@ class LocationProvider with ChangeNotifier {
 
     notifyListeners();
     ApiResponse apiResponse = await locationRepo.getPradesh();
+    log('pradesh test : ${apiResponse.response!.data.toString()}');
     ResponseModel responseModel;
     int? responseCode = apiResponse.response?.statusCode;
 
