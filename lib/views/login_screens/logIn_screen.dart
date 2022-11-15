@@ -101,6 +101,33 @@ class _LogInScreenState extends State<LogInScreen> {
                             icon: Icon(obsurePAssword
                                 ? Icons.visibility
                                 : Icons.visibility_off)),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                 
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 10),
