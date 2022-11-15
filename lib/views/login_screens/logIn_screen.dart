@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lmiis/models/ResponsModels/ViewAllJobsModel.dart';
 import 'package:lmiis/utils/AppConstants.dart';
 import 'package:lmiis/utils/colors_resource.dart';
 import 'package:lmiis/utils/dimensions.dart';
+import 'package:lmiis/views/Job_description_view_screens/Job_description_view_screen.dart';
 import 'package:lmiis/views/regi_screens/RegistationScren.dart';
 import 'package:lmiis/views/widgets/showCustomSnackBar.dart';
 
@@ -19,7 +21,17 @@ import '../widgets/custom_text_field.dart';
 import '../widgets/custtom_button.dart';
 
 class LogInScreen extends StatefulWidget {
-  const LogInScreen({Key? key}) : super(key: key);
+  LogInScreen({
+    Key? key,
+    this.doCheckLastScreen = false,
+    this.screenType,
+    this.viewAllJobsData,
+    // this.trainingModelData
+  }) : super(key: key);
+  final bool doCheckLastScreen;
+  final String? screenType;
+  final ViewAllJobsData? viewAllJobsData;
+  // final TrainingModelData? trainingModelData;
 
   @override
   State<LogInScreen> createState() => _LogInScreenState();
@@ -183,12 +195,31 @@ class _LogInScreenState extends State<LogInScreen> {
                                 '${authProvider.loginToken?.token}');
                             showCustomSnackBar('Login', context,
                                 isError: false);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const HomeScreen()),
-                                (Route<dynamic> route) => false);
+
+                            widget.doCheckLastScreen
+                                ? Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            widget.screenType ==
+                                                    "job_description"
+                                                ? JobDescriptionViewScreen(
+                                                    widget.viewAllJobsData!)
+                                                : HomeScreen())
+                                    // MaterialPageRoute(
+                                    //   builder: (BuildContext context) =>
+                                    //       widget.screenType == "job_description"
+                                    //           ? JobDescriptionViewScreen(
+                                    //               widget.viewAllJobsData!)
+                                    //           : widget.screenType == "training" ? TrainingWidget(widget.trainingModelData) : const HomeScreen(),
+                                    // ),
+                                    )
+                                : Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const HomeScreen()),
+                                    (Route<dynamic> route) => false);
                           } else {
                             Navigator.of(context).pop();
                             showCustomSnackBar(value.message, context);

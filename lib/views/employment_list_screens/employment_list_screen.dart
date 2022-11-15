@@ -549,7 +549,6 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                             if (gradListId != 0) {
                               url = '$url&category_id=$gradListId';
                             }
-                            print('shfgshjfghsd $url');
 
                             jobProvider
                                 .getSearchAllJob(url, sPageCount)
@@ -590,7 +589,6 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                   ],
                 ),
               ),
-              // EmploymentItem(),
               Expanded(
                   flex: 11,
                   child: jobProvider.viewAllJobsModel != null
@@ -610,7 +608,6 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                             child: CircularProgressIndicator(),
                           ),
                         )),
-
               Expanded(
                 flex: 1,
                 child: Container(
@@ -740,183 +737,6 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  selectDistrictLocationDropdown() {
-    return Container(
-      height: 40,
-      width: MediaQuery.of(context).size.width / 1.1,
-      decoration: myBoxDecoration(),
-      child: Container(
-        margin: const EdgeInsets.only(left: 10, right: 10),
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: DropdownButton<String>(
-            elevation: 16,
-            isExpanded: true,
-            style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
-            underline: Container(
-              height: 2,
-              color: Colors.transparent,
-            ),
-            hint: Text(
-              distrcitHintValWord,
-              style: TextStyle(
-                  fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                  fontSize: Dimensions.BODY_16,
-                  color: locationHintValWord !=
-                          AppConstants.Select_the_municipality
-                      ? ColorsResource.TEXT_BLACK_COLOR
-                      : ColorsResource.TEXT_GRAY_COLOR),
-            ),
-            iconSize: 30,
-            //value: locationValueWord,
-            //add this parameter
-            items: districtList.map((String dropDownStringItem) {
-              return DropdownMenuItem(
-                value: dropDownStringItem,
-                child: Text(
-                  dropDownStringItem,
-                  style: TextStyle(
-                      fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                      fontSize: Dimensions.BODY_16,
-                      color: dropDownStringItem !=
-                              AppConstants.Select_the_municipality
-                          ? ColorsResource.TEXT_BLACK_COLOR
-                          : ColorsResource.TEXT_GRAY_COLOR),
-                ),
-              );
-            }).toList(),
-            onChanged: (selectedValue) {
-              setState(() {
-                distrcitHintValWord = selectedValue!;
-                districtListId =
-                    distcitListIdList[districtList.indexOf(selectedValue)];
-
-                // print('${locationListIdList.indexOf(locationList.indexOf(selectedValue))}');
-                // print('${locationListIdList[locationList.indexOf(selectedValue)]} ');
-              });
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  selectLocationDropdown() {
-    return Container(
-      height: 40,
-      width: MediaQuery.of(context).size.width / 1.1,
-      decoration: myBoxDecoration(),
-      child: Container(
-        margin: const EdgeInsets.only(left: 10, right: 10),
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: DropdownButton<String>(
-            elevation: 16,
-            isExpanded: true,
-            style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
-            underline: Container(
-              height: 2,
-              color: Colors.transparent,
-            ),
-            hint: Text(
-              locationHintValWord,
-              style: TextStyle(
-                  fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                  fontSize: Dimensions.BODY_16,
-                  color: locationHintValWord !=
-                          AppConstants.Select_the_municipality
-                      ? ColorsResource.TEXT_BLACK_COLOR
-                      : ColorsResource.TEXT_GRAY_COLOR),
-            ),
-            iconSize: 30,
-            //value: locationValueWord,
-            //add this parameter
-            items: locationList.map((String dropDownStringItem) {
-              return DropdownMenuItem(
-                value: dropDownStringItem,
-                child: Text(
-                  dropDownStringItem,
-                  style: TextStyle(
-                      fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                      fontSize: Dimensions.BODY_16,
-                      color: dropDownStringItem !=
-                              AppConstants.Select_the_municipality
-                          ? ColorsResource.TEXT_BLACK_COLOR
-                          : ColorsResource.TEXT_GRAY_COLOR),
-                ),
-              );
-            }).toList(),
-            onChanged: (selectedValue) {
-              setState(() {
-                locationHintValWord = selectedValue!;
-                locationListId =
-                    locationListIdList[locationList.indexOf(selectedValue)];
-
-                // print('${locationListIdList.indexOf(locationList.indexOf(selectedValue))}');
-                // print('${locationListIdList[locationList.indexOf(selectedValue)]} ');
-              });
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  selectGradeDropdown() {
-    return Container(
-      height: 40,
-      width: MediaQuery.of(context).size.width / 1.1,
-      decoration: myBoxDecoration(),
-      child: Container(
-        margin: const EdgeInsets.only(left: 10, right: 10),
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: DropdownButton<String>(
-            elevation: 16,
-            isExpanded: true,
-            style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
-            underline: Container(
-              height: 2,
-              color: Colors.transparent,
-            ),
-            hint: Text(
-              gradHintValWord,
-              style: TextStyle(
-                  fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                  fontSize: Dimensions.BODY_16,
-                  color: ColorsResource.TEXT_GRAY_COLOR),
-            ),
-            iconSize: 30,
-            value: gradValueWord,
-            //add this parameter
-            items: gradList.map((String dropDownStringItem) {
-              return DropdownMenuItem(
-                value: dropDownStringItem,
-                child: Text(
-                  dropDownStringItem,
-                  style: TextStyle(
-                      fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                      fontSize: Dimensions.BODY_16,
-                      color: dropDownStringItem != AppConstants.grade
-                          ? ColorsResource.TEXT_BLACK_COLOR
-                          : ColorsResource.TEXT_GRAY_COLOR),
-                ),
-              );
-            }).toList(),
-            onChanged: (selectedValue) {
-              setState(() {
-                gradValueWord = selectedValue!;
-                gradHintValWord = selectedValue;
-                gradListId = gradListIdList[gradList.indexOf(selectedValue)];
-                print(gradListId);
-              });
-            },
           ),
         ),
       ),

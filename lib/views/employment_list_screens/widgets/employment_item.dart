@@ -73,12 +73,19 @@ class EmploymentItem extends StatelessWidget {
                                 minimumSize: const Size(150, 50), //////// HERE
                               ),
                               onPressed: () {
+                                Navigator.of(context).pop();
                                 token.isEmpty
                                     ? Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (ctx) =>
-                                                const LogInScreen()))
+                                            builder: (ctx) => LogInScreen(
+                                                  doCheckLastScreen: true,
+                                                  screenType: "job_description",
+                                                  //screenType : "training"
+                                                  //trainingModelData : trainingModelData
+                                                  viewAllJobsData:
+                                                      viewAllJobData,
+                                                )))
                                     : Navigator.push(
                                         context,
                                         MaterialPageRoute(

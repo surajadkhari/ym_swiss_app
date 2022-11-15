@@ -869,7 +869,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
-                                                  const LogInScreen()),
+                                                  LogInScreen()),
                                           (Route<dynamic> route) => false);
                                     } else {
                                       Navigator.of(context).pop();
