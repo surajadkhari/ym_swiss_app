@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lmiis/data/datasource/remote/dio/dio_client.dart';
 import 'package:lmiis/provider/AuthProvider.dart';
 import 'package:lmiis/provider/ESSPProvider.dart';
 import 'package:lmiis/provider/JobProvider.dart';
@@ -28,8 +31,6 @@ void main() async {
       ChangeNotifierProvider(create: (context) => di.sl<ESSPProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<UtilProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<MyProfileProvider>()),
-
-
     ],
     child: MyApp(),
   ));
@@ -40,8 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      builder: (context, child) => ResponsiveWrapper.builder(
-          child,
+      builder: (context, child) => ResponsiveWrapper.builder(child,
           maxWidth: 1200,
           minWidth: 480,
           defaultScale: true,
@@ -55,6 +55,4 @@ class MyApp extends StatelessWidget {
       theme: light,
     );
   }
-
 }
-

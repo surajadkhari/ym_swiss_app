@@ -1,0 +1,8 @@
+{
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.lineHeight": 2,
+    "editor.formatOnSave": true,
+    "breadcrumbs.enabled": true,
+    "editor.wordWrap": "on"
+}

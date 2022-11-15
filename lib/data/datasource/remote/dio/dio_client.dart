@@ -3,11 +3,15 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lmiis/models/district_new_model.dart';
+import 'package:lmiis/models/new_grade_model.dart';
+import 'package:lmiis/models/new_muni_model.dart';
+import 'package:lmiis/models/pradeshModel.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 
 import '../../../../utils/AppConstants.dart';
 import 'logging_interceptor.dart';
+
 class DioClient {
   final String baseUrl;
   final LoggingInterceptor? loggingInterceptor;
@@ -18,13 +22,14 @@ class DioClient {
   DioClient(this.baseUrl, Dio? dioC, {this.loggingInterceptor}) {
     dio = dioC ?? Dio();
     dio?.options.baseUrl = baseUrl;
-    dio?.options.connectTimeout = 60*1000;
-    dio?.options.receiveTimeout = 60*1000;
+    dio?.options.connectTimeout = 60 * 1000;
+    dio?.options.receiveTimeout = 60 * 1000;
     dio?.httpClientAdapter = DefaultHttpClientAdapter();
     dio?.interceptors.add(loggingInterceptor!);
   }
 
-  Future<Response?> get(String uri, {
+  Future<Response?> get(
+    String uri, {
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -52,7 +57,8 @@ class DioClient {
     }
   }
 
-  Future<Response?> post(String uri, {
+  Future<Response?> post(
+    String uri, {
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -64,10 +70,10 @@ class DioClient {
       final box = GetStorage();
       token = box.read(AppConstants.TOKEN);
       dio?.options.headers = {
-        'Accept':'application/json',
+        'Accept': 'application/json',
         'Authorization': 'Bearer $token',
       };
-      dio?.options.followRedirects =true;
+      dio?.options.followRedirects = true;
       dio?.options.validateStatus = (status) => true;
 
       var response = await dio?.post(
@@ -87,7 +93,8 @@ class DioClient {
     }
   }
 
-  Future<Response?> put(String uri, {
+  Future<Response?> put(
+    String uri, {
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -101,7 +108,8 @@ class DioClient {
       dio?.options.headers = {
         'accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token'};
+        'Authorization': 'Bearer $token'
+      };
 
       var response = await dio?.put(
         uri,
@@ -120,7 +128,8 @@ class DioClient {
     }
   }
 
-  Future<Response?> delete(String uri, {
+  Future<Response?> delete(
+    String uri, {
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -132,7 +141,8 @@ class DioClient {
       dio?.options.headers = {
         'accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token'};
+        'Authorization': 'Bearer $token'
+      };
       var response = await dio?.delete(
         uri,
         data: data,
@@ -146,5 +156,41 @@ class DioClient {
     } catch (e) {
       throw e;
     }
+  }
+}
+
+class ApiClient {
+  final dio = Dio();
+
+  Future<List<NewPradeshModel>> getPradeshData() async {
+    final result = await dio.get("http://139.59.21.174/api/pradesh");
+    final responseData = result.data;
+    return List.from(responseData['data'])
+        .map((e) => NewPradeshModel.fromMap(e))
+        .toList();
+  }
+
+  Future<List<DistrictNewModel>> getDistricts() async {
+    final result = await dio.get("http://139.59.21.174/api/districts");
+    final responseData = result.data;
+    return List.from(responseData['data'])
+        .map((e) => DistrictNewModel.fromMap(e))
+        .toList();
+  }
+
+  Future<List<NewMuniModel>> getMunicipalities() async {
+    final result = await dio.get("http://139.59.21.174/api/municipalities");
+    final responseData = result.data;
+    return List.from(responseData['data'])
+        .map((e) => NewMuniModel.fromMap(e))
+        .toList();
+  }
+
+  Future<List<NewGradeModel>> getGrades() async {
+    final result = await dio.get("http://139.59.21.174/api/category");
+    final responseData = result.data;
+    return List.from(responseData['data'])
+        .map((e) => NewGradeModel.fromMap(e))
+        .toList();
   }
 }
