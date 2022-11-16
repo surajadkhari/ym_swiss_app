@@ -42,7 +42,7 @@ class _LogInScreenState extends State<LogInScreen> {
   TextEditingController passwordTextEditingController = TextEditingController();
   FocusNode emailFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
-  bool obsurePAssword = false;
+  bool obsurePAssword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

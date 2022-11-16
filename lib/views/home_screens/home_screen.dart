@@ -479,71 +479,71 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 150,
-                              child: DrawerHeader(
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 70,
-                                        height: 70,
-                                        child: Container(
-                                            margin: const EdgeInsets.all(10),
-                                            child: myProfileProvider
-                                                        .myProfileModel
-                                                        ?.data
-                                                        ?.file !=
-                                                    null
-                                                ? Image.network(
-                                                    '${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}')
-                                                : Image.asset(
-                                                    AppImages.ic_demo_person)),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                            top: 20, left: 10),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.7,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "${myProfileProvider.myProfileModel?.data?.name}",
-                                              style: TextStyle(
-                                                  fontSize: Dimensions.BODY_16,
-                                                  fontWeight:
-                                                      Dimensions.FONT_MEDIUM,
-                                                  color: ColorsResource
-                                                      .PRAYMARY_TEXT_COLOR),
-                                              overflow: TextOverflow.ellipsis,
-                                              softWrap: false,
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "${myProfileProvider.myProfileModel?.data?.email}",
-                                              style: TextStyle(
-                                                  fontSize: Dimensions.BODY_12,
-                                                  fontWeight:
-                                                      Dimensions.FONT_MEDIUM,
-                                                  color: ColorsResource
-                                                      .TEXT_BLACK_COLOR),
-                                              overflow: TextOverflow.ellipsis,
-                                              softWrap: false,
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // SizedBox(
+                            //   height: 150,
+                            //   child: DrawerHeader(
+                            //     child: Align(
+                            //       alignment: Alignment.centerLeft,
+                            //       child: Row(
+                            //         children: [
+                            //           SizedBox(
+                            //             width: 70,
+                            //             height: 70,
+                            //             child: Container(
+                            //                 margin: const EdgeInsets.all(10),
+                            //                 child: myProfileProvider
+                            //                             .myProfileModel
+                            //                             ?.data
+                            //                             ?.file !=
+                            //                         null
+                            //                     ? Image.network(
+                            //                         '${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}')
+                            //                     : Image.asset(
+                            //                         AppImages.ic_demo_person)),
+                            //           ),
+                            //           Container(
+                            //             margin: const EdgeInsets.only(
+                            //                 top: 20, left: 10),
+                            //             width:
+                            //                 MediaQuery.of(context).size.width /
+                            //                     2.7,
+                            //             child: Column(
+                            //               crossAxisAlignment:
+                            //                   CrossAxisAlignment.start,
+                            //               children: [
+                            //                 Text(
+                            //                   "${myProfileProvider.myProfileModel?.data?.name}",
+                            //                   style: TextStyle(
+                            //                       fontSize: Dimensions.BODY_16,
+                            //                       fontWeight:
+                            //                           Dimensions.FONT_MEDIUM,
+                            //                       color: ColorsResource
+                            //                           .PRAYMARY_TEXT_COLOR),
+                            //                   overflow: TextOverflow.ellipsis,
+                            //                   softWrap: false,
+                            //                 ),
+                            //                 const SizedBox(
+                            //                   height: 5,
+                            //                 ),
+                            //                 Text(
+                            //                   "${myProfileProvider.myProfileModel?.data?.email}",
+                            //                   style: TextStyle(
+                            //                       fontSize: Dimensions.BODY_12,
+                            //                       fontWeight:
+                            //                           Dimensions.FONT_MEDIUM,
+                            //                       color: ColorsResource
+                            //                           .TEXT_BLACK_COLOR),
+                            //                   overflow: TextOverflow.ellipsis,
+                            //                   softWrap: false,
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                             Material(
                               color: Colors.transparent,
                               child: InkWell(
@@ -869,7 +869,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
-                                                  LogInScreen()),
+                                                  const HomeScreen()),
                                           (Route<dynamic> route) => false);
                                     } else {
                                       Navigator.of(context).pop();

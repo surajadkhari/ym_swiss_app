@@ -22,125 +22,189 @@ class ChnagePassword extends StatefulWidget {
 }
 
 class _ChnagePasswordState extends State<ChnagePassword> {
-
-  TextEditingController currentPasswordTextEditingController = TextEditingController();
-  TextEditingController newPasswordTextEditingController = TextEditingController();
-  TextEditingController enterTheNewPasswordAgainTextEditingController = TextEditingController();
+  TextEditingController currentPasswordTextEditingController =
+      TextEditingController();
+  TextEditingController newPasswordTextEditingController =
+      TextEditingController();
+  TextEditingController enterTheNewPasswordAgainTextEditingController =
+      TextEditingController();
   FocusNode currentPasswordFocusNode = FocusNode();
   FocusNode newPasswordFocusNode = FocusNode();
   FocusNode enterTheNewPasswordAgainFocusNode = FocusNode();
 
-
+  bool obsurecurrentPassword = true;
+  bool obsurenewPassword = true;
+  bool obsurenewConfirmPassword = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: Consumer<AuthProvider>(
-        builder: (context,authProvider,child) =>
-        Column(
-          children: [
-            Container(
-              height: 100,
-              color: ColorsResource.PRAYMERY_COLOR,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(top: 50, left: 10, right: 10),
-                child: Column(
-                  children: [
-                    //Toolbar
-                    Row(
-                      children: [
-                        InkWell(
-                            onHover: (_) {},
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: SvgPicture.asset(AppImages.ic_back_blue)),
-                        SizedBox(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width - 65,
-                          child: Text(
-                            AppConstants.Change_the_password,
-                            style: TextStyle(
-                                fontSize: Dimensions.BODY_20,
-                                fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          return currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: Consumer<AuthProvider>(
+          builder: (context, authProvider, child) => Column(
+            children: [
+              Container(
+                height: 100,
+                color: ColorsResource.PRAYMERY_COLOR,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
+                  child: Column(
+                    children: [
+                      //Toolbar
+                      Row(
+                        children: [
+                          InkWell(
+                              onHover: (_) {},
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: SvgPicture.asset(AppImages.ic_back_blue)),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width - 65,
+                            child: Text(
+                              AppConstants.Change_the_password,
+                              style: TextStyle(
+                                  fontSize: Dimensions.BODY_20,
+                                  fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+                                  color: ColorsResource.PRAYMARY_TEXT_COLOR),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20,right: 20,top: 60),
-              child: Column(
-                children: [
-                  CustomTextFieldWithTitle('',currentPasswordTextEditingController,currentPasswordFocusNode,insideHintText: AppConstants.current_password,inputTypePassword:true),
-                  const SizedBox(height: 10,),
-                  CustomTextFieldWithTitle('',newPasswordTextEditingController,newPasswordFocusNode,insideHintText: AppConstants.new_password,inputTypePassword:true),
-                  const SizedBox(height: 5,),
-                  CustomTextFieldWithTitle('',enterTheNewPasswordAgainTextEditingController,enterTheNewPasswordAgainFocusNode,insideHintText: AppConstants.enter_the_new_password_again,inputTypePassword:true),
-                  const SizedBox(height: 30,),
-                  CustomButton(AppConstants.Change_the_password_button,(){
-                    String currentPassword= currentPasswordTextEditingController.text;
-                    String newPassword= newPasswordTextEditingController.text;
-                    String againNewPassword = enterTheNewPasswordAgainTextEditingController.text;
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 60),
+                child: Column(
+                  children: [
+                    LoginTextFormFiled('', currentPasswordTextEditingController,
+                        currentPasswordFocusNode,
+                        insideHintText: AppConstants.current_password,
+                        inputTypePassword: obsurecurrentPassword,
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                obsurecurrentPassword = !obsurecurrentPassword;
+                              });
+                            },
+                            icon: Icon(obsurecurrentPassword
+                                ? Icons.visibility_off
+                                : Icons.visibility))),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    LoginTextFormFiled('', newPasswordTextEditingController,
+                        newPasswordFocusNode,
+                        insideHintText: AppConstants.new_password,
+                        inputTypePassword: obsurenewPassword,
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                obsurenewPassword = !obsurenewPassword;
+                              });
+                            },
+                            icon: Icon(obsurenewPassword
+                                ? Icons.visibility_off
+                                : Icons.visibility))),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    LoginTextFormFiled(
+                        '',
+                        enterTheNewPasswordAgainTextEditingController,
+                        enterTheNewPasswordAgainFocusNode,
+                        insideHintText:
+                            AppConstants.enter_the_new_password_again,
+                        inputTypePassword: obsurenewConfirmPassword,
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                obsurenewConfirmPassword =
+                                    !obsurenewConfirmPassword;
+                              });
+                            },
+                            icon: Icon(obsurenewConfirmPassword
+                                ? Icons.visibility_off
+                                : Icons.visibility))),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    CustomButton(AppConstants.Change_the_password_button, () {
+                      String currentPassword =
+                          currentPasswordTextEditingController.text;
+                      String newPassword =
+                          newPasswordTextEditingController.text;
+                      String againNewPassword =
+                          enterTheNewPasswordAgainTextEditingController.text;
 
-                    if(currentPassword == ''){
-                      return showCustomSnackBar(AppConstants.current_password,context);
-                    }
-
-                    if(newPassword == ''){
-                      return showCustomSnackBar(AppConstants.new_password,context);
-                    }
-
-                    if(againNewPassword == ''){
-                      return showCustomSnackBar(AppConstants.enter_the_new_password_again,context);
-                    }
-
-
-                    ChangePasswordSendModel changePasswordSendModel = ChangePasswordSendModel(currentpassword: currentPassword,password: newPassword,passwordConfirmation: againNewPassword);
-
-
-                    authProvider.changePassword(changePasswordSendModel).then((value) {
-                      if(value.isSuccess){
-                        currentPasswordTextEditingController.text = '';
-                        newPasswordTextEditingController.text= '';
-                        enterTheNewPasswordAgainTextEditingController.text= '';
-
-                        showCustomSnackBar(value.message,context,isError: false);
-                        successDialog(AppConstants.Password_has_been_successfully_reset);
-
-                      }else{
-                        showCustomSnackBar(value.message,context);
+                      if (currentPassword == '') {
+                        return showCustomSnackBar(
+                            AppConstants.current_password, context);
                       }
-                    });
 
+                      if (newPassword == '') {
+                        return showCustomSnackBar(
+                            AppConstants.new_password, context);
+                      }
 
-                  }, wight:250),
+                      if (againNewPassword == '') {
+                        return showCustomSnackBar(
+                            AppConstants.enter_the_new_password_again, context);
+                      }
 
-                ],
-              ),
-            )
-          ],
+                      ChangePasswordSendModel changePasswordSendModel =
+                          ChangePasswordSendModel(
+                              currentpassword: currentPassword,
+                              password: newPassword,
+                              passwordConfirmation: againNewPassword);
+
+                      authProvider
+                          .changePassword(changePasswordSendModel)
+                          .then((value) {
+                        if (value.isSuccess) {
+                          currentPasswordTextEditingController.text = '';
+                          newPasswordTextEditingController.text = '';
+                          enterTheNewPasswordAgainTextEditingController.text =
+                              '';
+
+                          showCustomSnackBar(value.message, context,
+                              isError: false);
+                          successDialog(AppConstants
+                              .Password_has_been_successfully_reset);
+                        } else {
+                          showCustomSnackBar(value.message, context);
+                        }
+                      });
+                    }, wight: 250),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  successDialog(String title){
+  successDialog(String title) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)), //this right here
-              child: Container(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3.0)), //this right here
+              child: SizedBox(
                 height: 200,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -164,30 +228,43 @@ class _ChnagePasswordState extends State<ChnagePassword> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
-                            onHover: (_){},
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                            onHover: (_) {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HomeScreen()));
                             },
                             child: Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: SvgPicture.asset(AppImages.ic_close,color: ColorsResource.TEXT_BLACK_COLOR,)),
+                                margin: const EdgeInsets.only(right: 10),
+                                child: SvgPicture.asset(
+                                  AppImages.ic_close,
+                                  color: ColorsResource.TEXT_BLACK_COLOR,
+                                )),
                           )
                         ],
                       ),
                     ),
                     Container(
-                        margin: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
-                        child: Text(title,textAlign:TextAlign.center, style: TextStyle(fontSize: Dimensions.BODY_20,color: ColorsResource.TEXT_BLACK_COLOR),)),
-                    SizedBox(height: 20,),
+                        margin: const EdgeInsets.only(
+                            left: 10, right: 10, top: 10, bottom: 10),
+                        child: Text(
+                          title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: Dimensions.BODY_20,
+                              color: ColorsResource.TEXT_BLACK_COLOR),
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Align(
                         alignment: Alignment.center,
                         child: SvgPicture.asset(AppImages.ic_sucses))
                   ],
                 ),
-              )
-          );
-        }
-    );
+              ));
+        });
   }
-
 }

@@ -69,7 +69,7 @@ class EmploymentItem extends StatelessWidget {
                                 shadowColor: Colors.greenAccent,
                                 elevation: 3,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(32.0)),
+                                    borderRadius: BorderRadius.circular(5.0)),
                                 minimumSize: const Size(150, 50), //////// HERE
                               ),
                               onPressed: () {
@@ -93,7 +93,7 @@ class EmploymentItem extends StatelessWidget {
                                                 JobDescriptionViewScreen(
                                                     viewAllJobData)));
                               },
-                              child: const Text("Login")),
+                              child: const Text("लग - इन")),
                         ],
                       ),
                     ),
