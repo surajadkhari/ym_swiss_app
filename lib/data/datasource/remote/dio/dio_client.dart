@@ -1,8 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lmiis/models/ResponsModels/training_category_model.dart';
 import 'package:lmiis/models/district_new_model.dart';
 import 'package:lmiis/models/new_grade_model.dart';
 import 'package:lmiis/models/new_muni_model.dart';
@@ -191,6 +193,15 @@ class ApiClient {
     final responseData = result.data;
     return List.from(responseData['data'])
         .map((e) => NewGradeModel.fromMap(e))
+        .toList();
+  }
+
+  Future<List<NewTrainingCategoryModel>> getTrainingCategory() async {
+    final result = await dio.get("http://139.59.21.174/api/training/category");
+    final responseData = result.data;
+  
+    return List.from(responseData["data"])
+        .map((e) => NewTrainingCategoryModel.fromMap(e))
         .toList();
   }
 }

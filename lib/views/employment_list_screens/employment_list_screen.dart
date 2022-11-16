@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lmiis/data/datasource/remote/dio/dio_client.dart';
 import 'package:lmiis/models/district_new_model.dart';
 import 'package:lmiis/models/new_grade_model.dart';
@@ -158,7 +157,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                                 DropdownButton<NewPradeshModel>(
                                               elevation: 16,
                                               isExpanded: true,
-                                              style: TextStyle(
+                                              style: GoogleFonts.poppins(
                                                   color: ColorsResource
                                                       .TEXT_BLACK_COLOR),
                                               underline: Container(
@@ -166,8 +165,8 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                                 color: Colors.transparent,
                                               ),
                                               hint: Text(
-                                                "Select province",
-                                                style: TextStyle(
+                                                "कृपया प्रदेश छान्नुहोस",
+                                                style: GoogleFonts.poppins(
                                                     fontWeight: Dimensions
                                                         .FONT_MEDIUM_NORMUL,
                                                     fontSize:
@@ -256,7 +255,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                                 DistrictNewModel>(
                                               elevation: 16,
                                               isExpanded: true,
-                                              style: TextStyle(
+                                              style: GoogleFonts.poppins(
                                                   color: ColorsResource
                                                       .TEXT_BLACK_COLOR),
                                               underline: Container(
@@ -264,8 +263,8 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                                 color: Colors.transparent,
                                               ),
                                               hint: Text(
-                                                "Select district",
-                                                style: TextStyle(
+                                                "कृपया जिल्ला छान्नुहोस",
+                                                style: GoogleFonts.poppins(
                                                     fontWeight: Dimensions
                                                         .FONT_MEDIUM_NORMUL,
                                                     fontSize:
@@ -354,7 +353,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                             child: DropdownButton<NewMuniModel>(
                                               elevation: 16,
                                               isExpanded: true,
-                                              style: TextStyle(
+                                              style: GoogleFonts.poppins(
                                                   color: ColorsResource
                                                       .TEXT_BLACK_COLOR),
                                               underline: Container(
@@ -362,8 +361,8 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                                 color: Colors.transparent,
                                               ),
                                               hint: Text(
-                                                "Select municipality",
-                                                style: TextStyle(
+                                                "कृपया नगरपालिका छान्नुहोस",
+                                                style: GoogleFonts.poppins(
                                                     fontWeight: Dimensions
                                                         .FONT_MEDIUM_NORMUL,
                                                     fontSize:
@@ -451,7 +450,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                                 DropdownButton<NewGradeModel>(
                                               elevation: 16,
                                               isExpanded: true,
-                                              style: TextStyle(
+                                              style: GoogleFonts.poppins(
                                                   color: ColorsResource
                                                       .TEXT_BLACK_COLOR),
                                               underline: Container(
@@ -459,8 +458,8 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                                 color: Colors.transparent,
                                               ),
                                               hint: Text(
-                                                "Select grade",
-                                                style: TextStyle(
+                                                "कृपया नगरपालिका छान्नुहोस",
+                                                style: GoogleFonts.poppins(
                                                     fontWeight: Dimensions
                                                         .FONT_MEDIUM_NORMUL,
                                                     fontSize:

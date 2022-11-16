@@ -18,6 +18,8 @@ import '../../utils/dimensions.dart';
 import '../Job_description_view_screens/Job_description_view_screen.dart';
 import '../training_service_provider_screens/TrainingSingleItemDetails.dart';
 import '../widgets/HtmlView.dart';
+import 'widgets/special_training_detail_page.dart';
+import 'widgets/special_training_item.dart';
 class EmploymentSupportServiceDetailsScreen extends StatefulWidget {
   EsspModelData esspModelData;
   EmploymentSupportServiceDetailsScreen(this.esspModelData);
@@ -47,6 +49,18 @@ class _EmploymentSupportServiceDetailsScreenState extends State<EmploymentSuppor
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+          appBar: AppBar(
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+          AppConstants.Employment_Support_Services_Provider_Details,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Consumer<ESSPProvider>(
           builder: (context,eSSPProvider,child) =>
@@ -55,52 +69,52 @@ class _EmploymentSupportServiceDetailsScreenState extends State<EmploymentSuppor
             height: 850,
             child: Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: ColorsResource.PRAYMERY_COLOR,
-                    child: Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.050,
-                      margin: EdgeInsets.only(top: 40, left: 10, right: 10),
-                      child: Column(
-                        children: [
-                          //Toolbar
-                          Row(
-                            children: [
-                              InkWell(
-                                  onHover: (_) {},
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: SvgPicture.asset(AppImages.ic_back_blue)),
-                              SizedBox(
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width - 65,
-                                child: Text(
-                                  AppConstants.Employment_Support_Services_Provider_Details,
-                                  style: TextStyle(
-                                      fontSize: Dimensions.BODY_20,
-                                      fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                      color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                                  textAlign: TextAlign.center,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Expanded(
+                //   flex: 1,
+                //   child: Container(
+                //     color: ColorsResource.PRAYMERY_COLOR,
+                //     child: Container(
+                //       width: MediaQuery
+                //           .of(context)
+                //           .size
+                //           .width,
+                //       height: MediaQuery
+                //           .of(context)
+                //           .size
+                //           .height * 0.050,
+                //       margin: EdgeInsets.only(top: 40, left: 10, right: 10),
+                //       child: Column(
+                //         children: [
+                //           //Toolbar
+                //           Row(
+                //             children: [
+                //               InkWell(
+                //                   onHover: (_) {},
+                //                   onTap: () {
+                //                     Navigator.of(context).pop();
+                //                   },
+                //                   child: SvgPicture.asset(AppImages.ic_back_blue)),
+                //               SizedBox(
+                //                 width: MediaQuery
+                //                     .of(context)
+                //                     .size
+                //                     .width - 65,
+                //                 child: Text(
+                //                   AppConstants.Employment_Support_Services_Provider_Details,
+                //                   style: TextStyle(
+                //                       fontSize: Dimensions.BODY_20,
+                //                       fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+                //                       color: ColorsResource.PRAYMARY_TEXT_COLOR),
+                //                   textAlign: TextAlign.center,
+                //                 ),
+                //               )
+                //             ],
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Expanded(
                     flex: 9,
                     child: Container(
@@ -226,9 +240,11 @@ class _EmploymentSupportServiceDetailsScreenState extends State<EmploymentSuppor
                             itemBuilder: (BuildContext context, int index){
                               ViewAllJobsData esspServiceDetailsJobs =eSSPProvider.esspServiceDetailsjobs![index];
 
-                              return EmploymentServiceItem(esspServiceDetailsJobs,(){
-                                Navigator.push(context, MaterialPageRoute(builder:(context) => JobDescriptionViewScreen(esspServiceDetailsJobs)));
-                              });
+                              return EmploymentServiceItem(esspServiceDetailsJobs,
+                              // (){
+                              //   Navigator.push(context, MaterialPageRoute(builder:(context) => JobDescriptionViewScreen(esspServiceDetailsJobs),),);
+                              // }
+                              );
                           },): Container(),),
 
                           Container(
@@ -239,11 +255,14 @@ class _EmploymentSupportServiceDetailsScreenState extends State<EmploymentSuppor
                               padding: EdgeInsets.zero,
                               itemCount: eSSPProvider.esspServiceDetailstrainings!.length,
                               itemBuilder: (BuildContext context, int index){
-                                ViewAllTrainingsData esspServiceDetailsJobs = eSSPProvider.esspServiceDetailstrainings![index];
+                                ViewAllTrainingsData esspServiceDetailsTraing = eSSPProvider.esspServiceDetailstrainings![index];
                                 // Navigator.push(context, MaterialPageRoute(builder:(context) => JobDescriptionViewScreen()));
-                                return TrainingServiceItem(esspServiceDetailsJobs,(){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingSingleItemDetails(esspServiceDetailsJobs)));
-                                },true);
+                                return SpecialTrainingServiceItem(esspServiceDetailsTraing,
+                                // (){
+                                //   Navigator.push(context, MaterialPageRoute(builder: (context) => SpecialTrainingSingleItemDetails(esspServiceDetailsJobs),),);
+                                // },
+                                true
+                                );
                               },): Container(),),
 
 

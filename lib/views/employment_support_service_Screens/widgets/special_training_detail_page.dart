@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/ResponsModels/ViewAllTrainingsModel.dart';
-import '../../provider/TrainingsProvider.dart';
-import '../../utils/AppConstants.dart';
-import '../../utils/app_images.dart';
-import '../../utils/colors_resource.dart';
-import '../../utils/dimensions.dart';
-import '../news_information_see_more_screens/widgets/custtom_search_button.dart';
-import '../widgets/HtmlView.dart';
-import '../widgets/showCustomSnackBar.dart';
+import '../../../models/ResponsModels/ViewAllTrainingsModel.dart';
+import '../../../provider/TrainingsProvider.dart';
+import '../../../utils/AppConstants.dart';
+import '../../../utils/app_images.dart';
+import '../../../utils/colors_resource.dart';
+import '../../../utils/dimensions.dart';
 
-class TrainingSingleItemDetails extends StatefulWidget {
+import '../../news_information_see_more_screens/widgets/custtom_search_button.dart';
+import '../../widgets/HtmlView.dart';
+import '../../widgets/showCustomSnackBar.dart';
+
+class SpecialTrainingSingleItemDetails extends StatefulWidget {
   ViewAllTrainingsData viewAllTrainingsData;
-  TrainingSingleItemDetails(this.viewAllTrainingsData);
+  SpecialTrainingSingleItemDetails(this.viewAllTrainingsData);
 
   @override
-  State<TrainingSingleItemDetails> createState() => _TrainingSingleItemDetailsState();
+  State<SpecialTrainingSingleItemDetails> createState() => _SpecialTrainingSingleItemDetailsState();
 }
 
-class _TrainingSingleItemDetailsState extends State<TrainingSingleItemDetails> {
+class _SpecialTrainingSingleItemDetailsState extends State<SpecialTrainingSingleItemDetails> {
 
 
   bool applyButton = false;

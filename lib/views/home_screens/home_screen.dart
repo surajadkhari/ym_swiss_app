@@ -60,7 +60,10 @@ class _HomeScreenState extends State<HomeScreen> {
         drawer: drawerLayout(),
         body: SingleChildScrollView(
           child: Consumer<NewsNoticeProvider>(
-            builder: (context, newsNoticeProvider, child) => SizedBox(
+              builder: (context, newsNoticeProvider, child) {
+            final box = GetStorage();
+            String? token = box.read(AppConstants.TOKEN) ?? '';
+            return SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: Column(
@@ -102,17 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                         fontWeight: Dimensions.FONT_BOLD),
                                   ),
                                   Expanded(child: Container()),
-                                  InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const NotificationScreen()));
-                                      },
-                                      onHover: (_) {},
-                                      child: SvgPicture.asset(
-                                          AppImages.ic_notificaton))
+                                  token.isNotEmpty
+                                      ? InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const NotificationScreen()));
+                                          },
+                                          onHover: (_) {},
+                                          child: SvgPicture.asset(
+                                              AppImages.ic_notificaton))
+                                      : const Text("")
                                 ],
                               ),
                             ),
@@ -377,8 +382,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-            ),
-          ),
+            );
+          }),
         ),
       ),
     );

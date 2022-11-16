@@ -91,46 +91,58 @@ class _JobDescriptionViewScreenState extends State<JobDescriptionViewScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+    appBar: AppBar(
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+           AppConstants.employment,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Consumer<JobProvider>(
           builder: (context,jobProvider,child) =>
           Column(
             children: [
-              Container(
-                color: ColorsResource.PRAYMERY_COLOR,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.050,
-                  margin: EdgeInsets.only(top: 50, left: 10, right: 10),
-                  child: Column(
-                    children: [
-                      //Toolbar
-                      Row(
-                        children: [
-                          InkWell(
-                              onHover: (_) {},
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child:
-                              SvgPicture.asset(AppImages.ic_back_blue)),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width - 65,
-                            child: Text(
-                              AppConstants.employment,
-                              style: TextStyle(
-                                  fontSize: Dimensions.BODY_20,
-                                  fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                  color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                              textAlign: TextAlign.center,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Container(
+              //   color: ColorsResource.PRAYMERY_COLOR,
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     height: MediaQuery.of(context).size.height * 0.050,
+              //     margin: EdgeInsets.only(top: 50, left: 10, right: 10),
+              //     child: Column(
+              //       children: [
+              //         //Toolbar
+              //         Row(
+              //           children: [
+              //             InkWell(
+              //                 onHover: (_) {},
+              //                 onTap: () {
+              //                   Navigator.of(context).pop();
+              //                 },
+              //                 child:
+              //                 SvgPicture.asset(AppImages.ic_back_blue)),
+              //             SizedBox(
+              //               width: MediaQuery.of(context).size.width - 65,
+              //               child: Text(
+              //                 AppConstants.employment,
+              //                 style: TextStyle(
+              //                     fontSize: Dimensions.BODY_20,
+              //                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+              //                     color: ColorsResource.PRAYMARY_TEXT_COLOR),
+              //                 textAlign: TextAlign.center,
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
 
               Container(
                 margin: EdgeInsets.only(left: 10,right: 10,bottom: 10),

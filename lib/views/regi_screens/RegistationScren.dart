@@ -104,7 +104,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
   String tpleaseSeletcWardHintValueWord = AppConstants.Please_be_a_ward;
   int tPleaseSeletcWardValueWordsId = 0;
   bool isLoading = true;
-
+ bool obsurePassword = true;
+  bool obsureconfrimPassword = true;
 
   String imageName = '';
   String? imagePath;
@@ -124,528 +125,554 @@ class _RegistationScreenState extends State<RegistationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorsResource.PRAYMERY_COLOR,
-      body: SingleChildScrollView(
-        child: Consumer2<AuthProvider,LocationProvider>(
-          builder: (context,authProvider,locationProvider,child) =>
-          Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(top: 40,left: 10,right: 10),
-            child: Container(
-              margin: EdgeInsets.only(bottom: 20),
-              child: Column(
-                children: [
-                  //Toolbar
-                  Row(
-                    children: [
-                      InkWell(
-                          onHover: (_){},
-                          onTap: (){
-                            Navigator.of(context).pop();
-                          },
-
-                          child: SvgPicture.asset(AppImages.ic_back_blue)),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width - 65,
-                        child: Text(
-                            AppConstants.Register,
-                            style: TextStyle(fontSize: Dimensions.BODY_30,fontWeight: Dimensions.FONT_MEDIUM,color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                            textAlign: TextAlign.center,
-
-                        ),
-                      )
-                    ],
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.only(left: 10,right: 10,top: 50),
-                    child: Column(
+    return GestureDetector(
+      onTap:       () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          return currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: ColorsResource.PRAYMERY_COLOR,
+        body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Consumer2<AuthProvider,LocationProvider>(
+            builder: (context,authProvider,locationProvider,child) =>
+            Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.only(top: 40,left: 10,right: 10),
+              child: Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: Column(
+                  children: [
+                    //Toolbar
+                    Row(
                       children: [
-                       // CustomTextFieldWithTitle(AppConstants.NAME,nameTextEditingController,nameFocusNode),
-                        CustomTextFieldWithTitle(AppConstants.NAME,nameTextEditingController,nameFocusNode,isShowRequrStar: true,
-                        ),
-                        const SizedBox(height: 5,),
-                        Container(
-                          margin: EdgeInsets.only(top: 0,left: 0,bottom: 5),
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            children: [
-                              Text(
-                                AppConstants.select_gender,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
-                              ),
-                              Text(
-                                ' *',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_READ_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
-                              ),
-                            ],
+                        InkWell(
+                            onHover: (_){},
+                            onTap: (){
+                              Navigator.of(context).pop();
+                            },
+    
+                            child: SvgPicture.asset(AppImages.ic_back_blue)),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 65,
+                          child: Text(
+                              AppConstants.Register,
+                              style: TextStyle(fontSize: Dimensions.BODY_30,fontWeight: Dimensions.FONT_MEDIUM,color: ColorsResource.PRAYMARY_TEXT_COLOR),
+                              textAlign: TextAlign.center,
+    
                           ),
-                        ),
-                        genderDropdown(),
-                        const SizedBox(height: 5,),
-                        CustomTextFieldWithTitle(AppConstants.E_mail,emailTextEditingController,emailFocusNode,isShowRequrStar: true,),
-                        const SizedBox(height: 5,),
-                        CustomTextFieldWithTitle(AppConstants.Password,passwordTextEditingController,passwordFocusNode,inputTypePassword:true,isShowRequrStar: true,),
-                        const SizedBox(height: 5,),
-                        CustomTextFieldWithTitle(AppConstants.Remember_the_password,rePasswordTextEditingController,rePasswordFocusNode,inputTypePassword:true,isShowRequrStar: true,),
-                        const SizedBox(height: 5,),
-                        CustomTextFieldWithTitle(AppConstants.Mobile_number,mobileNumberTextEditingController,mobileNumberFocusNode,inputType:AppConstants.PHONE,isShowRequrStar: true,),
+                        )
                       ],
                     ),
-                  ),
-
-
-                  Container(
-                    margin: EdgeInsets.only(top: 10,left: 10,bottom: 5),
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      children: [
-                        Text(
-                          AppConstants.Your_area_of_expertise,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
-                        ),
-                      ],
+    
+                    Container(
+                      margin: EdgeInsets.only(left: 10,right: 10,top: 50),
+                      child: Column(
+                        children: [
+                         // CustomTextFieldWithTitle(AppConstants.NAME,nameTextEditingController,nameFocusNode),
+                          CustomTextFieldWithTitle(AppConstants.NAME,nameTextEditingController,nameFocusNode,isShowRequrStar: true,
+                          ),
+                          const SizedBox(height: 5,),
+                          Container(
+                            margin: EdgeInsets.only(top: 0,left: 0,bottom: 5),
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                Text(
+                                  AppConstants.select_gender,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
+                                ),
+                                Text(
+                                  ' *',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_READ_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
+                                ),
+                              ],
+                            ),
+                          ),
+                          genderDropdown(),
+                          const SizedBox(height: 5,),
+                          CustomTextFieldWithTitle(AppConstants.E_mail,emailTextEditingController,emailFocusNode,isShowRequrStar: true,),
+                          const SizedBox(height: 5,),
+                          LoginTextFormFiled(AppConstants.Password,passwordTextEditingController,passwordFocusNode,inputTypePassword:obsurePassword,isShowRequrStar: true,
+                              suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  obsurePassword = !obsurePassword;
+                                });
+                              },
+                              icon: Icon(obsurePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility))),
+                          const SizedBox(height: 5,),
+                          LoginTextFormFiled(AppConstants.Remember_the_password,rePasswordTextEditingController,rePasswordFocusNode,inputTypePassword:obsureconfrimPassword,isShowRequrStar: true,          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  obsureconfrimPassword = !obsureconfrimPassword;
+                                });
+                              },
+                              icon: Icon(obsureconfrimPassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility))),
+                          const SizedBox(height: 5,),
+                          CustomTextFieldWithTitle(AppConstants.Mobile_number,mobileNumberTextEditingController,mobileNumberFocusNode,inputType:AppConstants.PHONE,isShowRequrStar: true,),
+                        ],
+                      ),
                     ),
-                  ),
-                  // jobCategoryDropdown(),
-                  InkWell(
-                    onTap: (){
-                      multipleJobCategoryAdd();
-                    },
-                    child: Container(
-                      decoration: myBoxDecoration(),
+    
+    
+                    Container(
+                      margin: EdgeInsets.only(top: 10,left: 10,bottom: 5),
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        children: [
+                          Text(
+                            AppConstants.Your_area_of_expertise,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // jobCategoryDropdown(),
+                    InkWell(
+                      onTap: (){
+                        multipleJobCategoryAdd();
+                      },
+                      child: Container(
+                        decoration: myBoxDecoration(),
+                        margin: EdgeInsets.only(left: 10,right: 10),
+                        padding: EdgeInsets.only(left: 10),
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        child: Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width -90,
+                              child: RichText(
+                                text: TextSpan(
+                                  text: _myActivitiesString!.length < 0 ? 'कृपया छन्नुहोस्' : '',
+                                  style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
+                                  children: _myActivitiesString!.map((e) {
+                                    return TextSpan(text: '${e}, ');
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                            Expanded(child: Container()),
+    
+                            Icon(Icons.arrow_drop_down),
+                            SizedBox(width: 10,)
+                          ],
+                        )
+                      ),
+                    ),
+    
+                    Container(
+                      margin: EdgeInsets.only(top: 10,left: 10,bottom: 5),
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        children: [
+                          Text(
+                            AppConstants.Identification_card,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
+                          ),
+                        ],
+                      ),
+                    ),
+    
+    
+                    Container(
                       margin: EdgeInsets.only(left: 10,right: 10),
-                      padding: EdgeInsets.only(left: 10),
+                      decoration: myBoxDecoration(),
                       width: MediaQuery.of(context).size.width,
                       height: 50,
                       child: Row(
                         children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width -90,
-                            child: RichText(
-                              text: TextSpan(
-                                text: _myActivitiesString!.length < 0 ? 'कृपया छन्नुहोस्' : '',
-                                style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
-                                children: _myActivitiesString!.map((e) {
-                                  return TextSpan(text: '${e}, ');
-                                }).toList(),
-                              ),
-                            ),
-                          ),
-                          Expanded(child: Container()),
-
-                          Icon(Icons.arrow_drop_down),
-                          SizedBox(width: 10,)
-                        ],
-                      )
-                    ),
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.only(top: 10,left: 10,bottom: 5),
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      children: [
-                        Text(
-                          AppConstants.Identification_card,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight:Dimensions.FONT_MEDIUM_NORMUL),
-                        ),
-                      ],
-                    ),
-                  ),
-
-
-                  Container(
-                    margin: EdgeInsets.only(left: 10,right: 10),
-                    decoration: myBoxDecoration(),
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: InkWell(
-                            onTap: () async{
-                              final ImagePicker _picker = ImagePicker();
-                              final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
-                              setState(() {
-                                imageName = photo!.name;
-                                imagePath = photo.path;
-                              });
-
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(left: 10,right: 10),
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                color: ColorsResource.TEXT_GRAY_COLOR,
-                                border: Border.all(
+                          Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: () async{
+                                final ImagePicker _picker = ImagePicker();
+                                final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
+                                setState(() {
+                                  imageName = photo!.name;
+                                  imagePath = photo.path;
+                                });
+    
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 10,right: 10),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
                                   color: ColorsResource.TEXT_GRAY_COLOR,
-                                  width: 1,
+                                  border: Border.all(
+                                    color: ColorsResource.TEXT_GRAY_COLOR,
+                                    width: 1,
+                                  ),
                                 ),
+                                child: Text(' Choose File',style: TextStyle(color:ColorsResource.WHAIT),),
                               ),
-                              child: Text(' Choose File',style: TextStyle(color:ColorsResource.WHAIT),),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text(  imageName == '' ? 'No file Choose ': imageName),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  documentTypeDropdown(),
-
-                  SizedBox(height: 10,),
-
-                  Container(
-                    margin: EdgeInsets.only(top: 20,left: 10,bottom: 20),
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                    children: [
-                      Text(
-                        AppConstants.Permanent_address,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(fontWeight: Dimensions.FONT_MEDIUM,fontSize:Dimensions.BODY_16,color: ColorsResource.TEXT_BLACK_COLOR),
+                          Expanded(
+                            flex: 1,
+                            child: Text(  imageName == '' ? 'No file Choose ': imageName),
+                          ),
+                        ],
                       ),
-                      Text(' *',style: TextStyle(fontSize: Dimensions.BODY_16,color:ColorsResource.TEXT_READ_COLOR ,fontWeight: Dimensions.FONT_MEDIUM_NORMUL),)
-                    ],
                     ),
-                  ),
-                  pleaseStatePradashDropdown(),
-                  SizedBox(height: 10,),
-                  pleaseEnterTheDistrictDropdown(),
-                  SizedBox(height: 10,),
-                  pleaseDeaMunicipalityDropdown(),
-                  SizedBox(height: 10,),
-                  pleaseSeletcWardDropdown(),
-
-                  Container(
-                    margin: EdgeInsets.only(top: 20,left: 10,bottom: 20),
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
+                    SizedBox(height: 20,),
+                    documentTypeDropdown(),
+    
+                    SizedBox(height: 10,),
+    
+                    Container(
+                      margin: EdgeInsets.only(top: 20,left: 10,bottom: 20),
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
                       children: [
                         Text(
-                          AppConstants.Temporary_address,
+                          AppConstants.Permanent_address,
                           textAlign: TextAlign.start,
                           style: TextStyle(fontWeight: Dimensions.FONT_MEDIUM,fontSize:Dimensions.BODY_16,color: ColorsResource.TEXT_BLACK_COLOR),
                         ),
-                        Text(' *',style: TextStyle(fontSize: Dimensions.BODY_16,color:ColorsResource.TEXT_READ_COLOR ,fontWeight: Dimensions.FONT_MEDIUM_NORMUL),),
-                        Expanded(child:Container()),
-                        InkWell(
-                            onTap: (){
-                              setState(() {
-                                valuefirst = !valuefirst;
-
-
-                                if(valuefirst){
-
-                                  tPleasePradashValueWord = pleasePradashValueWord;
-                                  tPleasePradashHintValueWord = pleasePradashHintValueWord;
-                                  tPradashWordsId = pradashWordsId;
-
-                                  tPleaseTheDistrictValueWord = pleaseTheDistrictValueWord;
-                                  tPleaseTheDistrictHintValueWord = pleaseTheDistrictHintValueWord;
-                                  tPleaseTheDistrictWordsId = pleaseTheDistrictWordsId;
-
-
-                                  tPleaseMunicipalityValueWord = pleaseMunicipalityValueWord;
-                                  tPleaseMunicipalityHintValueWord = pleaseMunicipalityHintValueWord;
-                                  tPleaseMunicipalityWordsId = pleaseMunicipalityWordsId;
-
-                                  tPleaseSeletcWardValueWord = pleaseSeletcWardValueWord;
-                                  tpleaseSeletcWardHintValueWord = pleaseSeletcWardHintValueWord;
-                                  tPleaseSeletcWardValueWordsId =pleaseSeletcWardValueWordsId;
-
-                                }else{
-                                  print("kfjskhfjds 2");
-                                  tPleasePradashValueWord = AppConstants.please_state_channuhos;
-                                  tPleasePradashHintValueWord = AppConstants.please_state_channuhos;
-                                  tPradashWordsId = 0;
-
-                                  tPleaseTheDistrictValueWord = AppConstants.Please_enter_the_district;
-                                  tPleaseTheDistrictHintValueWord = AppConstants.Please_enter_the_district;
-                                  tPleaseTheDistrictWordsId = 0;
-
-
-                                  tPleaseMunicipalityValueWord = AppConstants.Please_be_a_municipality;
-                                  tPleaseMunicipalityHintValueWord = AppConstants.Please_be_a_municipality;
-                                  tPleaseMunicipalityWordsId = 0;
-
-
-                                  tPleaseSeletcWardValueWord = AppConstants.Please_be_a_ward;
-                                  tpleaseSeletcWardHintValueWord = AppConstants.Please_be_a_ward;
-                                  tPleaseSeletcWardValueWordsId = 0;
-                                }
-
-                              });
-                            },
-                            child: Text(AppConstants.Like_permanent,style: TextStyle(fontSize: Dimensions.BODY_12), )),
-                        SizedBox(width: 10,),
-                        Container(
-                          width: 10,
-                          height: 10,
-                          margin: EdgeInsets.only(right: 10),
-                          child: Checkbox(
-                            checkColor: ColorsResource.WHAIT,
-                            activeColor: ColorsResource.PRAYMARY_TEXT_COLOR,
-                            value: valuefirst,
-                            onChanged: (value) {
-                              setState(() {
-                                valuefirst = value!;
-                                if(valuefirst){
-                                  tPleasePradashValueWord = pleasePradashValueWord;
-                                  tPleasePradashHintValueWord = pleasePradashHintValueWord;
-                                  tPradashWordsId = pradashWordsId;
-
-                                  tPleaseTheDistrictValueWord = pleaseTheDistrictValueWord;
-                                  tPleaseTheDistrictHintValueWord = pleaseTheDistrictHintValueWord;
-                                  tPleaseTheDistrictWordsId = pleaseTheDistrictWordsId;
-
-
-                                  tPleaseMunicipalityValueWord = pleaseMunicipalityValueWord;
-                                  tPleaseMunicipalityHintValueWord = pleaseMunicipalityHintValueWord;
-                                  tPleaseMunicipalityWordsId = pleaseMunicipalityWordsId;
-
-                                  tPleaseSeletcWardValueWord = pleaseSeletcWardValueWord;
-                                  tpleaseSeletcWardHintValueWord = pleaseSeletcWardHintValueWord;
-                                  tPleaseSeletcWardValueWordsId =pleaseSeletcWardValueWordsId;
-
-                                }else{
-                                  print("kfjskhfjds 2");
-                                  tPleasePradashValueWord = AppConstants.please_state_channuhos;
-                                  tPleasePradashHintValueWord = AppConstants.please_state_channuhos;
-                                  tPradashWordsId = 0;
-
-                                  tPleaseTheDistrictValueWord = AppConstants.Please_enter_the_district;
-                                  tPleaseTheDistrictHintValueWord = AppConstants.Please_enter_the_district;
-                                  tPleaseTheDistrictWordsId = 0;
-
-
-                                  tPleaseMunicipalityValueWord = AppConstants.Please_be_a_municipality;
-                                  tPleaseMunicipalityHintValueWord = AppConstants.Please_be_a_municipality;
-                                  tPleaseMunicipalityWordsId = 0;
-
-
-                                  tPleaseSeletcWardValueWord = AppConstants.Please_be_a_ward;
-                                  tpleaseSeletcWardHintValueWord = AppConstants.Please_be_a_ward;
-                                  tPleaseSeletcWardValueWordsId = 0;
-                                }
-
-
-                              });
-                            },
-                          ),
-                        ),
+                        Text(' *',style: TextStyle(fontSize: Dimensions.BODY_16,color:ColorsResource.TEXT_READ_COLOR ,fontWeight: Dimensions.FONT_MEDIUM_NORMUL),)
                       ],
+                      ),
                     ),
-                  ),
-
-                  tPleasePradashDropdown(),
-                  SizedBox(height: 10,),
-                  tPleaseEnterTheDistrictDropdown(),
-                  SizedBox(height: 10,),
-                  tPleaseDeaMunicipalityDropdown(),
-                  SizedBox(height: 10,),
-                  tPleaseSeletcWardDropdown(),
-                  SizedBox(height: 40,),
-
-                  CustomButton(AppConstants.Register,() async{
-                    String name =nameTextEditingController.text;
-                    String email =emailTextEditingController.text;
-                    String password =passwordTextEditingController.text;
-                    String rePassword =rePasswordTextEditingController.text;
-                    String mobileNumber =mobileNumberTextEditingController.text;
-                    int gender = genderId;
-
-                    ///Per
-                    int perPradeshId = pradashWordsId;
-                    int perDistrictId = pleaseTheDistrictWordsId;
-                    int perMuniId = pleaseMunicipalityWordsId;
-                    int perWard = pleaseSeletcWardValueWordsId;
-
-                    ///Tem
-                    int temPradeshId = tPradashWordsId;
-                    int temDistrictId = tPleaseTheDistrictWordsId;
-                    int temMuniId = tPleaseMunicipalityWordsId;
-                    int temWard = tPleaseSeletcWardValueWordsId;
-
-
-                    if(name == ''){
-                      return showCustomSnackBar('1',context);
-                    }if(email == ''){
-                      return showCustomSnackBar('2',context);
-                    }if(password == ''){
-                      return showCustomSnackBar('3',context);
-                    }if(rePassword == ''){
-                      return showCustomSnackBar('4',context);
-                    }if(mobileNumber == ''){
-                      return showCustomSnackBar('5',context);
-                    }if(gender == 0){
-                      return showCustomSnackBar('6',context);
-                    }if(perPradeshId == 0){
-                      return showCustomSnackBar('7',context);
-                    }if(perDistrictId == 0){
-                      return showCustomSnackBar('8',context);
-                    }if(perMuniId == 0){
-                      return showCustomSnackBar('9',context);
-                    }if(perWard == 0){
-                      return showCustomSnackBar('10',context);
-                    }
-
-
-                    if(!valuefirst){
-                      if(temPradeshId == 0){
-                        return showCustomSnackBar('11',context);
-                      }if(temDistrictId == 0){
-                        return showCustomSnackBar('12',context);
-                      }if(temMuniId == 0){
-                        return showCustomSnackBar('13',context);
-                      }if(temWard == 0){
-                        return showCustomSnackBar('14',context);
+                    pleaseStatePradashDropdown(),
+                    SizedBox(height: 10,),
+                    pleaseEnterTheDistrictDropdown(),
+                    SizedBox(height: 10,),
+                    pleaseDeaMunicipalityDropdown(),
+                    SizedBox(height: 10,),
+                    pleaseSeletcWardDropdown(),
+    
+                    Container(
+                      margin: EdgeInsets.only(top: 20,left: 10,bottom: 20),
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        children: [
+                          Text(
+                            AppConstants.Temporary_address,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(fontWeight: Dimensions.FONT_MEDIUM,fontSize:Dimensions.BODY_16,color: ColorsResource.TEXT_BLACK_COLOR),
+                          ),
+                          Text(' *',style: TextStyle(fontSize: Dimensions.BODY_16,color:ColorsResource.TEXT_READ_COLOR ,fontWeight: Dimensions.FONT_MEDIUM_NORMUL),),
+                          Expanded(child:Container()),
+                          InkWell(
+                              onTap: (){
+                                setState(() {
+                                  valuefirst = !valuefirst;
+    
+    
+                                  if(valuefirst){
+    
+                                    tPleasePradashValueWord = pleasePradashValueWord;
+                                    tPleasePradashHintValueWord = pleasePradashHintValueWord;
+                                    tPradashWordsId = pradashWordsId;
+    
+                                    tPleaseTheDistrictValueWord = pleaseTheDistrictValueWord;
+                                    tPleaseTheDistrictHintValueWord = pleaseTheDistrictHintValueWord;
+                                    tPleaseTheDistrictWordsId = pleaseTheDistrictWordsId;
+    
+    
+                                    tPleaseMunicipalityValueWord = pleaseMunicipalityValueWord;
+                                    tPleaseMunicipalityHintValueWord = pleaseMunicipalityHintValueWord;
+                                    tPleaseMunicipalityWordsId = pleaseMunicipalityWordsId;
+    
+                                    tPleaseSeletcWardValueWord = pleaseSeletcWardValueWord;
+                                    tpleaseSeletcWardHintValueWord = pleaseSeletcWardHintValueWord;
+                                    tPleaseSeletcWardValueWordsId =pleaseSeletcWardValueWordsId;
+    
+                                  }else{
+                                    print("kfjskhfjds 2");
+                                    tPleasePradashValueWord = AppConstants.please_state_channuhos;
+                                    tPleasePradashHintValueWord = AppConstants.please_state_channuhos;
+                                    tPradashWordsId = 0;
+    
+                                    tPleaseTheDistrictValueWord = AppConstants.Please_enter_the_district;
+                                    tPleaseTheDistrictHintValueWord = AppConstants.Please_enter_the_district;
+                                    tPleaseTheDistrictWordsId = 0;
+    
+    
+                                    tPleaseMunicipalityValueWord = AppConstants.Please_be_a_municipality;
+                                    tPleaseMunicipalityHintValueWord = AppConstants.Please_be_a_municipality;
+                                    tPleaseMunicipalityWordsId = 0;
+    
+    
+                                    tPleaseSeletcWardValueWord = AppConstants.Please_be_a_ward;
+                                    tpleaseSeletcWardHintValueWord = AppConstants.Please_be_a_ward;
+                                    tPleaseSeletcWardValueWordsId = 0;
+                                  }
+    
+                                });
+                              },
+                              child: Text(AppConstants.Like_permanent,style: TextStyle(fontSize: Dimensions.BODY_12), )),
+                          SizedBox(width: 10,),
+                          Container(
+                            width: 10,
+                            height: 10,
+                            margin: EdgeInsets.only(right: 10),
+                            child: Checkbox(
+                              checkColor: ColorsResource.WHAIT,
+                              activeColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+                              value: valuefirst,
+                              onChanged: (value) {
+                                setState(() {
+                                  valuefirst = value!;
+                                  if(valuefirst){
+                                    tPleasePradashValueWord = pleasePradashValueWord;
+                                    tPleasePradashHintValueWord = pleasePradashHintValueWord;
+                                    tPradashWordsId = pradashWordsId;
+    
+                                    tPleaseTheDistrictValueWord = pleaseTheDistrictValueWord;
+                                    tPleaseTheDistrictHintValueWord = pleaseTheDistrictHintValueWord;
+                                    tPleaseTheDistrictWordsId = pleaseTheDistrictWordsId;
+    
+    
+                                    tPleaseMunicipalityValueWord = pleaseMunicipalityValueWord;
+                                    tPleaseMunicipalityHintValueWord = pleaseMunicipalityHintValueWord;
+                                    tPleaseMunicipalityWordsId = pleaseMunicipalityWordsId;
+    
+                                    tPleaseSeletcWardValueWord = pleaseSeletcWardValueWord;
+                                    tpleaseSeletcWardHintValueWord = pleaseSeletcWardHintValueWord;
+                                    tPleaseSeletcWardValueWordsId =pleaseSeletcWardValueWordsId;
+    
+                                  }else{
+                                    print("kfjskhfjds 2");
+                                    tPleasePradashValueWord = AppConstants.please_state_channuhos;
+                                    tPleasePradashHintValueWord = AppConstants.please_state_channuhos;
+                                    tPradashWordsId = 0;
+    
+                                    tPleaseTheDistrictValueWord = AppConstants.Please_enter_the_district;
+                                    tPleaseTheDistrictHintValueWord = AppConstants.Please_enter_the_district;
+                                    tPleaseTheDistrictWordsId = 0;
+    
+    
+                                    tPleaseMunicipalityValueWord = AppConstants.Please_be_a_municipality;
+                                    tPleaseMunicipalityHintValueWord = AppConstants.Please_be_a_municipality;
+                                    tPleaseMunicipalityWordsId = 0;
+    
+    
+                                    tPleaseSeletcWardValueWord = AppConstants.Please_be_a_ward;
+                                    tpleaseSeletcWardHintValueWord = AppConstants.Please_be_a_ward;
+                                    tPleaseSeletcWardValueWordsId = 0;
+                                  }
+    
+    
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+    
+                    tPleasePradashDropdown(),
+                    SizedBox(height: 10,),
+                    tPleaseEnterTheDistrictDropdown(),
+                    SizedBox(height: 10,),
+                    tPleaseDeaMunicipalityDropdown(),
+                    SizedBox(height: 10,),
+                    tPleaseSeletcWardDropdown(),
+                    SizedBox(height: 40,),
+    
+                    CustomButton(AppConstants.Register,() async{
+                      String name =nameTextEditingController.text;
+                      String email =emailTextEditingController.text;
+                      String password =passwordTextEditingController.text;
+                      String rePassword =rePasswordTextEditingController.text;
+                      String mobileNumber =mobileNumberTextEditingController.text;
+                      int gender = genderId;
+    
+                      ///Per
+                      int perPradeshId = pradashWordsId;
+                      int perDistrictId = pleaseTheDistrictWordsId;
+                      int perMuniId = pleaseMunicipalityWordsId;
+                      int perWard = pleaseSeletcWardValueWordsId;
+    
+                      ///Tem
+                      int temPradeshId = tPradashWordsId;
+                      int temDistrictId = tPleaseTheDistrictWordsId;
+                      int temMuniId = tPleaseMunicipalityWordsId;
+                      int temWard = tPleaseSeletcWardValueWordsId;
+    
+    
+                      if(name == ''){
+                        return showCustomSnackBar('1',context);
+                      }if(email == ''){
+                        return showCustomSnackBar('2',context);
+                      }if(password == ''){
+                        return showCustomSnackBar('3',context);
+                      }if(rePassword == ''){
+                        return showCustomSnackBar('4',context);
+                      }if(mobileNumber == ''){
+                        return showCustomSnackBar('5',context);
+                      }if(gender == 0){
+                        return showCustomSnackBar('6',context);
+                      }if(perPradeshId == 0){
+                        return showCustomSnackBar('7',context);
+                      }if(perDistrictId == 0){
+                        return showCustomSnackBar('8',context);
+                      }if(perMuniId == 0){
+                        return showCustomSnackBar('9',context);
+                      }if(perWard == 0){
+                        return showCustomSnackBar('10',context);
                       }
-                    }
-
-
-                    print('sdfsdf«  ${valuefirst}');
-
-                    showLoaderDialog(context);
-                    RegistationSendModel registerSendModel;
-
-                    if(valuefirst){
-                      registerSendModel = RegistationSendModel(
-                        name: name,
-                        email: email,
-                        password: password,
-                        mobile: int.parse(mobileNumber),
-                        passwordConfirmation: rePassword,
-                        perPradeshId: perPradeshId,
-                        perDistrictId: perDistrictId,
-                        perMuniId: perMuniId,
-                        perWard: perWard,
-                        pradeshId: perPradeshId,
-                        districtId: perDistrictId,
-                        muniId: perMuniId,
-                        ward: perWard,
-                        gender: gender
-                      );
-                    }else{
-                      registerSendModel = RegistationSendModel(
+    
+    
+                      if(!valuefirst){
+                        if(temPradeshId == 0){
+                          return showCustomSnackBar('11',context);
+                        }if(temDistrictId == 0){
+                          return showCustomSnackBar('12',context);
+                        }if(temMuniId == 0){
+                          return showCustomSnackBar('13',context);
+                        }if(temWard == 0){
+                          return showCustomSnackBar('14',context);
+                        }
+                      }
+    
+    
+                      print('sdfsdf«  ${valuefirst}');
+    
+                      showLoaderDialog(context);
+                      RegistationSendModel registerSendModel;
+    
+                      if(valuefirst){
+                        registerSendModel = RegistationSendModel(
                           name: name,
                           email: email,
-                          mobile: int.parse(mobileNumber),
                           password: password,
+                          mobile: int.parse(mobileNumber),
                           passwordConfirmation: rePassword,
                           perPradeshId: perPradeshId,
                           perDistrictId: perDistrictId,
                           perMuniId: perMuniId,
                           perWard: perWard,
-                          pradeshId: temPradeshId,
-                          districtId: temDistrictId,
-                          muniId: temMuniId,
-                          ward: temWard,
-                          gender: gender,
-                          preferenceJobCat: '1'
-
+                          pradeshId: perPradeshId,
+                          districtId: perDistrictId,
+                          muniId: perMuniId,
+                          ward: perWard,
+                          gender: gender
+                        );
+                      }else{
+                        registerSendModel = RegistationSendModel(
+                            name: name,
+                            email: email,
+                            mobile: int.parse(mobileNumber),
+                            password: password,
+                            passwordConfirmation: rePassword,
+                            perPradeshId: perPradeshId,
+                            perDistrictId: perDistrictId,
+                            perMuniId: perMuniId,
+                            perWard: perWard,
+                            pradeshId: temPradeshId,
+                            districtId: temDistrictId,
+                            muniId: temMuniId,
+                            ward: temWard,
+                            gender: gender,
+                            preferenceJobCat: '1'
+    
+                        );
+                      }
+    
+    
+    
+                      String? token ="";
+                      final box = GetStorage();
+                      token = box.read(AppConstants.TOKEN);
+                      BaseOptions options = BaseOptions(
+                          baseUrl: Apis.BASE_URL,
+                          headers: {
+                            'Accept':'application/json',
+                            'Authorization': 'Bearer $token'}
                       );
-                    }
-
-
-
-                    String? token ="";
-                    final box = GetStorage();
-                    token = box.read(AppConstants.TOKEN);
-                    BaseOptions options = BaseOptions(
-                        baseUrl: Apis.BASE_URL,
-                        headers: {
-                          'Accept':'application/json',
-                          'Authorization': 'Bearer $token'}
-                    );
-                    Dio dio = Dio(options);
-
-                    final data = {
-                      "name": name,
-                      "email": email,
-                      "mobile": int.parse(mobileNumber),
-                      "password": password,
-                      "password_confirmation": rePassword,
-                      "per_pradesh_id": perPradeshId,
-                      "per_district_id": perDistrictId,
-                      "per_muni_id": perMuniId,
-                      "per_ward": perWard,
-                      "pradesh_id": temPradeshId,
-                      "district_id": temDistrictId,
-                      "muni_id": temMuniId,
-                      "ward": temWard,
-                      "preference_job_cat[]": _myActivities,
-                      "document_type": docType,
-                      "gender": gender,
-                    };
-                    if (imagePath != null) {
-                      data['document_type_file'] = MultipartFile.fromFileSync(imagePath!, filename: imageName);
-                    }
-                    final formData = FormData.fromMap(data);
-
-                    print(data.toString());
-                    var response = await dio.post(Apis.REGISTER,
-                      data: formData,
-                      onSendProgress: (int sent, int total) {
-                        print("ppppp ${(sent / total *100).toStringAsFixed(0)}%  $sent $total");
-                        setState(() {
-                         print('kjshsd');
-                         // Provider.of<OnChangeProgressProvider>(context,listen: false).setCurrentPercent("${(sent / total *100).toStringAsFixed(0)}%");
-                        });
-                      },
-                      options: Options(
-                          followRedirects: false,
-                          validateStatus: (status) {
-                            return status! <= 500;
-                          }),
-                    );
-
-                    print( "fdskj   ${response.statusCode}");
-                    print("sfdsf  ${response.data}");
-
-                    if(response.statusCode == 201){
+                      Dio dio = Dio(options);
+    
+                      final data = {
+                        "name": name,
+                        "email": email,
+                        "mobile": int.parse(mobileNumber),
+                        "password": password,
+                        "password_confirmation": rePassword,
+                        "per_pradesh_id": perPradeshId,
+                        "per_district_id": perDistrictId,
+                        "per_muni_id": perMuniId,
+                        "per_ward": perWard,
+                        "pradesh_id": temPradeshId,
+                        "district_id": temDistrictId,
+                        "muni_id": temMuniId,
+                        "ward": temWard,
+                        "preference_job_cat[]": _myActivities,
+                        "document_type": docType,
+                        "gender": gender,
+                      };
+                      if (imagePath != null) {
+                        data['document_type_file'] = MultipartFile.fromFileSync(imagePath!, filename: imageName);
+                      }
+                      final formData = FormData.fromMap(data);
+    
+                      print(data.toString());
+                      var response = await dio.post(Apis.REGISTER,
+                        data: formData,
+                        onSendProgress: (int sent, int total) {
+                          print("ppppp ${(sent / total *100).toStringAsFixed(0)}%  $sent $total");
+                          setState(() {
+                           print('kjshsd');
+                           // Provider.of<OnChangeProgressProvider>(context,listen: false).setCurrentPercent("${(sent / total *100).toStringAsFixed(0)}%");
+                          });
+                        },
+                        options: Options(
+                            followRedirects: false,
+                            validateStatus: (status) {
+                              return status! <= 500;
+                            }),
+                      );
+    
+                      print( "fdskj   ${response.statusCode}");
                       print("sfdsf  ${response.data}");
-                      Map map = response.data;
-                      String tokens = map['token'];
-                      print(tokens);
-
-                      showCustomSnackBar('successful',context,isError: false);
-                      box.write(AppConstants.USER_EMAIL, email);
-                      box.write(AppConstants.USER_PASSWORD, password);
-                      box.write(AppConstants.TOKEN,'$tokens');
-                      Navigator.of(context).pop();
-                      successDialog(AppConstants.register_success);
-                    }else{
-                      print("sfdsf  ${response.data}");
-                      Map map = response.data;
-                      String error =map['message'];
-                      String errorTyp = map['errors']['email'].toString();
-                      String errorTyp2 = map['errors']['phone'].toString();
-                      showCustomSnackBar('$error \n $errorTyp \n $errorTyp2',context);
-                      Navigator.of(context).pop();
-                    }
-
-                    // authProvider.register(registerSendModel).then((value) {
-                    //   if(value.isSuccess){
-                    //     showCustomSnackBar(value.message,context,isError: false);
-                    //     //successDialog(AppConstants.register_success);
-                    //   }else{
-                    //     showCustomSnackBar(value.message,context);
-                    //   }
-                    // });
-                  }),
-                ],
+    
+                      if(response.statusCode == 201){
+                        print("sfdsf  ${response.data}");
+                        Map map = response.data;
+                        String tokens = map['token'];
+                        print(tokens);
+    
+                        showCustomSnackBar('successful',context,isError: false);
+                        box.write(AppConstants.USER_EMAIL, email);
+                        box.write(AppConstants.USER_PASSWORD, password);
+                        box.write(AppConstants.TOKEN,'$tokens');
+                        Navigator.of(context).pop();
+                        successDialog(AppConstants.register_success);
+                      }else{
+                        print("sfdsf  ${response.data}");
+                        Map map = response.data;
+                        String error =map['message'];
+                        String errorTyp = map['errors']['email'].toString();
+                        String errorTyp2 = map['errors']['phone'].toString();
+                        showCustomSnackBar('$error \n $errorTyp \n $errorTyp2',context);
+                        Navigator.of(context).pop();
+                      }
+    
+                      // authProvider.register(registerSendModel).then((value) {
+                      //   if(value.isSuccess){
+                      //     showCustomSnackBar(value.message,context,isError: false);
+                      //     //successDialog(AppConstants.register_success);
+                      //   }else{
+                      //     showCustomSnackBar(value.message,context);
+                      //   }
+                      // });
+                    }),
+                  ],
+                ),
               ),
             ),
           ),

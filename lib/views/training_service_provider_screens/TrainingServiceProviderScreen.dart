@@ -34,6 +34,18 @@ class _TrainingServiceProviderState extends State<TrainingServiceProvider> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+             appBar: AppBar(
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+          AppConstants.training_service_provider
+        ),
+      ),
         body: SingleChildScrollView(
           child: Consumer<ESSPProvider>(
             builder: (context,eSSPProvider,child) =>
@@ -42,52 +54,52 @@ class _TrainingServiceProviderState extends State<TrainingServiceProvider> {
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
-                  Expanded(
-                    flex: 1,
-                      child: Container(
-                        color: ColorsResource.PRAYMERY_COLOR,
-                        child: Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.050,
-                          margin: EdgeInsets.only(top: 60, left: 10, right: 10),
-                          child: Column(
-                            children: [
-                              //Toolbar
-                              Row(
-                                children: [
-                                  InkWell(
-                                      onHover: (_) {},
-                                      onTap: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: SvgPicture.asset(AppImages.ic_back_blue)),
-                                  SizedBox(
-                                    width: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width - 65,
-                                    child: Text(
-                                      AppConstants.training_service_provider,
-                                      style: TextStyle(
-                                          fontSize: Dimensions.BODY_20,
-                                          fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                          color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                  ),
+                  // Expanded(
+                  //   flex: 1,
+                  //     child: Container(
+                  //       color: ColorsResource.PRAYMERY_COLOR,
+                  //       child: Container(
+                  //         width: MediaQuery
+                  //             .of(context)
+                  //             .size
+                  //             .width,
+                  //         height: MediaQuery
+                  //             .of(context)
+                  //             .size
+                  //             .height * 0.050,
+                  //         margin: EdgeInsets.only(top: 60, left: 10, right: 10),
+                  //         child: Column(
+                  //           children: [
+                  //             //Toolbar
+                  //             Row(
+                  //               children: [
+                  //                 InkWell(
+                  //                     onHover: (_) {},
+                  //                     onTap: () {
+                  //                       Navigator.of(context).pop();
+                  //                     },
+                  //                     child: SvgPicture.asset(AppImages.ic_back_blue)),
+                  //                 SizedBox(
+                  //                   width: MediaQuery
+                  //                       .of(context)
+                  //                       .size
+                  //                       .width - 65,
+                  //                   child: Text(
+                  //                     AppConstants.training_service_provider,
+                  //                     style: TextStyle(
+                  //                         fontSize: Dimensions.BODY_20,
+                  //                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+                  //                         color: ColorsResource.PRAYMARY_TEXT_COLOR),
+                  //                     textAlign: TextAlign.center,
+                  //                   ),
+                  //                 )
+                  //               ],
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  // ),
 
                   Expanded(
                       flex: 9,

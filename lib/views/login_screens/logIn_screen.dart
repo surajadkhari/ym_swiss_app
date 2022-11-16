@@ -10,13 +10,16 @@ import 'package:lmiis/views/widgets/showCustomSnackBar.dart';
 
 import 'package:provider/provider.dart';
 
+import '../../models/ResponsModels/ViewAllTrainingsModel.dart';
 import '../../models/SendDataModels/UserLogin.dart';
 import '../../provider/AuthProvider.dart';
 import '../../utils/app_images.dart';
 
+import '../employment_support_service_Screens/widgets/special_training_detail_page.dart';
 import '../home_screens/home_screen.dart';
 import '../reset_password/password_reset.dart';
 
+import '../training_service_provider_screens/TrainingSingleItemDetails.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custtom_button.dart';
 
@@ -26,12 +29,12 @@ class LogInScreen extends StatefulWidget {
     this.doCheckLastScreen = false,
     this.screenType,
     this.viewAllJobsData,
-    // this.trainingModelData
+    this.viewAllTrainingsData
   }) : super(key: key);
   final bool doCheckLastScreen;
   final String? screenType;
   final ViewAllJobsData? viewAllJobsData;
-  // final TrainingModelData? trainingModelData;
+  final ViewAllTrainingsData? viewAllTrainingsData;
 
   @override
   State<LogInScreen> createState() => _LogInScreenState();
@@ -116,30 +119,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                 
+    
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 10),
@@ -205,7 +185,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                                     "job_description"
                                                 ? JobDescriptionViewScreen(
                                                     widget.viewAllJobsData!)
-                                                : HomeScreen())
+                                                :widget.screenType == "training" ? TrainingSingleItemDetails(widget.viewAllTrainingsData!):widget.screenType == "esspServiceDetailsJobs" ?JobDescriptionViewScreen(
+                                                    widget.viewAllJobsData!):widget.screenType == "esspServiceDetailsTraining" ?SpecialTrainingSingleItemDetails(widget.viewAllTrainingsData!)  :HomeScreen())
                                     // MaterialPageRoute(
                                     //   builder: (BuildContext context) =>
                                     //       widget.screenType == "job_description"

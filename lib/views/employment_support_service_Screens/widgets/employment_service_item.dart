@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lmiis/utils/AppConstants.dart';
 import 'package:lmiis/utils/app_images.dart';
 import 'package:lmiis/utils/dimensions.dart';
@@ -9,20 +10,105 @@ import '../../../models/ResponsModels/ViewAllJobsModel.dart';
 import '../../../utils/Apis.dart';
 import '../../../utils/colors_resource.dart';
 import '../../Job_description_view_screens/Job_description_view_screen.dart';
+import '../../login_screens/logIn_screen.dart';
 import '../../news_information_details_screens/news_information_details_screens.dart';
 
 class EmploymentServiceItem extends StatelessWidget {
   ViewAllJobsData viewAllJobData;
-  Function() onTab;
-  EmploymentServiceItem(this.viewAllJobData,this.onTab);
+  // Function() onTab;
+  EmploymentServiceItem(this.viewAllJobData);
 
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    Size screenSize = MediaQuery.of(context).size;
     return InkWell(
       onHover: (_){},
-      onTap:onTab,
+      onTap:(){
+   final box = GetStorage();
+        String? token = box.read(AppConstants.TOKEN) ?? '';
+             token.isEmpty
+            ? showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    insetPadding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 14),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    // title: const Text("कृपया लगइन गर्नुहोस्"),
+                    content: SizedBox(
+                      width: screenSize.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(
+                                  Icons.close,
+                                  size: 30,
+                                )),
+                          ),
+                          const Text(
+                            "कृपया लगइन गर्नुहोस्",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+
+                                shadowColor: Colors.greenAccent,
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0)),
+                                minimumSize: const Size(150, 50), //////// HERE
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                token.isEmpty
+                                    ? Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (ctx) => LogInScreen(
+                                                  doCheckLastScreen: true,
+                                                  screenType: "esspServiceDetailsJobs",
+                                                  //screenType : "training"
+                                                  //trainingModelData : trainingModelData
+                                                  viewAllJobsData:
+                                                      viewAllJobData,
+                                                )))
+                                    : Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                JobDescriptionViewScreen(
+                                                    viewAllJobData)));
+                              },
+                              child: const Text("लग - इन")),
+                        ],
+                      ),
+                    ),
+                  );
+                })
+            : Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        JobDescriptionViewScreen(viewAllJobData)));
+      },
       child: Container(
         margin: EdgeInsets.only(left: 10,right: 10,bottom: 5,top: 5),
         decoration: myBoxDecoration(),
