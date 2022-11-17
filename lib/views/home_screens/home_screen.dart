@@ -53,6 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    String token = box.read(AppConstants.TOKEN) ?? '';
+
     return riverpod.ProviderScope(
       child: Scaffold(
         key: _scaffoldKey,
@@ -61,8 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Consumer<NewsNoticeProvider>(
               builder: (context, newsNoticeProvider, child) {
-            final box = GetStorage();
-            String? token = box.read(AppConstants.TOKEN) ?? '';
             return SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,

@@ -7,6 +7,7 @@ import 'package:lmiis/models/new_grade_model.dart';
 import 'package:lmiis/models/new_muni_model.dart';
 import 'package:lmiis/models/pradeshModel.dart';
 import 'package:lmiis/views/employment_list_screens/widgets/employment_item.dart';
+import 'package:lmiis/views/home_screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/ResponsModels/DistrictsModel.dart';
@@ -110,6 +111,14 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: ((context) => HomeScreen())),
+                (route) => false)
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
         elevation: 0,
         centerTitle: true,
