@@ -71,7 +71,12 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
     municipalitiesData = [];
     distictsData = [];
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<JobProvider>(context, listen: false).getVewAllJob(pageCount);
+      Provider.of<JobProvider>(context, listen: false).getVewAllJob(
+          pageCount,
+          newMuniModel?.muniId,
+          newGradeModel?.id,
+          newPradeshModel?.id,
+          districtNewModel?.id);
       Provider.of<JobProvider>(context, listen: false)
           .getJobCategory(1)
           .then((value) {
@@ -527,7 +532,14 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                             showLoaderDialog(context);
 
                             if (locationListId == 0 && gradListId == 0) {
-                              jobProvider.getVewAllJob(pageCount).then((value) {
+                              jobProvider
+                                  .getVewAllJob(
+                                      pageCount,
+                                      newMuniModel?.muniId,
+                                      newGradeModel?.id,
+                                      newPradeshModel?.id,
+                                      districtNewModel?.id)
+                                  .then((value) {
                                 if (value.isSuccess) {
                                   isSearching = false;
                                   Navigator.of(context).pop();
@@ -638,7 +650,12 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                             : pageCount = pageCount - 1;
                                         Provider.of<JobProvider>(context,
                                                 listen: false)
-                                            .getVewAllJob(pageCount);
+                                            .getVewAllJob(
+                                                pageCount,
+                                                newMuniModel?.muniId,
+                                                newGradeModel?.id,
+                                                newPradeshModel?.id,
+                                                districtNewModel?.id);
                                       } else {
                                         showCustomSnackBar(
                                             'No more page', context);
@@ -672,7 +689,12 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                         print('fshdghdsh$pageCount ');
                                         Provider.of<JobProvider>(context,
                                                 listen: false)
-                                            .getVewAllJob(pageCount);
+                                            .getVewAllJob(
+                                                pageCount,
+                                                newMuniModel?.muniId,
+                                                newGradeModel?.id,
+                                                newPradeshModel?.id,
+                                                districtNewModel?.id);
                                       } else {
                                         showCustomSnackBar(
                                             'No more page', context);
@@ -696,7 +718,12 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                       pageCount = int.parse(linkMeta.label!);
                                       Provider.of<JobProvider>(context,
                                               listen: false)
-                                          .getVewAllJob(pageCount);
+                                          .getVewAllJob(
+                                              pageCount,
+                                              newMuniModel?.muniId,
+                                              newGradeModel?.id,
+                                              newPradeshModel?.id,
+                                              districtNewModel?.id);
                                     },
                                     child: Container(
                                       margin: const EdgeInsets.all(5),

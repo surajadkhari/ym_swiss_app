@@ -16,11 +16,10 @@ class Apis {
 
   ///Jobs
   static String VIEW_ALL_JOBS = 'view-all/jobs?page=';
-  static String VIEW_SEARCH_JOBS = 'search/jobs?page=';
+  static String VIEW_SEARCH_JOBS = 'search/jobs?';
   static String VIEW_SINGLE_JOB = 'view/job/';
   static String JOB_APPLAY_F = 'job/';
   static String JOB_APPLAY_L = '/apply';
-
 
   ///Location
   static String PRODESH = 'pradesh';
@@ -61,24 +60,21 @@ class Apis {
 
   static String POST_EDUCATION = "store/education";
   static String UPDATE_EDUCATION = "edit/education/";
-  static String  DELETE_EDUCATION= "delete/education/";
+  static String DELETE_EDUCATION = "delete/education/";
 
-  static String  POST_EXPERINCE= "store/experience";
-  static String  DELETE_EXPERINCE= "delete/experience/";
+  static String POST_EXPERINCE = "store/experience";
+  static String DELETE_EXPERINCE = "delete/experience/";
 
-  static String  POST_TRANINGS= "store/training";
-  static String  UPDATE_TRANINGS= "update/training/";
-  static String  DELETE_TRANINGS= "delete/training/";
+  static String POST_TRANINGS = "store/training";
+  static String UPDATE_TRANINGS = "update/training/";
+  static String DELETE_TRANINGS = "delete/training/";
 
+  static String POST_SKILL = "store/skill";
+  static String DELETE_SKILL = "delete/skill/";
 
-  static String  POST_SKILL= "store/skill";
-  static String  DELETE_SKILL= "delete/skill/";
-
-
-  static String  POST_LAMGUAGE = "store/language";
-  static String  UPDATE_LAMGUAGE = "update/language/";
-  static String  DELETE_LAMGUAGE = "delete/language/";
-
+  static String POST_LAMGUAGE = "store/language";
+  static String UPDATE_LAMGUAGE = "update/language/";
+  static String DELETE_LAMGUAGE = "delete/language/";
 
   /// employ loacation
   static String PRODESH_EM = 'pradesh';
@@ -87,7 +83,6 @@ class Apis {
   static String POST_LOCATION = 'store/preferenceLocation';
   static String UPDATE_LOCATION = 'update/preferenceLocation/';
   static String DELETE_LOCATION = 'delete/preferenceLocation/';
-
 
   static String SPESIAL_ADD = 'store/specialization';
   static String GET_SOCIAL_NAME = 'social-account';
