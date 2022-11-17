@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_svg/svg.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lmiis/provider/AuthProvider.dart';gti
+import 'package:lmiis/provider/AuthProvider.dart';
 import 'package:lmiis/utils/Apis.dart';
 import 'package:lmiis/utils/AppConstants.dart';
 import 'package:lmiis/utils/app_images.dart';
