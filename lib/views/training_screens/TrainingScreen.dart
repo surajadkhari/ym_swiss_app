@@ -71,8 +71,12 @@ class _TrainingScreenState extends State<TrainingScreen> {
     municipalitiesData = [];
     distictsData = [];
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<TrainingsProvider>(context, listen: false)
-          .getVewAllTraining(pageCount);
+      Provider.of<TrainingsProvider>(context, listen: false).getVewAllTraining(
+          pageCount,
+          newTrainingCategoryModel?.id,
+          newPradeshModel?.id,
+          districtNewModel?.id,
+          newMuniModel?.muniId);
       Provider.of<TrainingsProvider>(context, listen: false)
           .getTrainingCategory(pageCount)
           .then((value) {
@@ -570,7 +574,12 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
                               if (locationListId == 0 && gradListId == 0) {
                                 viewAllTrainingsProvider
-                                    .getVewAllTraining(pageCount)
+                                    .getVewAllTraining(
+                                        pageCount,
+                                        newTrainingCategoryModel?.id,
+                                        newPradeshModel?.id,
+                                        districtNewModel?.id,
+                                        newMuniModel?.muniId)
                                     .then((value) {
                                   if (value.isSuccess) {
                                     isSearching = false;
@@ -699,7 +708,12 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                           Provider.of<TrainingsProvider>(
                                                   context,
                                                   listen: false)
-                                              .getVewAllTraining(pageCount);
+                                              .getVewAllTraining(
+                                                  pageCount,
+                                                  newTrainingCategoryModel?.id,
+                                                  newPradeshModel?.id,
+                                                  districtNewModel?.id,
+                                                  newMuniModel?.muniId);
                                         } else {
                                           showCustomSnackBar(
                                               'No more page', context);
@@ -733,7 +747,12 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                           Provider.of<TrainingsProvider>(
                                                   context,
                                                   listen: false)
-                                              .getVewAllTraining(pageCount);
+                                              .getVewAllTraining(
+                                                  pageCount,
+                                                  newTrainingCategoryModel?.id,
+                                                  newPradeshModel?.id,
+                                                  districtNewModel?.id,
+                                                  newMuniModel?.muniId);
                                         } else {
                                           showCustomSnackBar(
                                               'No more page', context);
@@ -757,7 +776,12 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                         pageCount = int.parse(linkMeta.label!);
                                         Provider.of<TrainingsProvider>(context,
                                                 listen: false)
-                                            .getVewAllTraining(pageCount);
+                                            .getVewAllTraining(
+                                                pageCount,
+                                                newTrainingCategoryModel?.id,
+                                                newPradeshModel?.id,
+                                                districtNewModel?.id,
+                                                newMuniModel?.muniId);
                                       },
                                       child: Container(
                                         margin: EdgeInsets.all(5),
