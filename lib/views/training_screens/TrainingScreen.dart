@@ -62,8 +62,16 @@ class _TrainingScreenState extends State<TrainingScreen> {
   bool isGradeSelected = false;
   bool isMuniSelcted = false;
   DistrictNewModel? districtNewModel;
+    late Future<List<NewPradeshModel>> fPardesh;
+  late Future<List<DistrictNewModel>> fDistrict;
+  late Future<List<NewMuniModel>> fMunicipalities;
+  late Future<
+                                        List<NewTrainingCategoryModel>> ftrainingCategory;
   @override
-  void initState() {
+  void initState() { fPardesh = ApiClient().getPradeshData();
+    fDistrict = ApiClient().getDistricts();
+    fMunicipalities = ApiClient().getMunicipalities();
+    ftrainingCategory =  ApiClient().getTrainingCategory();
     isProvinceSelected = false;
     isnewTrainingSelected = false;
     isDistrictSelected = false;
@@ -146,7 +154,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                     top: 5, left: 20, right: 20),
                                 width: MediaQuery.of(context).size.width - 80,
                                 child: FutureBuilder<List<NewPradeshModel>>(
-                                    future: ApiClient().getPradeshData(),
+                                    future: fPardesh,
                                     builder: (context, snap) {
                                       if (snap.hasData) {
                                         return Container(
@@ -173,7 +181,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                                   color: Colors.transparent,
                                                 ),
                                                 hint: Text(
-                                                  "कृपया प्रदेश छान्नुहोस",
+                                                  "तालीमको वर्ग छान्नुहोस",
                                                   style: GoogleFonts.poppins(
                                                       fontWeight: Dimensions
                                                           .FONT_MEDIUM_NORMUL,
@@ -245,7 +253,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                     top: 5, left: 20, right: 20),
                                 width: MediaQuery.of(context).size.width - 80,
                                 child: FutureBuilder<List<DistrictNewModel>>(
-                                    future: ApiClient().getDistricts(),
+                                    future: fDistrict,
                                     builder: (context, snap) {
                                       if (snap.hasData) {
                                         return Container(
@@ -345,7 +353,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                     top: 5, left: 20, right: 20),
                                 width: MediaQuery.of(context).size.width - 80,
                                 child: FutureBuilder<List<NewMuniModel>>(
-                                    future: ApiClient().getMunicipalities(),
+                                    future: fMunicipalities,
                                     builder: (context, snap) {
                                       if (snap.hasData) {
                                         return Container(
@@ -445,7 +453,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                 width: MediaQuery.of(context).size.width - 80,
                                 child: FutureBuilder<
                                         List<NewTrainingCategoryModel>>(
-                                    future: ApiClient().getTrainingCategory(),
+                                    future: ftrainingCategory,
                                     builder: (context, snap) {
                                       if (snap.hasData) {
                                         return Container(

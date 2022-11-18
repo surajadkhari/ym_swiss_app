@@ -62,9 +62,16 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
 
   List<MunicipalitiesData>? municipalitiesData;
   List<DistrictsData>? distictsData;
-
+  late Future<List<NewPradeshModel>> fPardesh;
+  late Future<List<DistrictNewModel>> fDistrict;
+  late Future<List<NewMuniModel>> fMunicipalities;
+  late Future<List<NewGradeModel>> fjsobCategory;
   @override
   void initState() {
+    fPardesh = ApiClient().getPradeshData();
+    fDistrict = ApiClient().getDistricts();
+    fMunicipalities = ApiClient().getMunicipalities();
+    fjsobCategory = ApiClient().getGrades();
     isProvinceSelected = false;
     isDistrictSelected = false;
     isMuniSelcted = false;
@@ -153,7 +160,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                   top: 5, left: 20, right: 20),
                               width: MediaQuery.of(context).size.width - 80,
                               child: FutureBuilder<List<NewPradeshModel>>(
-                                  future: ApiClient().getPradeshData(),
+                                  future: fPardesh,
                                   builder: (context, snap) {
                                     if (snap.hasData) {
                                       return Container(
@@ -251,7 +258,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                   top: 5, left: 20, right: 20),
                               width: MediaQuery.of(context).size.width - 80,
                               child: FutureBuilder<List<DistrictNewModel>>(
-                                  future: ApiClient().getDistricts(),
+                                  future: fDistrict,
                                   builder: (context, snap) {
                                     if (snap.hasData) {
                                       return Container(
@@ -329,8 +336,8 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                         ),
                                       );
                                     } else {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
+                                      return  Center(
+                                        child: Container(),
                                       );
                                     }
                                   }))
@@ -350,7 +357,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                   top: 5, left: 20, right: 20),
                               width: MediaQuery.of(context).size.width - 80,
                               child: FutureBuilder<List<NewMuniModel>>(
-                                  future: ApiClient().getMunicipalities(),
+                                  future: fMunicipalities,
                                   builder: (context, snap) {
                                     if (snap.hasData) {
                                       return Container(
@@ -425,8 +432,8 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                         ),
                                       );
                                     } else {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
+                                      return  Center(
+                                        child: Container(),
                                       );
                                     }
                                   }))
@@ -446,7 +453,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                   top: 5, left: 20, right: 20),
                               width: MediaQuery.of(context).size.width - 80,
                               child: FutureBuilder<List<NewGradeModel>>(
-                                  future: ApiClient().getGrades(),
+                                  future: fjsobCategory,
                                   builder: (context, snap) {
                                     if (snap.hasData) {
                                       return Container(
@@ -472,7 +479,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                                 color: Colors.transparent,
                                               ),
                                               hint: Text(
-                                                "कृपया नगरपालिका छान्नुहोस",
+                                                "रोजगारीको वर्ग छान्नुहोस",
                                                 style: GoogleFonts.poppins(
                                                     fontWeight: Dimensions
                                                         .FONT_MEDIUM_NORMUL,
@@ -519,8 +526,8 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                         ),
                                       );
                                     } else {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
+                                      return  Center(
+                                        child: Container(),
                                       );
                                     }
                                   }))
