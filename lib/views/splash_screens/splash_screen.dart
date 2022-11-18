@@ -25,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<LocationProvider>(context, listen: false).getPradesh();
-      Provider.of<LocationProvider>(context, listen: false).tGetPradesh();
       Provider.of<LocationProvider>(context, listen: false).getJobCategory();
       Provider.of<LocationProvider>(context, listen: false).getDocumentType();
       Provider.of<LocationProvider>(context, listen: false).getGender();

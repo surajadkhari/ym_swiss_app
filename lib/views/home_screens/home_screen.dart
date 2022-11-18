@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_svg/svg.dart';
@@ -118,7 +119,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                           onHover: (_) {},
                                           child: SvgPicture.asset(
                                               AppImages.ic_notificaton))
-                                      : const Text("")
+                                      : InkWell(
+                                        onTap: (){
+
+                                          Navigator.push(context, CupertinoPageRoute(builder: ((context) => LogInScreen())));
+                                        },
+                                        child: const Text("लग - इन",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),))
                                 ],
                               ),
                             ),

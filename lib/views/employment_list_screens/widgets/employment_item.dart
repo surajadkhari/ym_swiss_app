@@ -143,7 +143,7 @@ class EmploymentItem extends StatelessWidget {
                         //       )
 
                         )
-                    : const Text("sd")
+                    : const Text("")
                 // Container(
                 //     width: 80,
                 //     height: 80,
