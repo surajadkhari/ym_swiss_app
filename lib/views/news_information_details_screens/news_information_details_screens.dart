@@ -40,58 +40,78 @@ class _NewsInformationDetailsScreensState extends State<NewsInformationDetailsSc
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+               appBar: AppBar(      
+                
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              !widget.isNews ? AppConstants.news: AppConstants.information,
+              style: const TextStyle(
+                  fontSize: Dimensions.BODY_20,
+                  fontWeight: Dimensions.FONT_BOLD,
+                  color: Colors.white),
+    
+            ),SizedBox(width: 10,),  
+            SvgPicture.asset( !widget.isNews ? AppImages.ic_news_blue: AppImages.ic_info_notification,color: Colors.white,)
+          ],
+        ),
+      ),
       backgroundColor: ColorsResource.WHAIT,
       body: Consumer<NewsNoticeProvider>(
         builder: (context,newsNoticeProvider,child) =>
             Column(
             children: [
-              Expanded(
-                flex: 1,
-                child:  Container(
-                  color: ColorsResource.PRAYMERY_COLOR,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.055,
-                    margin: EdgeInsets.only(top: 50, left: 10, right: 10),
-                    child: Column(
-                      children: [
-                        //Toolbar
-                        Row(
-                          children: [
-                            InkWell(
-                                onHover: (_) {},
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child:
-                                SvgPicture.asset(AppImages.ic_back_blue)),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 65,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    !widget.isNews ? AppConstants.news: AppConstants.information,
-                                    style: TextStyle(
-                                        fontSize: Dimensions.BODY_20,
-                                        fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                        color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  SizedBox(width: 10,),
-                                  SvgPicture.asset( !widget.isNews ? AppImages.ic_news_blue: AppImages.ic_info_notification)
+              // Expanded(
+              //   flex: 1,
+              //   child:  Container(
+              //     color: ColorsResource.PRAYMERY_COLOR,
+              //     child: Container(
+              //       width: MediaQuery.of(context).size.width,
+              //       height: MediaQuery.of(context).size.height * 0.055,
+              //       margin: EdgeInsets.only(top: 50, left: 10, right: 10),
+              //       child: Column(
+              //         children: [
+              //           //Toolbar
+              //           Row(
+              //             children: [
+              //               InkWell(
+              //                   onHover: (_) {},
+              //                   onTap: () {
+              //                     Navigator.of(context).pop();
+              //                   },
+              //                   child:
+              //                   SvgPicture.asset(AppImages.ic_back_blue)),
+              //               SizedBox(
+              //                 width: MediaQuery.of(context).size.width - 65,
+              //                 child: Row(
+              //                   crossAxisAlignment: CrossAxisAlignment.center,
+              //                   mainAxisAlignment: MainAxisAlignment.center,
+              //                   children: [
+              //                     Text(
+              //                       !widget.isNews ? AppConstants.news: AppConstants.information,
+              //                       style: TextStyle(
+              //                           fontSize: Dimensions.BODY_20,
+              //                           fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+              //                           color: ColorsResource.PRAYMARY_TEXT_COLOR),
+              //                       textAlign: TextAlign.center,
+              //                     ),
+              //                     SizedBox(width: 10,),
+              //                     SvgPicture.asset( !widget.isNews ? AppImages.ic_news_blue: AppImages.ic_info_notification)
 
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              //                   ],
+              //                 ),
+              //               )
+              //             ],
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Expanded(
                   flex: 8,
                   child: newsNoticeProvider.newNoticeSingleModel != null ? SingleChildScrollView(

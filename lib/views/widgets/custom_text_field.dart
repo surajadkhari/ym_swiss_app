@@ -27,7 +27,7 @@ class CustomTextFieldWithTitle extends StatelessWidget {
   bool isBold;
   bool isPadding;
   double paddingDouble;
-
+TextInputAction? textInputAction;
   CustomTextFieldWithTitle(this.hintText,this.controller,this.focusNode,
       {this.isShowRequrStar = false,this.onChanged,this.height = 54,
         this.inputTypePassword = false, this.inputType = AppConstants.TEXT,
@@ -42,6 +42,7 @@ class CustomTextFieldWithTitle extends StatelessWidget {
         this.suffixIconPadding = 10,
         this.fontSize = 15,
         this.paddingDouble = 5,
+        textInputAction=TextInputAction.next
       });
   @override
   Widget build(BuildContext context) {
@@ -67,6 +68,7 @@ class CustomTextFieldWithTitle extends StatelessWidget {
         SizedBox(
             height: height,
             child: TextField(
+              textInputAction:textInputAction ,
                 style: TextStyle(fontSize: fontSize),
                 obscureText: inputTypePassword,
                 keyboardType: inputType != AppConstants.TEXT ? TextInputType.phone:TextInputType.text,

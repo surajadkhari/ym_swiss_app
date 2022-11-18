@@ -10,6 +10,7 @@ import '../../utils/AppConstants.dart';
 import '../../utils/app_images.dart';
 import '../../utils/colors_resource.dart';
 import '../../utils/dimensions.dart';
+import '../home_screens/home_screen.dart';
 
 class EmploymentSupportServiceScreen extends StatefulWidget {
   const EmploymentSupportServiceScreen({Key? key}) : super(key: key);
@@ -35,7 +36,15 @@ class _EmploymentSupportServiceScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
+      
+          appBar: AppBar(         leading: IconButton(
+          onPressed: () => {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: ((context) => HomeScreen())),
+                (route) => false)
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
         elevation: 0,
         centerTitle: true,
