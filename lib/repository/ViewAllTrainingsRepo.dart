@@ -5,23 +5,26 @@ import '../data/datasource/remote/dio/dio_client.dart';
 import '../data/datasource/remote/exception/api_error_handler.dart';
 import '../utils/Apis.dart';
 
-class ViewAllTrainingsRepo{
+class ViewAllTrainingsRepo {
   final DioClient dioClient;
   ViewAllTrainingsRepo({required this.dioClient});
 
+  Future<ApiResponse> getVewAllTraining(int pageId, int? categoryId,
+      int? pradeshId, int? districtId, int? muniId) async {
+    var mid = muniId == null ? '' : muniId;
+    var catId = categoryId == null ? '' : categoryId;
+    var pId = pradeshId == null ? '' : pradeshId;
+    var dId = districtId == null ? '' : districtId;
 
-  Future<ApiResponse> getVewAllTraining(int pageId) async {
     try {
       Response? response = await dioClient.get(
-        '${Apis.VIEW_ALL_TRAININGS}$pageId',
+        '${Apis.VIEW_SEARCH_TRAINING}?muni_id=$mid&category_id=$catId&pradesh_id=$pId&district_id=$dId&page=$pageId',
       );
       return ApiResponse.withSuccess(response!);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-
-
 
   Future<ApiResponse> getVewSingleTraining(int id) async {
     try {
@@ -34,7 +37,6 @@ class ViewAllTrainingsRepo{
     }
   }
 
-
   Future<ApiResponse> getTrainingCategory() async {
     try {
       Response? response = await dioClient.get(
@@ -46,8 +48,7 @@ class ViewAllTrainingsRepo{
     }
   }
 
-
-  Future<ApiResponse> getSearchAllJob(String url,int pageId) async {
+  Future<ApiResponse> getSearchAllJob(String url, int pageId) async {
     try {
       Response? response = await dioClient.get(
         '${Apis.VIEW_SEARCH_TRAINING}$pageId$url',
@@ -68,5 +69,4 @@ class ViewAllTrainingsRepo{
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-
 }

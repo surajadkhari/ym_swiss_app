@@ -44,7 +44,7 @@ class Apis {
   static String TRAININGS_CATEGORY = 'training/category';
   static String TRAINING_APPLLAY_F = 'training/';
   static String TRAINING_APPLLAY_L = '/apply';
-  static String VIEW_SEARCH_TRAINING = 'search/trainings?page=';
+  static String VIEW_SEARCH_TRAINING = 'search/trainings';
   static String MUNICIPALITIES = 'municipalities/';
   static String MUNICIPALITIES_All = 'municipalities';
 
