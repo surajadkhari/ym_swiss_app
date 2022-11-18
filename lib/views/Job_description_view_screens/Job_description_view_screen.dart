@@ -1014,6 +1014,7 @@ class _JobDescriptionViewScreenState extends State<JobDescriptionViewScreen> {
                             }
 
                             int id = widget.viewAllJobDataF.id!;
+                            utilProvider.setUploading(true);
                             var response = await dio.post(
                               '${Apis.JOB_APPLAY_F}$id${Apis.JOB_APPLAY_L}',
                               data: fileName == null ? '' : formData,
@@ -1034,6 +1035,8 @@ class _JobDescriptionViewScreenState extends State<JobDescriptionViewScreen> {
                                   }),
                             );
                             log(response.statusCode.toString());
+                            utilProvider.setUploading(false);
+                            Navigator.pop(context);
 
                             if (response.statusCode == 200) {
                               log(response.data.toString());
