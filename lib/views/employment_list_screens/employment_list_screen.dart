@@ -7,7 +7,6 @@ import 'package:lmiis/models/new_grade_model.dart';
 import 'package:lmiis/models/new_muni_model.dart';
 import 'package:lmiis/models/pradeshModel.dart';
 import 'package:lmiis/views/employment_list_screens/widgets/employment_item.dart';
-import 'package:lmiis/views/home_screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/ResponsModels/DistrictsModel.dart';
@@ -19,6 +18,7 @@ import '../../utils/AppConstants.dart';
 import '../../utils/app_images.dart';
 import '../../utils/colors_resource.dart';
 import '../../utils/dimensions.dart';
+import '../home_screens/home_screen.dart';
 import '../news_information_see_more_screens/widgets/custtom_search_button.dart';
 import '../widgets/showCustomSnackBar.dart';
 

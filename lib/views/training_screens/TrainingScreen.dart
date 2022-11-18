@@ -22,6 +22,7 @@ import '../../utils/app_images.dart';
 import '../../utils/colors_resource.dart';
 import '../../utils/dimensions.dart';
 import '../Job_description_view_screens/Job_description_view_screen.dart';
+import '../home_screens/home_screen.dart';
 import '../news_information_see_more_screens/widgets/custtom_search_button.dart';
 import '../training_service_provider_screens/TrainingSingleItemDetails.dart';
 import '../widgets/showCustomSnackBar.dart';
@@ -98,6 +99,14 @@ class _TrainingScreenState extends State<TrainingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+         leading: IconButton(
+          onPressed: () => {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: ((context) => HomeScreen())),
+                (route) => false)
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
         elevation: 0,
         centerTitle: true,
