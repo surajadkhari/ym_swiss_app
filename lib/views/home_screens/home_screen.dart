@@ -12,6 +12,7 @@ import 'package:lmiis/utils/colors_resource.dart';
 import 'package:lmiis/utils/dimensions.dart';
 import 'package:lmiis/views/employment_list_screens/employment_list_screen.dart';
 import 'package:lmiis/views/home_screens/widgets/news_infomation_item.dart';
+import 'package:lmiis/views/login_screens/logIn_screen.dart';
 import 'package:lmiis/views/my_profile_screens/EditMyProfileScreen.dart';
 import 'package:lmiis/views/widgets/custtom_button.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,6 @@ import '../../models/ResponsModels/NewsNoticeModel.dart';
 import '../../provider/MyProfileProvider.dart';
 import '../../provider/NewNoticePrvide.dart';
 import '../employment_support_service_Screens/employment_support_service_screen.dart';
-import '../login_screens/logIn_screen.dart';
 import '../my_profile_screens/ChnagePassword.dart';
 import '../my_profile_screens/MyProfileScreen.dart';
 import '../news_information_see_more_screens/news_information_see_more_screen.dart';
@@ -118,7 +118,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                           onHover: (_) {},
                                           child: SvgPicture.asset(
                                               AppImages.ic_notificaton))
-                                      : const Text("")
+                                      : InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LogInScreen()));
+                                          },
+                                          child: const Text(
+                                            "लग - इन",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
+                                          ),
+                                        )
                                 ],
                               ),
                             ),
