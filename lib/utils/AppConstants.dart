@@ -7,7 +7,6 @@ class AppConstants {
   // static String LOGIN_URI = '/api/login';
   // static String LOG_OUT_URI = '/api/logout';*/
 
-
   static String GET_RECENT_ACTIVITY_URI = '/api/recent-activities';
   static String ABOUT_URI = '/api/about';
   static String CHANGE_PASSWORD_URI = '/api/reset-password';
@@ -29,22 +28,6 @@ class AppConstants {
 
   static String USER_PASSWORD = "USER_PASSWORD";
   static String USER_NUMBER = 'USER_NUMBER';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   ///Enum Value
   static const String TEXT = 'text';
@@ -102,7 +85,8 @@ class AppConstants {
   static String Please_be_a_ward = 'कृपया वार्ड छन्नुहोस';
 
   static String Like_permanent = 'स्थायी जस्तै ';
-  static String register_success = 'तपाईकाे खाता सफलता पुर्वक सृजना भएकाे छ ।  ';
+  static String register_success =
+      'तपाईकाे खाता सफलता पुर्वक सृजना भएकाे छ ।  ';
 
   //Password Reset
   static String password_reset = 'पासवर्ड रिसेट';
@@ -128,7 +112,7 @@ class AppConstants {
 //New Information details screen
   static String news = 'समाचार';
   static String InformationD = 'सूचना';
-
+  static String jobTrainingTitle = "रोजगार/प्रशिक्षण";
 // Employer list
   static String Please_choose_a_lower_location = 'कृपया कमको स्थान छान्नुहोस';
   static String Select_the_municipality = 'नगरपालिका छान्नुहाेस्';
@@ -148,7 +132,8 @@ class AppConstants {
   static String salary = 'तलब:';
 
   static String Job_description = 'कामको विवरण';
-  static String Job_description_test = "Sales executives are executives who work with companies' sales teams to determine the best strategies for increasing customer purchases. They assist top management in developing appropriate sales goals, overseeing sales staff activities, and collaborating with marketing teams to expand brand presence.";
+  static String Job_description_test =
+      "Sales executives are executives who work with companies' sales teams to determine the best strategies for increasing customer purchases. They assist top management in developing appropriate sales goals, overseeing sales staff activities, and collaborating with marketing teams to expand brand presence.";
   static String Work_required = 'काम आवसेक्ता';
   static String education = 'शिक्षा: ';
   static String Experience = 'अनुभव: ';
@@ -157,21 +142,30 @@ class AppConstants {
   static String Your_CV = "तपाईंको सि.भी ";
   static String Keep_an_updated_CV = "अप्डेट गरिएको सि भी राख्नुहोस ";
   static String Apply = "आवेदन दिनुहोस्";
-  static String You_have_successfully_applied_for_a_job = "तपाईंले सफलतापूर्वक कामको लागि आवेदन दिनुभएको छ ";
+  static String You_have_successfully_applied_for_a_job =
+      "तपाईंले सफलतापूर्वक कामको लागि आवेदन दिनुभएको छ ";
 
   static String Training_Details = "प्रशिक्षण विवरण";
-  static String Training_Service_Provider_Details = "प्रशिक्षण सेवा प्रदायक विवरण";
-  static String Details_of_Training_Institution = "प्रशिक्षण दिने संस्थाको विवरण";
-  static String Training_within_this_service_provider = "यस सेवा प्रदायक भित्रका प्रशिक्षणहरु";
+  static String Training_Service_Provider_Details =
+      "प्रशिक्षण सेवा प्रदायक विवरण";
+  static String Details_of_Training_Institution =
+      "प्रशिक्षण दिने संस्थाको विवरण";
+  static String Training_within_this_service_provider =
+      "यस सेवा प्रदायक भित्रका प्रशिक्षणहरु";
   static String Details_of_training = "प्रशिक्षणको विवरण";
-  static String You_have_successfully_applied_for_training = "तपाईंले सफलतापूर्वक तालिमको लागि आवेदन दिनुभएको छ ";
+  static String You_have_successfully_applied_for_training =
+      "तपाईंले सफलतापूर्वक तालिमको लागि आवेदन दिनुभएको छ ";
 
-  static String Employment_support_service_provider = "रोजगार समर्थन सेवा प्रदायक";
-  static String Employment_Support_Services_Provider_Details = "रोजगार समर्थन सेवा प्रदायक विवरण";
+  static String Employment_support_service_provider =
+      "रोजगार समर्थन सेवा प्रदायक";
+  static String Employment_Support_Services_Provider_Details =
+      "रोजगार समर्थन सेवा प्रदायक विवरण";
 
   static String description = "विवरण";
-  static String Training_and_employment_within_this_service_provider = "यस सेवा प्रदायक भित्रका प्रशिक्षणहरु";
-  static String Recruitment_and_training_within_this_service_provider = "यस सेवा प्रदायक भित्रका रोजगरी र प्रशिक्षणहरु";
+  static String Training_and_employment_within_this_service_provider =
+      "यस सेवा प्रदायक भित्रका प्रशिक्षणहरु";
+  static String Recruitment_and_training_within_this_service_provider =
+      "यस सेवा प्रदायक भित्रका रोजगरी र प्रशिक्षणहरु";
   static String employee = "यस सेवा प्रदायक भित्रका प्रशिक्षण र रोजगरीहरु";
 
   static String Training = "तालिम";
@@ -180,14 +174,15 @@ class AppConstants {
   static String Information_notification = "नोटिफिकेशन"
       "";
   static String LogOut = 'Logout';
-  static String Profile= 'प्रोफाइल';
+  static String Profile = 'प्रोफाइल';
 
-  static String Edit_profile="प्रोफाइल सम्पादन गर्नुहोस ";
+  static String Edit_profile = "प्रोफाइल सम्पादन गर्नुहोस ";
 
   static String Change_the_password = 'पासवर्ड परिवर्तन गर्नुहोस्';
   static String current_password = 'वर्तमान पासवर्ड';
   static String new_password = 'नयाँ पासवर्ड ';
-  static String enter_the_new_password_again = 'पुन: नयाँ पासवर्ड प्रविष्ट गर्नुहोस्';
+  static String enter_the_new_password_again =
+      'पुन: नयाँ पासवर्ड प्रविष्ट गर्नुहोस्';
   static String Change_the_password_button = 'पासवर्ड परिवर्तन गर्नुहोस्';
 
   static String Add_experience = 'अनुभव थप्नुहोस्';
@@ -210,7 +205,6 @@ class AppConstants {
   static String start_date1 = 'सुरू मिति';
   static String Description1 = 'विवरण';
 
-
   static String Add_languages = 'भाषाहरु थप्नुहोस्';
   static String Add_languages_edit = 'भाषाहरु सम्पादन गर्नुहोस';
   static String language = 'भाषा';
@@ -219,9 +213,6 @@ class AppConstants {
   static String writing = 'लेखन';
   static String speacking = 'सुनाई';
   static String Select_Rating = 'Select Rating';
-
-
-
 
   static String Choose_a_job_location = 'रोजगर स्थान छान्नुहोस';
   static String Choose_a_job_location_edit = 'रोजगर स्थान सम्पादन गर्नुहोस';
@@ -234,7 +225,8 @@ class AppConstants {
 
   ///Profile
   static String about_yourself = 'आफ्नो बारेमा';
-  static String about_yourself_de = 'Lorem Lorem Ipsum is simply dummy text of the printingand typesetting industry. Lorem Ipsum is simply dummytext of the printing and typesetting industry. Ipsum is a dummy text of the printing and typesetting industry. ';
+  static String about_yourself_de =
+      'Lorem Lorem Ipsum is simply dummy text of the printingand typesetting industry. Lorem Ipsum is simply dummytext of the printing and typesetting industry. Ipsum is a dummy text of the printing and typesetting industry. ';
   static String education1 = 'शिक्षा';
 
   static String Program = 'Program: ';
@@ -246,19 +238,19 @@ class AppConstants {
   static String Organization = 'Organization: ';
   static String Training_Trainings = 'प्रशिक्षण/तालिमहरू';
   static String Add_Training_Trainings = 'प्रशिक्षण/तालिमहरू थप्नुहोस्';
-  static String Add_Training_Trainings_edit = 'प्रशिक्षण/तालिमहरू सम्पादन गर्नुहोस्';
+  static String Add_Training_Trainings_edit =
+      'प्रशिक्षण/तालिमहरू सम्पादन गर्नुहोस्';
 
   static String skills = 'सिपहरु';
   static String Language = 'भाषा';
 
-
   static String Reading = 'Reading';
   static String Listening = 'Listening';
   static String Writing = 'Writing';
-  static String Speaking='Speaking';
+  static String Speaking = 'Speaking';
 
-  static String place_of_employment='रोजगार स्थान';
-  static String Province ='Province: ';
+  static String place_of_employment = 'रोजगार स्थान';
+  static String Province = 'Province: ';
   static String District = 'District: ';
   static String Village = 'Village: ';
   static String Municipality = 'Municipality: ';
@@ -268,7 +260,8 @@ class AppConstants {
   static String Expertise = 'विशेषज्ञाता';
   static String Ward_No = 'वार्ड नम्बर';
 
-  static String Choose_your_area_of_expertise = 'तपाईंको दक्षताको क्षेत्र चएन गर्नुहोस';
+  static String Choose_your_area_of_expertise =
+      'तपाईंको दक्षताको क्षेत्र चएन गर्नुहोस';
   static String the_plumber = 'प्लम्बर';
 
   static String save = 'सेभ गर्नुहोस';
@@ -285,27 +278,39 @@ class AppConstants {
 
   // AppConstants.exam_passing_year,
 
+  static String About_yourself_has_been_successfully_divulged =
+      'आफ्नो बारेमा सफलतापूर्वक आधावधिक गरिएको छ';
+  static String Education_has_been_added_successfully =
+      'शिक्षा सफलतापूर्वक थपिएको छ';
+  static String Education_has_been_added_successfully_edit =
+      'शिक्षा सफलतापूर्वक आधावधिक गरिएको छ';
+  static String Experience_has_been_added_successfully =
+      'अनुभव  सफलतापूर्वक थपिएको छ';
+  static String Experience_has_been_added_successfully_edite =
+      'अनुभव सफलतापूर्वक आधावधिक गरिएको छ';
 
-  static String About_yourself_has_been_successfully_divulged = 'आफ्नो बारेमा सफलतापूर्वक आधावधिक गरिएको छ';
-  static String Education_has_been_added_successfully = 'शिक्षा सफलतापूर्वक थपिएको छ';
-  static String Education_has_been_added_successfully_edit = 'शिक्षा सफलतापूर्वक आधावधिक गरिएको छ';
-  static String Experience_has_been_added_successfully = 'अनुभव  सफलतापूर्वक थपिएको छ';
-  static String Experience_has_been_added_successfully_edite = 'अनुभव सफलतापूर्वक आधावधिक गरिएको छ';
+  static String Training_Trainings_have_been_successfully_added =
+      'प्रशिक्षण/तालिमहरू सफलतापूर्वक  थपिएको छ';
+  static String Training_Trainings_have_been_successfully_added_edit =
+      'प्रशिक्षण/तालिमहरू सफलतापूर्वक आधावधिक गरिएको छ';
 
+  static String Skills_have_been_successfully_added =
+      'सिपहरु  सफलतापूर्वक थपिएको छ';
+  static String Skills_have_been_successfully_added_edit =
+      'सिपहरु सफलतापूर्वक आधावधिक गरिएको छ';
 
-  static String Training_Trainings_have_been_successfully_added = 'प्रशिक्षण/तालिमहरू सफलतापूर्वक  थपिएको छ';
-  static String Training_Trainings_have_been_successfully_added_edit = 'प्रशिक्षण/तालिमहरू सफलतापूर्वक आधावधिक गरिएको छ';
-
-  static String Skills_have_been_successfully_added = 'सिपहरु  सफलतापूर्वक थपिएको छ';
-  static String Skills_have_been_successfully_added_edit = 'सिपहरु सफलतापूर्वक आधावधिक गरिएको छ';
-
-
-  static String Languages_have_been_successfully_added = 'भाषाहरु सफलतापूर्वक थपिएको छ';
-  static String Languages_have_been_successfully_added_edit = 'भाषाहरु सफलतापूर्वक आधावधिक गरिएको छ';
-  static String The_job_location_has_been_successfully_added = 'रोजगर स्थान सफलतापूर्वक थपिएको छ';
-  static String The_job_location_has_been_successfully_added_edit = 'रोजगर स्थान सफलतापूर्वक आधावधिक गरिएको छ';
-  static String The_social_media_account_has_been_successfully_added = 'सामाजिक मिडिया खाता सफलतापूर्वक थपिएको छ';
-  static String Expertise_has_been_successfully_added = 'विशेषज्ञाता सफलतापूर्वक थपिएको छ';
+  static String Languages_have_been_successfully_added =
+      'भाषाहरु सफलतापूर्वक थपिएको छ';
+  static String Languages_have_been_successfully_added_edit =
+      'भाषाहरु सफलतापूर्वक आधावधिक गरिएको छ';
+  static String The_job_location_has_been_successfully_added =
+      'रोजगर स्थान सफलतापूर्वक थपिएको छ';
+  static String The_job_location_has_been_successfully_added_edit =
+      'रोजगर स्थान सफलतापूर्वक आधावधिक गरिएको छ';
+  static String The_social_media_account_has_been_successfully_added =
+      'सामाजिक मिडिया खाता सफलतापूर्वक थपिएको छ';
+  static String Expertise_has_been_successfully_added =
+      'विशेषज्ञाता सफलतापूर्वक थपिएको छ';
 
   //FullEdit
   static String name = 'नाम';
@@ -315,7 +320,6 @@ class AppConstants {
   static String expected_summons = 'अपेक्षित तलब';
   static String temporary_address = 'अस्थायी ठेगाना ';
   static String Profile_photo = 'प्रोफाइल फोटो ';
-
 
   static String Certificate_of_Experience = 'अनुभवको प्रमाणपत्र ';
   static String permanent_contracting_state = 'स्थायी ठेगाना प्रदेश ';
@@ -345,20 +349,18 @@ class AppConstants {
   static String SELECT_NO = 'हैन';
 
   static String Migrant_workers = 'प्रवासी कामदार';
-  static String disabled  = 'अपाङ्ग';
-  static String Update1  = 'अपडेट गर्नुहोस्';
-  static String Your_account_is_successful_has_been_created = 'तपाईंको खाता सफल भयो सिर्जना गरिएको छ।';
+  static String disabled = 'अपाङ्ग';
+  static String Update1 = 'अपडेट गर्नुहोस्';
+  static String Your_account_is_successful_has_been_created =
+      'तपाईंको खाता सफल भयो सिर्जना गरिएको छ।';
 
-  static String Your_password_to_your_email_has_been_sent = 'तपाईको पासवर्ड ईमेलमा पठाइएको छ।';
-  static String You_have_successfully_trained_applied_for = 'तपाईंले सफलतापूर्वक तालिमको लागि आवेदन दिनुभएको छ ';
+  static String Your_password_to_your_email_has_been_sent =
+      'तपाईको पासवर्ड ईमेलमा पठाइएको छ।';
+  static String You_have_successfully_trained_applied_for =
+      'तपाईंले सफलतापूर्वक तालिमको लागि आवेदन दिनुभएको छ ';
   static String addSkillDi = 'सिपहरु थप्नुहोस्';
   static String addSkillDi_edit = 'सिपहरु सम्पादन गर्नुहोस';
   static String Choose_a_recipe = 'सिप छान्नुहोस्';
-  static String Password_has_been_successfully_reset = 'पासवर्ड सफलतापूर्वक आधावधिक गरिएको छ';
-
-
-
-
-
-
+  static String Password_has_been_successfully_reset =
+      'पासवर्ड सफलतापूर्वक आधावधिक गरिएको छ';
 }

@@ -119,7 +119,8 @@ class EmploymentItem extends StatelessWidget {
         decoration: myBoxDecoration(),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.120,
-        child: Row(
+        child: 
+        Row(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -261,3 +262,6 @@ class EmploymentItem extends StatelessWidget {
     );
   }
 }
+
+
+

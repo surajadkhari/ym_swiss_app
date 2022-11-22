@@ -17,7 +17,9 @@ import 'package:lmiis/views/my_profile_screens/EditMyProfileScreen.dart';
 import 'package:lmiis/views/widgets/custtom_button.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/datasource/remote/dio/dio_client.dart';
 import '../../models/ResponsModels/NewsNoticeModel.dart';
+import '../../models/ResponsModels/view_all_job_model.dart';
 import '../../provider/MyProfileProvider.dart';
 import '../../provider/NewNoticePrvide.dart';
 import '../employment_support_service_Screens/employment_support_service_screen.dart';
@@ -40,14 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int countpage = 1;
-
+  late Future<List<NewViewAllJobModel>> fnewAllJob;
   @override
   void initState() {
+    fnewAllJob = ApiClient().getnewviewAllJob();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<NewsNoticeProvider>(context, listen: false)
           .getNewNotice(countpage);
       Provider.of<MyProfileProvider>(context, listen: false).getMyProfile();
     });
+
     super.initState();
   }
 
@@ -71,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   //ToolBar
                   Expanded(
-                    flex: 5,
+                    flex: 10,
                     child: Container(
                       child: Column(
                         children: [
@@ -338,6 +342,191 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(
                             height: 10,
                           ),
+
+                          Container(
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            child: Row(
+                              children: [
+                                Text(
+                                  AppConstants.jobTrainingTitle,
+                                  style: TextStyle(
+                                      color:
+                                          ColorsResource.PRAYMARY_TEXT_COLOR),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<List<NewViewAllJobModel>>(
+                                  future: fnewAllJob,
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      var viewAllJobData = snap.data;
+                                   
+                                      return Row(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                      width: 80,
+                                                      height: 80,
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              5),
+                                                              child: Text(viewAllJobData![1].address),
+                                                      // decoration: BoxDecoration(
+                                                      //     image: DecorationImage(
+                                                      //         image: NetworkImage(
+                                                      //             '${Apis.URL}${viewAllJobData![1].serviceProvider.logo}')))
+                                                      // viewAllJobData.serviceProvider!.logo != null
+                                                      //     ? Image.network(
+                                                      //         '${Apis.URL}${viewAllJobData.serviceProvider!.logo}',
+                                                      //         height: 60,
+                                                      //         width: 60,
+                                                      //         fit: BoxFit.fill,
+                                                      //       )
+
+                                              //         )
+                                              // viewAllJobData.serviceProvider!
+                                              //             .logo !=
+                                              //         null
+                                              //     ? Container(
+                                              //         width: 80,
+                                              //         height: 80,
+                                              //         padding:
+                                              //             const EdgeInsets.all(
+                                              //                 5),
+                                              //         decoration: BoxDecoration(
+                                              //             image: DecorationImage(
+                                              //                 image: NetworkImage(
+                                              //                     '${Apis.URL}${viewAllJobData.serviceProvider!.logo}')))
+                                              //         // viewAllJobData.serviceProvider!.logo != null
+                                              //         //     ? Image.network(
+                                              //         //         '${Apis.URL}${viewAllJobData.serviceProvider!.logo}',
+                                              //         //         height: 60,
+                                              //         //         width: 60,
+                                              //         //         fit: BoxFit.fill,
+                                              //         //       )
+
+                                              //         )
+                                              //     : const Text("sd")
+                         
+                                          )],
+                                          ),
+                                          // Column(
+                                          //   crossAxisAlignment:
+                                          //       CrossAxisAlignment.start,
+                                          //   children: [
+                                          //     Container(
+                                          //         margin: const EdgeInsets.only(
+                                          //             left: 10, top: 5),
+                                          //         width: MediaQuery.of(context)
+                                          //                 .size
+                                          //                 .width -
+                                          //             120,
+                                          //         child: Text(
+                                          //           '${viewAllJobData.title}',
+                                          //           maxLines: 1,
+                                          //           overflow:
+                                          //               TextOverflow.ellipsis,
+                                          //           style: TextStyle(
+                                          //               fontSize:
+                                          //                   Dimensions.BODY_18,
+                                          //               color: ColorsResource
+                                          //                   .PRAYMARY_TEXT_COLOR,
+                                          //               fontWeight: Dimensions
+                                          //                   .FONT_MEDIUM),
+                                          //         )),
+                                          //     Container(
+                                          //         margin: const EdgeInsets.only(
+                                          //             left: 10, top: 3),
+                                          //         width: MediaQuery.of(context)
+                                          //                 .size
+                                          //                 .width -
+                                          //             120,
+                                          //         child: Text(
+                                          //           '${viewAllJobData.serviceProviderName}',
+                                          //           maxLines: 1,
+                                          //           overflow:
+                                          //               TextOverflow.ellipsis,
+                                          //           style: TextStyle(
+                                          //               fontSize:
+                                          //                   Dimensions.BODY_14,
+                                          //               color: ColorsResource
+                                          //                   .TEXT_GRAY_COLOR_LOW,
+                                          //               fontWeight: Dimensions
+                                          //                   .FONT_MEDIUM_NORMUL),
+                                          //         )),
+                                          //     Expanded(child: Container()),
+                                          //     SizedBox(
+                                          //       width: MediaQuery.of(context)
+                                          //               .size
+                                          //               .width -
+                                          //           120,
+                                          //       child: Row(
+                                          //         children: [
+                                          //           const SizedBox(
+                                          //             width: 10,
+                                          //           ),
+                                          //           Row(
+                                          //             children: [
+                                          //               SvgPicture.asset(
+                                          //                 AppImages.ic_location,
+                                          //                 color: ColorsResource
+                                          //                     .TEXT_BLACK_COLOR,
+                                          //               ),
+                                          //               const SizedBox(
+                                          //                 width: 10,
+                                          //               ),
+                                          //               Text(
+                                          //                   '${viewAllJobData.address}')
+                                          //             ],
+                                          //           ),
+                                          //           Expanded(
+                                          //               child: Container()),
+                                          //           Row(
+                                          //             children: [
+                                          //               SvgPicture.asset(
+                                          //                 AppImages.ic_clock,
+                                          //                 color: ColorsResource
+                                          //                     .TEXT_BLACK_COLOR,
+                                          //               ),
+                                          //               const SizedBox(
+                                          //                 width: 10,
+                                          //               ),
+                                          //               Text(
+                                          //                   '${viewAllJobData.deadline}')
+                                          //             ],
+                                          //           )
+                                          //         ],
+                                          //       ),
+                                          //     ),
+                                          //     const SizedBox(
+                                          //       height: 12,
+                                          //     )
+                                          //   ],
+                                          // ),
+                                        ],
+                                      );
+                                    } else {
+                                      log(snap.error.toString() + "sd");
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  })),
+
+                          const SizedBox(
+                            height: 10,
+                          ),
+
                           Container(
                             margin: const EdgeInsets.only(left: 10, right: 10),
                             child: Row(

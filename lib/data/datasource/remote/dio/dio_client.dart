@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/adapter.dart';
@@ -9,8 +8,8 @@ import 'package:lmiis/models/district_new_model.dart';
 import 'package:lmiis/models/new_grade_model.dart';
 import 'package:lmiis/models/new_muni_model.dart';
 import 'package:lmiis/models/pradeshModel.dart';
-import 'package:permission_handler/permission_handler.dart';
 
+import '../../../../models/ResponsModels/view_all_job_model.dart';
 import '../../../../utils/AppConstants.dart';
 import 'logging_interceptor.dart';
 
@@ -52,10 +51,10 @@ class DioClient {
     } on SocketException catch (e) {
       throw SocketException(e.toString());
     } on FormatException catch (_) {
-      throw FormatException("Unable to process the data");
+      throw const FormatException("Unable to process the data");
     } catch (e) {
       print('===============${e.toString()}');
-      throw e;
+      rethrow;
     }
   }
 
@@ -89,9 +88,9 @@ class DioClient {
       );
       return response;
     } on FormatException catch (_) {
-      throw FormatException("Unable to process the data");
+      throw const FormatException("Unable to process the data");
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -124,9 +123,9 @@ class DioClient {
       );
       return response;
     } on FormatException catch (_) {
-      throw FormatException("Unable to process the data");
+      throw const FormatException("Unable to process the data");
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -154,9 +153,9 @@ class DioClient {
       );
       return response;
     } on FormatException catch (_) {
-      throw FormatException("Unable to process the data");
+      throw const FormatException("Unable to process the data");
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }
@@ -199,9 +198,18 @@ class ApiClient {
   Future<List<NewTrainingCategoryModel>> getTrainingCategory() async {
     final result = await dio.get("http://139.59.21.174/api/training/category");
     final responseData = result.data;
-  
+
     return List.from(responseData["data"])
         .map((e) => NewTrainingCategoryModel.fromMap(e))
+        .toList();
+  }
+
+  Future<List<NewViewAllJobModel>> getnewviewAllJob() async {
+    final result = await dio.get("http://139.59.21.174/api/view-all/jobs");
+    final responseData = result.data;
+
+    return List.from(responseData["data"])
+        .map((e) => NewViewAllJobModel.fromMap(e))
         .toList();
   }
 }
