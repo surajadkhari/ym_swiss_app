@@ -34,6 +34,7 @@ class Apis {
 
   ///ServiceProviders
   static String VIEW_ALL_Essp = 'get/essp?page=';
+    static String getAllESSP = 'get/essp=';
   static String ESSP_SERVICE_PROVIDER_DETAILS = 'serviceprovider/details/';
   static String VIEW_ALL_Tsp = 'get/tsp?page=';
   static String TSP_DETAILS = 'tsp/details/';

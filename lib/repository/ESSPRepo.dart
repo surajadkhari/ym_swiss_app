@@ -20,7 +20,6 @@ class ESSPRepo {
     }
   }
 
-
   Future<ApiResponse> getVewAllTsp(int pageId) async {
     try {
       Response? response = await dioClient.get(
@@ -32,7 +31,6 @@ class ESSPRepo {
     }
   }
 
-
   Future<ApiResponse> getServiceProvider(int id) async {
     try {
       Response? response = await dioClient.get(
@@ -43,7 +41,6 @@ class ESSPRepo {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-
 
   Future<ApiResponse> getTsspDetails(int id) async {
     try {

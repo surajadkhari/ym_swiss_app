@@ -341,7 +341,40 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 10,
                         ),
 
-                 
+                    Container(
+                          margin: const EdgeInsets.only(left: 10, right: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                AppConstants.jobTrainingTitle,
+                                style: TextStyle(
+                                    color:
+                                        ColorsResource.PRAYMARY_TEXT_COLOR),
+                              ),
+                              // Expanded(child: Container()),
+                              // CustomButton(
+                              //     AppConstants.see_more,
+                              //     () => {
+                              //           Navigator.push(
+                              //               context,
+                              //               MaterialPageRoute(
+                              //                   builder: (context) =>
+                              //                       const NewsInformationSeeMoreScreen()))
+                              //         },
+                              //     height: 25,
+                              //     wight: 115,
+                              //     textSize: Dimensions.BODY_10,
+                              //     padding: 2)
+                            ],
+                          ),
+                        ),
+                                Container(
+                          margin: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10),
+                          height: 1,
+                          width: MediaQuery.of(context).size.width,
+                          color: ColorsResource.PRAYMARY_TEXT_COLOR,
+                        ),
 
                         Container(
                           margin: const EdgeInsets.only(left: 10, right: 10),

@@ -28,7 +28,7 @@ class _EmploymentSupportServiceScreenState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<ESSPProvider>(context, listen: false)
-          .getVewAllEssp(pageCount);
+          .getVewAllEssp(1);
     });
     super.initState();
   }
@@ -62,39 +62,37 @@ class _EmploymentSupportServiceScreenState
           builder: (context, eSSPProvider, child) => SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Expanded(
-                // flex: 8,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  child: eSSPProvider.esspModel != null
-                      ? ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          itemCount: eSSPProvider.esspModelDataList!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            EsspModelData esspModelData =
-                                eSSPProvider.esspModelDataList![index];
-                            return EmploymentSupportServiceItem(
-                                esspModelData, () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          EmploymentSupportServiceDetailsScreen(
-                                              esspModelData),),
-                                              );
-                            });
-                          },
-                        )
-                      : Container(
-                          child: const Align(
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                )),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.only(left: 10, right: 10),
+              child: eSSPProvider.esspModel != null
+                  ? ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: eSSPProvider.esspModelDataList!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        EsspModelData esspModelData =
+                            eSSPProvider.esspModelDataList![index];
+                        return EmploymentSupportServiceItem(
+                            esspModelData, () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      EmploymentSupportServiceDetailsScreen(
+                                          esspModelData),),
+                                          );
+                        });
+                      },
+                    )
+                  : Container(
+                      child: const Align(
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+            ),
           ),
         ),
       ),
