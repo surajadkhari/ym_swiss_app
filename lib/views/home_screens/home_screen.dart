@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_svg/svg.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lmiis/models/ResponsModels/latest_job..dart';
 import 'package:lmiis/provider/AuthProvider.dart';
 import 'package:lmiis/utils/Apis.dart';
 import 'package:lmiis/utils/AppConstants.dart';
@@ -20,7 +21,6 @@ import 'package:provider/provider.dart';
 import '../../data/datasource/remote/dio/dio_client.dart';
 import '../../models/ResponsModels/NewsNoticeModel.dart';
 import '../../models/ResponsModels/latest_training_model.dart';
-import '../../models/ResponsModels/view_all_job_model.dart';
 import '../../provider/MyProfileProvider.dart';
 import '../../provider/NewNoticePrvide.dart';
 import '../employment_list_screens/widgets/latest_job_card.dart';
@@ -46,9 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int countpage = 1;
   late Future<List<LatestTrainingModel>> fnewlatestTraining;
+  late Future<List<LatestJobModel>> fnewlatestJobs;
   @override
   void initState() {
     fnewlatestTraining = ApiClient().newgetLatestTraining();
+    fnewlatestJobs = ApiClient().newgetLatestJobs();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<NewsNoticeProvider>(context, listen: false)
           .getNewNotice(countpage);
@@ -346,8 +348,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 style: TextStyle(
                                     color: ColorsResource.PRAYMARY_TEXT_COLOR),
                               ),
-                      
-                             
                             ],
                           ),
                         ),
@@ -358,27 +358,50 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: MediaQuery.of(context).size.width,
                           color: ColorsResource.PRAYMARY_TEXT_COLOR,
                         ),
-        FutureBuilder<List<LatestTrainingModel>>(
-                                  future: fnewlatestTraining,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      return ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        itemCount: snapshot.data!.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          LatestTrainingModel latestTraining =
-                                              snapshot.data![index];
-                                          return LatestTrainingCard(latestTraining);
-                                        },
-                                      );
-                                    } else {
-                                      return Center(
-                                        child: Text(snapshot.error.toString()),
-                                      );
-                                    }
-                                  }),
+                        //Latest Jobs//
+                        FutureBuilder<List<LatestJobModel>>(
+                            future: fnewlatestJobs,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  itemCount: 2,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    LatestJobModel latestJobModel =
+                                        snapshot.data![index];
+                                    return LatestJobCard(latestJobModel);
+                                  },
+                                );
+                              } else {
+                                return Center(
+                                  child: Text(snapshot.error.toString()),
+                                );
+                              }
+                            }),
+                        //Latest Training//
+                        FutureBuilder<List<LatestTrainingModel>>(
+                            future: fnewlatestTraining,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  itemCount: 3,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    LatestTrainingModel latestTraining =
+                                        snapshot.data![index];
+                                    return LatestTrainingCard(latestTraining);
+                                  },
+                                );
+                              } else {
+                                return Center(
+                                    child: Text(snapshot.error.toString()));
+                              }
+                            }),
+
                         Container(
                           margin: const EdgeInsets.only(left: 10, right: 10),
                           child: Row(

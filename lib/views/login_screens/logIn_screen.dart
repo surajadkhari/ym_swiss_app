@@ -5,12 +5,15 @@ import 'package:lmiis/utils/AppConstants.dart';
 import 'package:lmiis/utils/colors_resource.dart';
 import 'package:lmiis/utils/dimensions.dart';
 import 'package:lmiis/views/Job_description_view_screens/Job_description_view_screen.dart';
+import 'package:lmiis/views/employment_list_screens/widgets/latest_job_card.dart';
 import 'package:lmiis/views/regi_screens/RegistationScren.dart';
 import 'package:lmiis/views/widgets/showCustomSnackBar.dart';
 
 import 'package:provider/provider.dart';
 
 import '../../models/ResponsModels/ViewAllTrainingsModel.dart';
+import '../../models/ResponsModels/latest_training_model.dart';
+import '../../models/ResponsModels/latest_job..dart';
 import '../../models/SendDataModels/UserLogin.dart';
 import '../../provider/AuthProvider.dart';
 import '../../utils/app_images.dart';
@@ -29,13 +32,17 @@ class LogInScreen extends StatefulWidget {
       this.doCheckLastScreen = false,
       this.screenType,
       this.viewAllJobsData,
-      this.viewAllTrainingsData})
+      this.viewAllTrainingsData,
+      this.latestJobModel,
+      this.latestTrainingModel
+      })
       : super(key: key);
   final bool doCheckLastScreen;
   final String? screenType;
   final ViewAllJobsData? viewAllJobsData;
   final ViewAllTrainingsData? viewAllTrainingsData;
-
+  final LatestJobModel? latestJobModel;
+  final LatestTrainingModel? latestTrainingModel;
   @override
   State<LogInScreen> createState() => _LogInScreenState();
 }
@@ -63,8 +70,8 @@ class _LogInScreenState extends State<LogInScreen> {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Consumer<AuthProvider>(
             builder: (context, authProvider, child) => Container(
-              margin:
-                  const EdgeInsets.only(top: 40, left: 10, right: 10, bottom: 10),
+              margin: const EdgeInsets.only(
+                  top: 40, left: 10, right: 10, bottom: 10),
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
@@ -104,14 +111,10 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: Column(
                       children: [
                         CustomTextFieldWithTitle(
-                          '',
-                          emailTextEditingController,
-                          emailFocusNode,
-                          prefixIcon: AppImages.ic_user,
-                          insideHintText: AppConstants.E_mail,
-                          textInputAction:TextInputAction.next
-                        
-                        ),
+                            '', emailTextEditingController, emailFocusNode,
+                            prefixIcon: AppImages.ic_user,
+                            insideHintText: AppConstants.E_mail,
+                            textInputAction: TextInputAction.next),
                         LoginTextFormFiled(
                           '',
                           passwordTextEditingController,
@@ -158,9 +161,9 @@ class _LogInScreenState extends State<LogInScreen> {
                           // showCustomDialog(context,'Loading');
                           String email = emailTextEditingController.text;
                           String password = passwordTextEditingController.text;
-    
+
                           // Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-    
+
                           if (email == '') {
                             return showCustomSnackBar(
                                 AppConstants.E_mail, context);
@@ -169,10 +172,10 @@ class _LogInScreenState extends State<LogInScreen> {
                             return showCustomSnackBar(
                                 AppConstants.Password, context);
                           }
-    
+
                           showLoaderDialog(context);
-                          UserLogin userLogin =
-                              UserLogin(email: email, password: password.trim());
+                          UserLogin userLogin = UserLogin(
+                              email: email, password: password.trim());
                           authProvider.login(userLogin).then((value) {
                             if (value.isSuccess) {
                               Navigator.of(context).pop();
@@ -183,7 +186,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                   '${authProvider.loginToken?.token}');
                               showCustomSnackBar('Login', context,
                                   isError: false);
-    
+
                               widget.doCheckLastScreen
                                   ? Navigator.pushReplacement(
                                       context,
@@ -200,7 +203,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                                   : widget.screenType ==
                                                           "esspServiceDetailsJobs"
                                                       ? JobDescriptionViewScreen(
-                                                          widget.viewAllJobsData!)
+                                                          widget
+                                                              .viewAllJobsData!)
                                                       : widget.screenType ==
                                                               "esspServiceDetailsTraining"
                                                           ? SpecialTrainingSingleItemDetails(

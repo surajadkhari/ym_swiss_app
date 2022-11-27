@@ -1,9 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lmiis/models/ResponsModels/latest_training_modeld.dart';
+import 'package:lmiis/models/ResponsModels/latest_job..dart';
 import 'package:lmiis/models/ResponsModels/training_category_model.dart';
 import 'package:lmiis/models/district_new_model.dart';
 import 'package:lmiis/models/new_grade_model.dart';
@@ -11,7 +12,6 @@ import 'package:lmiis/models/new_muni_model.dart';
 import 'package:lmiis/models/pradeshModel.dart';
 
 import '../../../../models/ResponsModels/latest_training_model.dart';
-import '../../../../models/ResponsModels/view_all_job_model.dart';
 import '../../../../utils/Apis.dart';
 import '../../../../utils/AppConstants.dart';
 import 'logging_interceptor.dart';
@@ -52,6 +52,7 @@ class DioClient {
       );
       return response;
     } on SocketException catch (e) {
+      log(e.message.toString());
       throw SocketException(e.toString());
     } on FormatException catch (_) {
       throw const FormatException("Unable to process the data");
@@ -208,15 +209,18 @@ class ApiClient {
   }
 
   Future<List<LatestTrainingModel>> newgetLatestTraining() async {
-    final result = await dio.get(Apis.latestJoburl);
+    final result = await dio.get("http://139.59.21.174/api/latest/trainings");
     final responseData = result.data;
 
     return List.from(responseData["data"])
         .map((e) => LatestTrainingModel.fromJson(e))
         .toList();
   }
-    Future<List<LatestJobModel>> newgetLatestJobs() async {
-    final result = await dio.get(Apis.latestJoburl);
+
+  Future<List<LatestJobModel>> newgetLatestJobs() async {
+    final result = await dio.get("http://139.59.21.174/api/latest/jobs");
+
+    log(result.data.toString());
     final responseData = result.data;
 
     return List.from(responseData["data"])

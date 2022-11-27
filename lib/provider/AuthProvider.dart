@@ -35,7 +35,8 @@ class AuthProvider with ChangeNotifier {
       String errorMessage = 'Server Error';
       responseModel = ResponseModel(false, errorMessage,responseCode!);
     }else{
-      String errorMessage = 'Server Error';
+      Map map = apiResponse.response?.data;
+      String errorMessage = map["message"];
       responseModel = ResponseModel(false, errorMessage,responseCode!);
     }
 

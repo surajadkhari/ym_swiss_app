@@ -1,9 +1,10 @@
 class Apis {
-  static String BASE_URL = 'http://103.175.192.138/api/';
-  static String IMAGE_URL = 'http://103.175.192.138/';
-  static String URL = 'http://103.175.192.138';
+  static String BASE_URL = 'http://139.59.21.174/api/';
+  static String IMAGE_URL = 'http://139.59.21.174/';
+  static String URL = 'http://139.59.21.174';
   // static String latestJoburl = "http://139.59.21.174/api/latest/trainings";
-static String latestJoburl = "http://139.59.21.174/api/latest/trainings";
+  static String latestJoburl = "http://139.59.21.174/api/latest/jobs";
+ static String latestTrainingUrl = "http://139.59.21.174/api/latest/trainings";
   /// Auth
   static String LOGIN_URI = 'jobseeker/login';
   static String FOR_GET_PASSWORD = 'forget-password';

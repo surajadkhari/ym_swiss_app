@@ -50,7 +50,7 @@ class LatestJobModel {
   final int ward;
   final String address;
   final String deadline;
-  final DateTime engDeadline;
+  final String engDeadline;
   final String description;
   final String specification;
   final String salaryMin;
