@@ -19,15 +19,18 @@ import 'package:provider/provider.dart';
 
 import '../../data/datasource/remote/dio/dio_client.dart';
 import '../../models/ResponsModels/NewsNoticeModel.dart';
+import '../../models/ResponsModels/latest_training_model.dart';
 import '../../models/ResponsModels/view_all_job_model.dart';
 import '../../provider/MyProfileProvider.dart';
 import '../../provider/NewNoticePrvide.dart';
+import '../employment_list_screens/widgets/latest_job_card.dart';
 import '../employment_support_service_Screens/employment_support_service_screen.dart';
 import '../my_profile_screens/ChnagePassword.dart';
 import '../my_profile_screens/MyProfileScreen.dart';
 import '../news_information_see_more_screens/news_information_see_more_screen.dart';
 import '../notification_screens/notification_screen.dart';
 import '../training_screens/TrainingScreen.dart';
+import '../training_screens/widgets/latest_training_card.dart';
 import '../training_service_provider_screens/TrainingServiceProviderScreen.dart';
 import '../widgets/showCustomSnackBar.dart';
 
@@ -42,10 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int countpage = 1;
-  late Future<List<NewViewAllJobModel>> fnewAllJob;
+  late Future<List<LatestTrainingModel>> fnewlatestTraining;
   @override
   void initState() {
-    fnewAllJob = ApiClient().getnewviewAllJob();
+    fnewlatestTraining = ApiClient().newgetLatestTraining();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<NewsNoticeProvider>(context, listen: false)
           .getNewNotice(countpage);
@@ -74,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   //ToolBar
-                    Container(
+                  Container(
                     child: Column(
                       children: [
                         Container(
@@ -149,12 +152,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 flex: 1,
                                 child: Container(
                                   margin: const EdgeInsets.only(
-                                      left: 10,
-                                      right: 5,
-                                      top: 10,
-                                      bottom: 10),
-                                  width: MediaQuery.of(context).size.width *
-                                      0.92,
+                                      left: 10, right: 5, top: 10, bottom: 10),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.92,
                                   decoration: myBoxDecorationTop(),
                                   height: MediaQuery.of(context).size.height *
                                       0.150,
@@ -198,8 +198,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Container(
                                   margin: const EdgeInsets.only(
                                       left: 5, right: 5, top: 10, bottom: 10),
-                                  width: MediaQuery.of(context).size.width *
-                                      0.92,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.92,
                                   decoration: myBoxDecorationTop(),
                                   height: MediaQuery.of(context).size.height *
                                       0.150,
@@ -218,8 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        SvgPicture.asset(
-                                            AppImages.ic_training),
+                                        SvgPicture.asset(AppImages.ic_training),
                                         const SizedBox(
                                           height: 10,
                                         ),
@@ -243,8 +242,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Container(
                                   margin: const EdgeInsets.only(
                                       left: 5, right: 5, top: 10, bottom: 10),
-                                  width: MediaQuery.of(context).size.width *
-                                      0.92,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.92,
                                   decoration: myBoxDecorationTop(),
                                   height: MediaQuery.of(context).size.height *
                                       0.150,
@@ -288,12 +287,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 flex: 1,
                                 child: Container(
                                   margin: const EdgeInsets.only(
-                                      left: 5,
-                                      right: 10,
-                                      top: 10,
-                                      bottom: 10),
-                                  width: MediaQuery.of(context).size.width *
-                                      0.92,
+                                      left: 5, right: 10, top: 10, bottom: 10),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.92,
                                   decoration: myBoxDecorationTop(),
                                   height: MediaQuery.of(context).size.height *
                                       0.150,
@@ -341,41 +337,48 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 10,
                         ),
 
-                    Container(
+                        Container(
                           margin: const EdgeInsets.only(left: 10, right: 10),
                           child: Row(
                             children: [
                               Text(
                                 AppConstants.jobTrainingTitle,
                                 style: TextStyle(
-                                    color:
-                                        ColorsResource.PRAYMARY_TEXT_COLOR),
+                                    color: ColorsResource.PRAYMARY_TEXT_COLOR),
                               ),
-                              // Expanded(child: Container()),
-                              // CustomButton(
-                              //     AppConstants.see_more,
-                              //     () => {
-                              //           Navigator.push(
-                              //               context,
-                              //               MaterialPageRoute(
-                              //                   builder: (context) =>
-                              //                       const NewsInformationSeeMoreScreen()))
-                              //         },
-                              //     height: 25,
-                              //     wight: 115,
-                              //     textSize: Dimensions.BODY_10,
-                              //     padding: 2)
+                      
+                             
                             ],
                           ),
                         ),
-                                Container(
+                        Container(
                           margin: const EdgeInsets.only(
                               left: 10, right: 10, top: 10),
                           height: 1,
                           width: MediaQuery.of(context).size.width,
                           color: ColorsResource.PRAYMARY_TEXT_COLOR,
                         ),
-
+        FutureBuilder<List<LatestTrainingModel>>(
+                                  future: fnewlatestTraining,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        itemCount: snapshot.data!.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          LatestTrainingModel latestTraining =
+                                              snapshot.data![index];
+                                          return LatestTrainingCard(latestTraining);
+                                        },
+                                      );
+                                    } else {
+                                      return Center(
+                                        child: Text(snapshot.error.toString()),
+                                      );
+                                    }
+                                  }),
                         Container(
                           margin: const EdgeInsets.only(left: 10, right: 10),
                           child: Row(
@@ -383,8 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 AppConstants.information_news,
                                 style: TextStyle(
-                                    color:
-                                        ColorsResource.PRAYMARY_TEXT_COLOR),
+                                    color: ColorsResource.PRAYMARY_TEXT_COLOR),
                               ),
                               Expanded(child: Container()),
                               CustomButton(
@@ -415,8 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   newsNoticeProvider.newsNoticeModel != null
                       ? Expanded(
-                      
-                        child: ListView.builder(
+                          child: ListView.builder(
                             shrinkWrap: true,
                             itemCount:
                                 newsNoticeProvider.newsNoticeDataList!.length,
@@ -426,7 +427,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               return NewsInformationItem(newsNoticeData);
                             },
                           ),
-                      )
+                        )
                       : Container(
                           child: const Align(
                             alignment: Alignment.center,

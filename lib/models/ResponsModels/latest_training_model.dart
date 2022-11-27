@@ -2,25 +2,10 @@
 import 'dart:convert';
 
 
-class LatestJobModel {
-    LatestJobModel({
-        required this.data,
-        required this.success,
-    });
-
-    List<Datum> data;
-    bool success;
-
-    factory LatestJobModel.fromJson(Map<String, dynamic> json) => LatestJobModel(
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-        success: json["success"],
-    );
 
 
-}
-
-class Datum {
-    Datum({
+class LatestTrainingModel {
+    LatestTrainingModel({
         required this.id,
         required this.serviceProviderName,
         required this.title,
@@ -56,7 +41,7 @@ class Datum {
     String ward;
     ServiceProvider serviceProvider;
 
-    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    factory LatestTrainingModel.fromJson(Map<String, dynamic> json) => LatestTrainingModel(
         id: json["id"]??0,
         serviceProviderName: json["service_provider_name"]??'',
         title: json["title"]??"",

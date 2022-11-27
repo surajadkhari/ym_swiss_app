@@ -9,7 +9,9 @@ import 'package:lmiis/models/new_grade_model.dart';
 import 'package:lmiis/models/new_muni_model.dart';
 import 'package:lmiis/models/pradeshModel.dart';
 
+import '../../../../models/ResponsModels/latest_training_model.dart';
 import '../../../../models/ResponsModels/view_all_job_model.dart';
+import '../../../../utils/Apis.dart';
 import '../../../../utils/AppConstants.dart';
 import 'logging_interceptor.dart';
 
@@ -204,12 +206,12 @@ class ApiClient {
         .toList();
   }
 
-  Future<List<NewViewAllJobModel>> getnewviewAllJob() async {
-    final result = await dio.get("http://139.59.21.174/api/view-all/jobs");
+  Future<List<LatestTrainingModel>> newgetLatestTraining() async {
+    final result = await dio.get(Apis.latestJoburl);
     final responseData = result.data;
 
     return List.from(responseData["data"])
-        .map((e) => NewViewAllJobModel.fromMap(e))
+        .map((e) => LatestTrainingModel.fromJson(e))
         .toList();
   }
 }

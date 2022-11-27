@@ -530,7 +530,9 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
                                         child: Container(),
                                       );
                                     }
-                                  }))
+                                  }
+                                  )
+                                  )
                         ],
                       ),
                     ),
