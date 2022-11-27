@@ -549,7 +549,9 @@ class _LatestJobDetailScreenState extends State<LatestJobDetailScreen> {
 
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width -80,
-                                  child: HtmlView(' ${jobProvider.viewSingJobsModel?.specification} '),
+                                  child: HtmlView(
+                                  
+                                    ' ${jobProvider.viewSingJobsModel?.specification} '),
                                 ),
                               ],
                             ),

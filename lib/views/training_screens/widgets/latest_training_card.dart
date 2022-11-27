@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:lmiis/utils/AppConstants.dart';
 import 'package:lmiis/utils/app_images.dart';
 import 'package:lmiis/utils/dimensions.dart';
+import 'package:lmiis/views/training_screens/widgets/latest_training_detail_screen.dart';
 
 import '../../../models/ResponsModels/ViewAllTrainingsModel.dart';
 import '../../../models/ResponsModels/latest_training_model.dart';
@@ -98,9 +99,9 @@ class LatestTrainingCard extends StatelessWidget {
                                     : Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>Text("data")
-                                                // TrainingSingleItemDetails(
-                                                //     viewAllTrainingsData),
+                                            builder: (context) =>
+                                                LatestTrainingDetailScreen(
+                                                    latestTrainingModel),
                                                     ),
                                                     );
                               },
@@ -113,8 +114,8 @@ class LatestTrainingCard extends StatelessWidget {
             : Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>Text("ss")
-                        // TrainingSingleItemDetails(viewAllTrainingsData)
+                    builder: (context) =>
+                        LatestTrainingDetailScreen(latestTrainingModel)
                         ));
       },
       child: Container(

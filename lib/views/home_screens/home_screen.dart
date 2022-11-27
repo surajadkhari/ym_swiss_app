@@ -375,7 +375,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: CircularProgressIndicator.adaptive(),
                                 );
                               }

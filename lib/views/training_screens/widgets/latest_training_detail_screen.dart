@@ -400,7 +400,7 @@ class _LatestTrainingDetailScreenState extends State<LatestTrainingDetailScreen>
                       ),
                     )
 
-                ):CircularProgressIndicator.adaptive(),
+                ):Center(child: CircularProgressIndicator.adaptive()),
                
               ],
             ),
