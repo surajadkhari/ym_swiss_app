@@ -14,11 +14,11 @@ import '../../news_information_details_screens/news_information_details_screens.
 import '../../training_service_provider_screens/TrainingSingleItemDetails.dart';
 
 class LatestTrainingCard extends StatelessWidget {
-  LatestTrainingModel viewAllTrainingsData;
+  LatestTrainingModel latestTrainingModel;
   // Function() onTab;
 
   LatestTrainingCard(
-    this.viewAllTrainingsData,
+    this.latestTrainingModel,
   );
 
   @override
@@ -84,15 +84,15 @@ class LatestTrainingCard extends StatelessWidget {
                                     ? Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (ctx) => Text("data")
-                                            // LogInScreen(
-                                            //       doCheckLastScreen: true,
-                                            //       screenType: "training",
-                                            //       //screenType : "training"
-                                            //       //trainingModelData : trainingModelData
-                                            //       viewAllTrainingsData:
-                                            //           viewAllTrainingsData,
-                                            //     )
+                                            builder: (ctx) => 
+                                            LogInScreen(
+                                                  doCheckLastScreen: true,
+                                                  screenType: "latest-training",
+                                                  //screenType : "training"
+                                                  //trainingModelData : trainingModelData
+                                                  latestTrainingModel:
+                                                      latestTrainingModel,
+                                                )
                                                 )
                                                 )
                                     : Navigator.push(
@@ -136,7 +136,7 @@ class LatestTrainingCard extends StatelessWidget {
                       margin: EdgeInsets.only(left: 10, top: 5),
                       width: MediaQuery.of(context).size.width,
                       child: Text(
-                        '${viewAllTrainingsData.title}',
+                        '${latestTrainingModel.title}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -149,7 +149,7 @@ class LatestTrainingCard extends StatelessWidget {
                       margin: EdgeInsets.only(left: 10, top: 3),
                       width: MediaQuery.of(context).size.width,
                       child: Text(
-                        '${viewAllTrainingsData.serviceProviderName}',
+                        '${latestTrainingModel.serviceProviderName}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -176,7 +176,7 @@ class LatestTrainingCard extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              '${viewAllTrainingsData.startDate} to ${viewAllTrainingsData.endDate}',
+                              '${latestTrainingModel.startDate} to ${latestTrainingModel.endDate}',
                               style: TextStyle(
                                   fontSize: Dimensions.BODY_10,
                                   color: ColorsResource.TEXT_BLACK_COLOR),
@@ -194,7 +194,7 @@ class LatestTrainingCard extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              '${viewAllTrainingsData.districtName}',
+                              '${latestTrainingModel.districtName}',
                               style: TextStyle(
                                   fontSize: Dimensions.BODY_10,
                                   color: ColorsResource.TEXT_BLACK_COLOR),
@@ -212,7 +212,7 @@ class LatestTrainingCard extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              '${viewAllTrainingsData.endDate}',
+                              '${latestTrainingModel.endDate}',
                               style: TextStyle(
                                   fontSize: Dimensions.BODY_10,
                                   color: ColorsResource.TEXT_BLACK_COLOR),

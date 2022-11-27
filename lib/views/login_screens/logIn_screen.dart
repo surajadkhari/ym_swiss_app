@@ -18,10 +18,12 @@ import '../../models/SendDataModels/UserLogin.dart';
 import '../../provider/AuthProvider.dart';
 import '../../utils/app_images.dart';
 
+import '../Job_description_view_screens/latest_job_detail_screen.dart';
 import '../employment_support_service_Screens/widgets/special_training_detail_page.dart';
 import '../home_screens/home_screen.dart';
 import '../reset_password/password_reset.dart';
 
+import '../training_screens/widgets/latest_training_detail_screen.dart';
 import '../training_service_provider_screens/TrainingSingleItemDetails.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custtom_button.dart';
@@ -209,8 +211,10 @@ class _LogInScreenState extends State<LogInScreen> {
                                                               "esspServiceDetailsTraining"
                                                           ? SpecialTrainingSingleItemDetails(
                                                               widget
-                                                                  .viewAllTrainingsData!)
-                                                          : HomeScreen())
+                                                                  .viewAllTrainingsData!):widget.screenType ==
+                                                              "latest-job"?
+                                                           LatestJobDetailScreen(widget.latestJobModel!):widget.screenType ==
+                                                              "latest-training-job"?LatestTrainingDetailScreen(widget.latestTrainingModel!):HomeScreen())
                                       // MaterialPageRoute(
                                       //   builder: (BuildContext context) =>
                                       //       widget.screenType == "job_description"

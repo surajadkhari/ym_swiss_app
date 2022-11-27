@@ -12,7 +12,6 @@ import 'package:lmiis/models/new_muni_model.dart';
 import 'package:lmiis/models/pradeshModel.dart';
 
 import '../../../../models/ResponsModels/latest_training_model.dart';
-import '../../../../utils/Apis.dart';
 import '../../../../utils/AppConstants.dart';
 import 'logging_interceptor.dart';
 
