@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lmiis/models/ResponsModels/latest_training_modeld.dart';
 import 'package:lmiis/models/ResponsModels/training_category_model.dart';
 import 'package:lmiis/models/district_new_model.dart';
 import 'package:lmiis/models/new_grade_model.dart';
@@ -212,6 +213,14 @@ class ApiClient {
 
     return List.from(responseData["data"])
         .map((e) => LatestTrainingModel.fromJson(e))
+        .toList();
+  }
+    Future<List<LatestJobModel>> newgetLatestJobs() async {
+    final result = await dio.get(Apis.latestJoburl);
+    final responseData = result.data;
+
+    return List.from(responseData["data"])
+        .map((e) => LatestJobModel.fromJson(e))
         .toList();
   }
 }
