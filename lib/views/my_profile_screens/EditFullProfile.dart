@@ -33,12 +33,13 @@ class _EditFullProfileState extends State<EditFullProfile> {
   TextEditingController mobileNumberTextEditingController = TextEditingController();
   TextEditingController citizenshipNoTextEditingController = TextEditingController();
   TextEditingController expectedSummonsTextEditingController = TextEditingController();
+    TextEditingController otherjobTextEditingController = TextEditingController();
   FocusNode nameFocusNode = FocusNode();
   FocusNode mobileNumberFocusNode = FocusNode();
   FocusNode citizenshipNoFocusNode = FocusNode();
   FocusNode dateOfBirthFocusNode = FocusNode();
   FocusNode expectedSummonsFocusNode = FocusNode();
-
+  FocusNode otherJobFocusNode = FocusNode();
 
   bool isVisibleTopHint = true;
 
@@ -161,6 +162,10 @@ class _EditFullProfileState extends State<EditFullProfile> {
     if(myProfileModel.data?.expectedSalary != null){
       expectedSummonsTextEditingController.text = myProfileModel.data!.expectedSalary!;
     }
+      if(myProfileModel.data?.otherSkills != null){
+      otherjobTextEditingController.text = myProfileModel.data!.otherSkills!;
+    }
+
 
      if(myProfileData?.file != null){
        String? fileName = myProfileData?.file!.split('/').last;
@@ -576,7 +581,14 @@ class _EditFullProfileState extends State<EditFullProfile> {
                               )
                           ),
                         ),
-
+ const SizedBox(height: 20,),
+                        LoginTextFormFiled(
+                          AppConstants.enterOtherJobField,
+                          otherjobTextEditingController,
+                          otherJobFocusNode,
+                         
+                          isShowRequrStar: false,
+                        ),
                         const SizedBox(height: 30,),
                         Row(
                           children: [
@@ -759,6 +771,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                String mobile = mobileNumberTextEditingController.text;
                                String citizenshipNo = citizenshipNoTextEditingController.text;
                                String expectedSummons = expectedSummonsTextEditingController.text;
+                                   String otherskillValue = otherjobTextEditingController.text;
                                int gender = locationProvider.genderValueWordId;
 
                                 int? perPradeshId = pradashWordsId;
@@ -803,6 +816,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                   "ward": temWard,
                                   "gender": gender,
                                   "mobile": mobile,
+                                  "other_skills":otherskillValue,
                                   "dob": dobDateTime,
                                   "citizenship_no": int.parse(citizenshipNo),
                                   "expected_salary": expectedSummons,
@@ -1599,7 +1613,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                           InkWell(
                             onHover: (_){},
                             onTap: (){
-                              Navigator.of(context).pop();
+                        Navigator.pop(context);
                             },
                             child: Container(
                                 margin: EdgeInsets.only(right: 10),
@@ -1719,6 +1733,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                   onHover: (_){},
                                   onTap: (){
                                     Navigator.of(context).pop();
+                                    
                                   },
                                   child: Container(
                                       margin: EdgeInsets.only(right: 10),

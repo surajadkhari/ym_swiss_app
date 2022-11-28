@@ -1,15 +1,20 @@
 /// data : {"id":13,"name":"kundan","per_pradesh_id":1,"per_pradesh_name":"प्रदेश नं. १","per_district_id":1,"per_district_name":"ताप्लेजुङ","per_muni_id":1,"per_muni_name":"फुङ्लिङ नगरपालिका","per_ward":"1","pradesh_id":1,"temp_pradesh_name":"प्रदेश नं. १","district_id":1,"temp_district_name":"ताप्लेजुङ","muni_id":1,"temp_muni_name":"फुङ्लिङ नगरपालिका","ward":"1","dob":"2006-01-01","preference_job_cat":null,"gender":"पुरुष","mobile":"123456789","phone":"01733887657","citizenship_no":"1234546","expected_salary":"2500","ethnicity_type":"4","ethnicity_name":"नेवार","differently_able":1,"migrant_worker":1,"minority_group":1,"file":"/profilePicture/13/app_icon.png","educations":[{"id":3,"level_id":1,"level_name":"डाक्टरेट","program":"csit","board":"csit","institute":"csit","graduation_year":"2022-02-02","marks_secured":"10","levels":{"id":1,"name":"डाक्टरेट"}}],"experiences":[{"id":5,"organization":"youngMinds Pvt Ltd","location":"birtamode","title":"experience1","is_currently_working":0,"start_date":"2022-10-15","end_date":"2022-10-20","reference_name":"diwakar","reference_contact":"9842706856","file":"/experience/13/5/app_icon.png"}],"trainings":[{"title":"YM training","provider":"youngminds","duration":"2 month","year":"2015-10-20","details":"Young minds Creation kathmandu Nepal"}],"languages":[{"id":2,"language_name":"english","language_rating_speaking":"1","language_rating_reading":"2","language_rating_writing":"3","language_rating_listening":"4"}],"locations":[{"id":3,"location":"kathmandu","per_pradesh_id":1,"pradesh_name":"प्रदेश नं. १","per_district_id":1,"district_name":"ताप्लेजुङ","per_muni_id":1,"muni_name":"फुङ्लिङ नगरपालिका"},{"id":4,"location":"kathmandu","per_pradesh_id":1,"pradesh_name":"प्रदेश नं. १","per_district_id":1,"district_name":"ताप्लेजुङ","per_muni_id":1,"muni_name":"फुङ्लिङ नगरपालिका"}],"socialAccounts":[{"id":5,"name":"Instagram","url":"jhjhj"},{"id":6,"name":"Twitter","url":"qwqwq"},{"id":7,"name":"YouTube","url":"dsd"}],"specialization":{"id":1,"specialization":"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available"},"aboutYourself":{"id":2,"description":"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available"},"skills":[{"id":8,"skill_id":1,"skill_name":"ऑफिस मैसेंजर"},{"id":9,"skill_id":2,"skill_name":"स्टोर कीपर"},{"id":10,"skill_id":3,"skill_name":"ऑफिस रनर"},{"id":11,"skill_id":1,"skill_name":"ऑफिस मैसेंजर"},{"id":12,"skill_id":2,"skill_name":"स्टोर कीपर"},{"id":13,"skill_id":3,"skill_name":"ऑफिस रनर"}]}
 
 class MyProfileModel {
-  MyProfileModel({this.data,});
+  MyProfileModel({
+    this.data,
+  });
 
   MyProfileModel.fromJson(dynamic json) {
     data = json['data'] != null ? MyProfileData.fromJson(json['data']) : null;
   }
   MyProfileData? data;
-MyProfileModel copyWith({  MyProfileData? data,
-}) => MyProfileModel(  data: data ?? this.data,
-);
+  MyProfileModel copyWith({
+    MyProfileData? data,
+  }) =>
+      MyProfileModel(
+        data: data ?? this.data,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (data != null) {
@@ -17,51 +22,52 @@ MyProfileModel copyWith({  MyProfileData? data,
     }
     return map;
   }
-
 }
 
 class MyProfileData {
   MyProfileData({
-      this.id, 
-      this.name, 
-      this.email,
-      this.perPradeshId,
-      this.perPradeshName, 
-      this.perDistrictId, 
-      this.perDistrictName, 
-      this.perMuniId, 
-      this.perMuniName, 
-      this.perWard, 
-      this.pradeshId, 
-      this.tempPradeshName, 
-      this.districtId, 
-      this.tempDistrictName, 
-      this.muniId, 
-      this.tempMuniName, 
-      this.ward, 
-      this.dob, 
-      this.preferenceJobCat, 
-      this.gender, 
-      this.mobile, 
-      this.phone, 
-      this.citizenshipNo, 
-      this.expectedSalary, 
-      this.ethnicityType, 
-      this.ethnicityName, 
-      this.differentlyAble, 
-      this.migrantWorker, 
-      this.minorityGroup, 
-      this.file, 
-      this.jobseekerPreferenceCategory,
-      this.educations,
-      this.experiences, 
-      this.trainings, 
-      this.languages, 
-      this.locations, 
-      this.socialAccounts, 
-      this.specialization, 
-      this.aboutYourself, 
-      this.skills,});
+    this.id,
+    this.name,
+    this.email,
+    this.perPradeshId,
+    this.perPradeshName,
+    this.perDistrictId,
+    this.perDistrictName,
+    this.perMuniId,
+    this.perMuniName,
+    this.perWard,
+    this.pradeshId,
+    this.tempPradeshName,
+    this.districtId,
+    this.tempDistrictName,
+    this.muniId,
+    this.tempMuniName,
+    this.ward,
+    this.dob,
+    this.preferenceJobCat,
+    this.gender,
+    this.mobile,
+    this.phone,
+    this.otherSkills,
+    this.citizenshipNo,
+    this.expectedSalary,
+    this.ethnicityType,
+    this.ethnicityName,
+    this.differentlyAble,
+    this.migrantWorker,
+    this.minorityGroup,
+    this.file,
+    this.jobseekerPreferenceCategory,
+    this.educations,
+    this.experiences,
+    this.trainings,
+    this.languages,
+    this.locations,
+    this.socialAccounts,
+    this.specialization,
+    this.aboutYourself,
+    this.skills,
+  });
 
   MyProfileData.fromJson(dynamic json) {
     id = json['id'];
@@ -86,6 +92,7 @@ class MyProfileData {
     gender = json['gender'];
     mobile = json['mobile'];
     phone = json['phone'];
+    otherSkills = json["other_skills"] ;
     citizenshipNo = json['citizenship_no'];
     expectedSalary = json['expected_salary'];
     ethnicityType = json['ethnicity_type'];
@@ -97,7 +104,8 @@ class MyProfileData {
     if (json['jobseeker_preference_category'] != null) {
       jobseekerPreferenceCategory = [];
       json['jobseeker_preference_category'].forEach((v) {
-        jobseekerPreferenceCategory?.add(JobseekerPreferenceCategory.fromJson(v));
+        jobseekerPreferenceCategory
+            ?.add(JobseekerPreferenceCategory.fromJson(v));
       });
     }
     if (json['educations'] != null) {
@@ -136,8 +144,12 @@ class MyProfileData {
         socialAccounts?.add(SocialAccounts.fromJson(v));
       });
     }
-    specialization = json['specialization'] != null ? Specialization.fromJson(json['specialization']) : null;
-    aboutYourself = json['aboutYourself'] != null ? AboutYourself.fromJson(json['aboutYourself']) : null;
+    specialization = json['specialization'] != null
+        ? Specialization.fromJson(json['specialization'])
+        : null;
+    aboutYourself = json['aboutYourself'] != null
+        ? AboutYourself.fromJson(json['aboutYourself'])
+        : null;
     if (json['skills'] != null) {
       skills = [];
       json['skills'].forEach((v) {
@@ -167,6 +179,8 @@ class MyProfileData {
   String? gender;
   String? mobile;
   String? phone;
+
+  String? otherSkills;
   String? citizenshipNo;
   String? expectedSalary;
   String? ethnicityType;
@@ -185,87 +199,93 @@ class MyProfileData {
   Specialization? specialization;
   AboutYourself? aboutYourself;
   List<Skills>? skills;
-MyProfileData copyWith({  int? id,
-  String? name,
-  String? email,
-  int? perPradeshId,
-  String? perPradeshName,
-  int? perDistrictId,
-  String? perDistrictName,
-  int? perMuniId,
-  String? perMuniName,
-  String? perWard,
-  int? pradeshId,
-  String? tempPradeshName,
-  int? districtId,
-  String? tempDistrictName,
-  int? muniId,
-  String? tempMuniName,
-  String? ward,
-  String? dob,
-  dynamic preferenceJobCat,
-  String? gender,
-  String? mobile,
-  String? phone,
-  String? citizenshipNo,
-  String? expectedSalary,
-  String? ethnicityType,
-  String? ethnicityName,
-  int? differentlyAble,
-  int? migrantWorker,
-  int? minorityGroup,
-  String? file,
-  List<JobseekerPreferenceCategory>? jobseekerPreferenceCategory,
-  List<Educations>? educations,
-  List<Experiences>? experiences,
-  List<Trainings>? trainings,
-  List<Languages>? languages,
-  List<Locations>? locations,
-  List<SocialAccounts>? socialAccounts,
-  Specialization? specialization,
-  AboutYourself? aboutYourself,
-  List<Skills>? skills,
-}) => MyProfileData(  id: id ?? this.id,
-  name: name ?? this.name,
-  email: email ?? this.email,
-  perPradeshId: perPradeshId ?? this.perPradeshId,
-  perPradeshName: perPradeshName ?? this.perPradeshName,
-  perDistrictId: perDistrictId ?? this.perDistrictId,
-  perDistrictName: perDistrictName ?? this.perDistrictName,
-  perMuniId: perMuniId ?? this.perMuniId,
-  perMuniName: perMuniName ?? this.perMuniName,
-  perWard: perWard ?? this.perWard,
-  pradeshId: pradeshId ?? this.pradeshId,
-  tempPradeshName: tempPradeshName ?? this.tempPradeshName,
-  districtId: districtId ?? this.districtId,
-  tempDistrictName: tempDistrictName ?? this.tempDistrictName,
-  muniId: muniId ?? this.muniId,
-  tempMuniName: tempMuniName ?? this.tempMuniName,
-  ward: ward ?? this.ward,
-  dob: dob ?? this.dob,
-  preferenceJobCat: preferenceJobCat ?? this.preferenceJobCat,
-  gender: gender ?? this.gender,
-  mobile: mobile ?? this.mobile,
-  phone: phone ?? this.phone,
-  citizenshipNo: citizenshipNo ?? this.citizenshipNo,
-  expectedSalary: expectedSalary ?? this.expectedSalary,
-  ethnicityType: ethnicityType ?? this.ethnicityType,
-  ethnicityName: ethnicityName ?? this.ethnicityName,
-  differentlyAble: differentlyAble ?? this.differentlyAble,
-  migrantWorker: migrantWorker ?? this.migrantWorker,
-  minorityGroup: minorityGroup ?? this.minorityGroup,
-  file: file ?? this.file,
-  jobseekerPreferenceCategory: jobseekerPreferenceCategory ?? this.jobseekerPreferenceCategory,
-  educations: educations ?? this.educations,
-  experiences: experiences ?? this.experiences,
-  trainings: trainings ?? this.trainings,
-  languages: languages ?? this.languages,
-  locations: locations ?? this.locations,
-  socialAccounts: socialAccounts ?? this.socialAccounts,
-  specialization: specialization ?? this.specialization,
-  aboutYourself: aboutYourself ?? this.aboutYourself,
-  skills: skills ?? this.skills,
-);
+  MyProfileData copyWith({
+    int? id,
+    String? name,
+    String? email,
+    int? perPradeshId,
+    String? perPradeshName,
+    int? perDistrictId,
+    String? perDistrictName,
+    int? perMuniId,
+    String? perMuniName,
+    String? perWard,
+    int? pradeshId,
+    String? tempPradeshName,
+    int? districtId,
+    String? tempDistrictName,
+    int? muniId,
+    String? tempMuniName,
+    String? ward,
+    String? dob,
+    dynamic preferenceJobCat,
+    String? gender,
+    String? mobile,
+    String? phone,
+    String? otherSkills,
+    String? citizenshipNo,
+    String? expectedSalary,
+    String? ethnicityType,
+    String? ethnicityName,
+    int? differentlyAble,
+    int? migrantWorker,
+    int? minorityGroup,
+    String? file,
+    List<JobseekerPreferenceCategory>? jobseekerPreferenceCategory,
+    List<Educations>? educations,
+    List<Experiences>? experiences,
+    List<Trainings>? trainings,
+    List<Languages>? languages,
+    List<Locations>? locations,
+    List<SocialAccounts>? socialAccounts,
+    Specialization? specialization,
+    AboutYourself? aboutYourself,
+    List<Skills>? skills,
+  }) =>
+      MyProfileData(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        perPradeshId: perPradeshId ?? this.perPradeshId,
+        perPradeshName: perPradeshName ?? this.perPradeshName,
+        perDistrictId: perDistrictId ?? this.perDistrictId,
+        perDistrictName: perDistrictName ?? this.perDistrictName,
+        perMuniId: perMuniId ?? this.perMuniId,
+        perMuniName: perMuniName ?? this.perMuniName,
+        perWard: perWard ?? this.perWard,
+        pradeshId: pradeshId ?? this.pradeshId,
+        tempPradeshName: tempPradeshName ?? this.tempPradeshName,
+        districtId: districtId ?? this.districtId,
+        tempDistrictName: tempDistrictName ?? this.tempDistrictName,
+        muniId: muniId ?? this.muniId,
+        tempMuniName: tempMuniName ?? this.tempMuniName,
+        ward: ward ?? this.ward,
+        dob: dob ?? this.dob,
+        preferenceJobCat: preferenceJobCat ?? this.preferenceJobCat,
+        gender: gender ?? this.gender,
+        mobile: mobile ?? this.mobile,
+        phone: phone ?? this.phone,
+        otherSkills: otherSkills ?? this.otherSkills,
+        citizenshipNo: citizenshipNo ?? this.citizenshipNo,
+        expectedSalary: expectedSalary ?? this.expectedSalary,
+        ethnicityType: ethnicityType ?? this.ethnicityType,
+        ethnicityName: ethnicityName ?? this.ethnicityName,
+        differentlyAble: differentlyAble ?? this.differentlyAble,
+        migrantWorker: migrantWorker ?? this.migrantWorker,
+        minorityGroup: minorityGroup ?? this.minorityGroup,
+        file: file ?? this.file,
+        jobseekerPreferenceCategory:
+            jobseekerPreferenceCategory ?? this.jobseekerPreferenceCategory,
+        educations: educations ?? this.educations,
+        experiences: experiences ?? this.experiences,
+        trainings: trainings ?? this.trainings,
+        languages: languages ?? this.languages,
+        locations: locations ?? this.locations,
+        socialAccounts: socialAccounts ?? this.socialAccounts,
+        specialization: specialization ?? this.specialization,
+        aboutYourself: aboutYourself ?? this.aboutYourself,
+        skills: skills ?? this.skills,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -289,6 +309,7 @@ MyProfileData copyWith({  int? id,
     map['preference_job_cat'] = preferenceJobCat;
     map['gender'] = gender;
     map['mobile'] = mobile;
+    map["other_skills"] = otherSkills;
     map['phone'] = phone;
     map['citizenship_no'] = citizenshipNo;
     map['expected_salary'] = expectedSalary;
@@ -299,7 +320,8 @@ MyProfileData copyWith({  int? id,
     map['minority_group'] = minorityGroup;
     map['file'] = file;
     if (jobseekerPreferenceCategory != null) {
-      map['jobseeker_preference_category'] = jobseekerPreferenceCategory?.map((v) => v.toJson()).toList();
+      map['jobseeker_preference_category'] =
+          jobseekerPreferenceCategory?.map((v) => v.toJson()).toList();
     }
     if (educations != null) {
       map['educations'] = educations?.map((v) => v.toJson()).toList();
@@ -330,7 +352,6 @@ MyProfileData copyWith({  int? id,
     }
     return map;
   }
-
 }
 
 /// id : 8
@@ -339,9 +360,10 @@ MyProfileData copyWith({  int? id,
 
 class Skills {
   Skills({
-      this.id, 
-      this.skillId, 
-      this.skillName,});
+    this.id,
+    this.skillId,
+    this.skillName,
+  });
 
   Skills.fromJson(dynamic json) {
     id = json['id'];
@@ -351,13 +373,16 @@ class Skills {
   int? id;
   int? skillId;
   String? skillName;
-Skills copyWith({  int? id,
-  int? skillId,
-  String? skillName,
-}) => Skills(  id: id ?? this.id,
-  skillId: skillId ?? this.skillId,
-  skillName: skillName ?? this.skillName,
-);
+  Skills copyWith({
+    int? id,
+    int? skillId,
+    String? skillName,
+  }) =>
+      Skills(
+        id: id ?? this.id,
+        skillId: skillId ?? this.skillId,
+        skillName: skillName ?? this.skillName,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -365,7 +390,6 @@ Skills copyWith({  int? id,
     map['skill_name'] = skillName;
     return map;
   }
-
 }
 
 /// id : 2
@@ -373,8 +397,9 @@ Skills copyWith({  int? id,
 
 class AboutYourself {
   AboutYourself({
-      this.id, 
-      this.description,});
+    this.id,
+    this.description,
+  });
 
   AboutYourself.fromJson(dynamic json) {
     id = json['id'];
@@ -382,18 +407,20 @@ class AboutYourself {
   }
   int? id;
   String? description;
-AboutYourself copyWith({  int? id,
-  String? description,
-}) => AboutYourself(  id: id ?? this.id,
-  description: description ?? this.description,
-);
+  AboutYourself copyWith({
+    int? id,
+    String? description,
+  }) =>
+      AboutYourself(
+        id: id ?? this.id,
+        description: description ?? this.description,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['description'] = description;
     return map;
   }
-
 }
 
 /// id : 1
@@ -401,8 +428,9 @@ AboutYourself copyWith({  int? id,
 
 class Specialization {
   Specialization({
-      this.id, 
-      this.specialization,});
+    this.id,
+    this.specialization,
+  });
 
   Specialization.fromJson(dynamic json) {
     id = json['id'];
@@ -410,18 +438,20 @@ class Specialization {
   }
   int? id;
   String? specialization;
-Specialization copyWith({  int? id,
-  String? specialization,
-}) => Specialization(  id: id ?? this.id,
-  specialization: specialization ?? this.specialization,
-);
+  Specialization copyWith({
+    int? id,
+    String? specialization,
+  }) =>
+      Specialization(
+        id: id ?? this.id,
+        specialization: specialization ?? this.specialization,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['specialization'] = specialization;
     return map;
   }
-
 }
 
 /// id : 5
@@ -430,9 +460,10 @@ Specialization copyWith({  int? id,
 
 class SocialAccounts {
   SocialAccounts({
-      this.id, 
-      this.name, 
-      this.url,});
+    this.id,
+    this.name,
+    this.url,
+  });
 
   SocialAccounts.fromJson(dynamic json) {
     id = json['id'];
@@ -442,13 +473,16 @@ class SocialAccounts {
   int? id;
   String? name;
   String? url;
-SocialAccounts copyWith({  int? id,
-  String? name,
-  String? url,
-}) => SocialAccounts(  id: id ?? this.id,
-  name: name ?? this.name,
-  url: url ?? this.url,
-);
+  SocialAccounts copyWith({
+    int? id,
+    String? name,
+    String? url,
+  }) =>
+      SocialAccounts(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        url: url ?? this.url,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -456,7 +490,6 @@ SocialAccounts copyWith({  int? id,
     map['url'] = url;
     return map;
   }
-
 }
 
 /// id : 3
@@ -470,14 +503,15 @@ SocialAccounts copyWith({  int? id,
 
 class Locations {
   Locations({
-      this.id, 
-      this.location, 
-      this.perPradeshId, 
-      this.pradeshName, 
-      this.perDistrictId, 
-      this.districtName, 
-      this.perMuniId, 
-      this.muniName,});
+    this.id,
+    this.location,
+    this.perPradeshId,
+    this.pradeshName,
+    this.perDistrictId,
+    this.districtName,
+    this.perMuniId,
+    this.muniName,
+  });
 
   Locations.fromJson(dynamic json) {
     id = json['id'];
@@ -497,23 +531,26 @@ class Locations {
   String? districtName;
   int? perMuniId;
   String? muniName;
-Locations copyWith({  int? id,
-  String? location,
-  int? perPradeshId,
-  String? pradeshName,
-  int? perDistrictId,
-  String? districtName,
-  int? perMuniId,
-  String? muniName,
-}) => Locations(  id: id ?? this.id,
-  location: location ?? this.location,
-  perPradeshId: perPradeshId ?? this.perPradeshId,
-  pradeshName: pradeshName ?? this.pradeshName,
-  perDistrictId: perDistrictId ?? this.perDistrictId,
-  districtName: districtName ?? this.districtName,
-  perMuniId: perMuniId ?? this.perMuniId,
-  muniName: muniName ?? this.muniName,
-);
+  Locations copyWith({
+    int? id,
+    String? location,
+    int? perPradeshId,
+    String? pradeshName,
+    int? perDistrictId,
+    String? districtName,
+    int? perMuniId,
+    String? muniName,
+  }) =>
+      Locations(
+        id: id ?? this.id,
+        location: location ?? this.location,
+        perPradeshId: perPradeshId ?? this.perPradeshId,
+        pradeshName: pradeshName ?? this.pradeshName,
+        perDistrictId: perDistrictId ?? this.perDistrictId,
+        districtName: districtName ?? this.districtName,
+        perMuniId: perMuniId ?? this.perMuniId,
+        muniName: muniName ?? this.muniName,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -526,7 +563,6 @@ Locations copyWith({  int? id,
     map['muni_name'] = muniName;
     return map;
   }
-
 }
 
 /// id : 2
@@ -538,12 +574,13 @@ Locations copyWith({  int? id,
 
 class Languages {
   Languages({
-      this.id, 
-      this.languageName, 
-      this.languageRatingSpeaking, 
-      this.languageRatingReading, 
-      this.languageRatingWriting, 
-      this.languageRatingListening,});
+    this.id,
+    this.languageName,
+    this.languageRatingSpeaking,
+    this.languageRatingReading,
+    this.languageRatingWriting,
+    this.languageRatingListening,
+  });
 
   Languages.fromJson(dynamic json) {
     id = json['id'];
@@ -559,19 +596,26 @@ class Languages {
   String? languageRatingReading;
   String? languageRatingWriting;
   String? languageRatingListening;
-Languages copyWith({  int? id,
-  String? languageName,
-  String? languageRatingSpeaking,
-  String? languageRatingReading,
-  String? languageRatingWriting,
-  String? languageRatingListening,
-}) => Languages(  id: id ?? this.id,
-  languageName: languageName ?? this.languageName,
-  languageRatingSpeaking: languageRatingSpeaking ?? this.languageRatingSpeaking,
-  languageRatingReading: languageRatingReading ?? this.languageRatingReading,
-  languageRatingWriting: languageRatingWriting ?? this.languageRatingWriting,
-  languageRatingListening: languageRatingListening ?? this.languageRatingListening,
-);
+  Languages copyWith({
+    int? id,
+    String? languageName,
+    String? languageRatingSpeaking,
+    String? languageRatingReading,
+    String? languageRatingWriting,
+    String? languageRatingListening,
+  }) =>
+      Languages(
+        id: id ?? this.id,
+        languageName: languageName ?? this.languageName,
+        languageRatingSpeaking:
+            languageRatingSpeaking ?? this.languageRatingSpeaking,
+        languageRatingReading:
+            languageRatingReading ?? this.languageRatingReading,
+        languageRatingWriting:
+            languageRatingWriting ?? this.languageRatingWriting,
+        languageRatingListening:
+            languageRatingListening ?? this.languageRatingListening,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -582,7 +626,6 @@ Languages copyWith({  int? id,
     map['language_rating_listening'] = languageRatingListening;
     return map;
   }
-
 }
 
 /// title : "YM training"
@@ -593,13 +636,13 @@ Languages copyWith({  int? id,
 
 class Trainings {
   Trainings({
-      this.id,
-      this.title,
-      this.provider,
-      this.duration, 
-      this.year, 
-      this.details,
-      this.file,
+    this.id,
+    this.title,
+    this.provider,
+    this.duration,
+    this.year,
+    this.details,
+    this.file,
   });
 
   Trainings.fromJson(dynamic json) {
@@ -618,23 +661,24 @@ class Trainings {
   String? year;
   String? details;
   String? file;
-Trainings copyWith({
-  int? id,
-  String? title,
-  String? provider,
-  String? duration,
-  String? year,
-  String? details,
-  String? file,
-}) => Trainings(
-  id: id ?? this.id,
-  title: title ?? this.title,
-  provider: provider ?? this.provider,
-  duration: duration ?? this.duration,
-  year: year ?? this.year,
-  details: details ?? this.details,
-  file: file ?? this.file,
-);
+  Trainings copyWith({
+    int? id,
+    String? title,
+    String? provider,
+    String? duration,
+    String? year,
+    String? details,
+    String? file,
+  }) =>
+      Trainings(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        provider: provider ?? this.provider,
+        duration: duration ?? this.duration,
+        year: year ?? this.year,
+        details: details ?? this.details,
+        file: file ?? this.file,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -646,7 +690,6 @@ Trainings copyWith({
     map['file'] = file;
     return map;
   }
-
 }
 
 /// id : 5
@@ -662,16 +705,17 @@ Trainings copyWith({
 
 class Experiences {
   Experiences({
-      this.id, 
-      this.organization, 
-      this.location, 
-      this.title, 
-      this.isCurrentlyWorking, 
-      this.startDate, 
-      this.endDate, 
-      this.referenceName, 
-      this.referenceContact, 
-      this.file,});
+    this.id,
+    this.organization,
+    this.location,
+    this.title,
+    this.isCurrentlyWorking,
+    this.startDate,
+    this.endDate,
+    this.referenceName,
+    this.referenceContact,
+    this.file,
+  });
 
   Experiences.fromJson(dynamic json) {
     id = json['id'];
@@ -696,27 +740,30 @@ class Experiences {
   String? referenceContact;
   String? file;
   List<JobseekerPreferenceCategory>? jobseekerPreferenceCategory;
-Experiences copyWith({  int? id,
-  String? organization,
-  String? location,
-  String? title,
-  int? isCurrentlyWorking,
-  String? startDate,
-  String? endDate,
-  String? referenceName,
-  String? referenceContact,
-  String? file,
-}) => Experiences(  id: id ?? this.id,
-  organization: organization ?? this.organization,
-  location: location ?? this.location,
-  title: title ?? this.title,
-  isCurrentlyWorking: isCurrentlyWorking ?? this.isCurrentlyWorking,
-  startDate: startDate ?? this.startDate,
-  endDate: endDate ?? this.endDate,
-  referenceName: referenceName ?? this.referenceName,
-  referenceContact: referenceContact ?? this.referenceContact,
-  file: file ?? this.file,
-);
+  Experiences copyWith({
+    int? id,
+    String? organization,
+    String? location,
+    String? title,
+    int? isCurrentlyWorking,
+    String? startDate,
+    String? endDate,
+    String? referenceName,
+    String? referenceContact,
+    String? file,
+  }) =>
+      Experiences(
+        id: id ?? this.id,
+        organization: organization ?? this.organization,
+        location: location ?? this.location,
+        title: title ?? this.title,
+        isCurrentlyWorking: isCurrentlyWorking ?? this.isCurrentlyWorking,
+        startDate: startDate ?? this.startDate,
+        endDate: endDate ?? this.endDate,
+        referenceName: referenceName ?? this.referenceName,
+        referenceContact: referenceContact ?? this.referenceContact,
+        file: file ?? this.file,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -731,7 +778,6 @@ Experiences copyWith({  int? id,
     map['file'] = file;
     return map;
   }
-
 }
 
 /// id : 3
@@ -746,15 +792,16 @@ Experiences copyWith({  int? id,
 
 class Educations {
   Educations({
-      this.id, 
-      this.levelId, 
-      this.levelName, 
-      this.program, 
-      this.board, 
-      this.institute, 
-      this.graduationYear, 
-      this.marksSecured, 
-      this.levels,});
+    this.id,
+    this.levelId,
+    this.levelName,
+    this.program,
+    this.board,
+    this.institute,
+    this.graduationYear,
+    this.marksSecured,
+    this.levels,
+  });
 
   Educations.fromJson(dynamic json) {
     id = json['id'];
@@ -776,25 +823,28 @@ class Educations {
   String? graduationYear;
   String? marksSecured;
   Levels? levels;
-Educations copyWith({  int? id,
-  int? levelId,
-  String? levelName,
-  String? program,
-  String? board,
-  String? institute,
-  String? graduationYear,
-  String? marksSecured,
-  Levels? levels,
-}) => Educations(  id: id ?? this.id,
-  levelId: levelId ?? this.levelId,
-  levelName: levelName ?? this.levelName,
-  program: program ?? this.program,
-  board: board ?? this.board,
-  institute: institute ?? this.institute,
-  graduationYear: graduationYear ?? this.graduationYear,
-  marksSecured: marksSecured ?? this.marksSecured,
-  levels: levels ?? this.levels,
-);
+  Educations copyWith({
+    int? id,
+    int? levelId,
+    String? levelName,
+    String? program,
+    String? board,
+    String? institute,
+    String? graduationYear,
+    String? marksSecured,
+    Levels? levels,
+  }) =>
+      Educations(
+        id: id ?? this.id,
+        levelId: levelId ?? this.levelId,
+        levelName: levelName ?? this.levelName,
+        program: program ?? this.program,
+        board: board ?? this.board,
+        institute: institute ?? this.institute,
+        graduationYear: graduationYear ?? this.graduationYear,
+        marksSecured: marksSecured ?? this.marksSecured,
+        levels: levels ?? this.levels,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -810,7 +860,6 @@ Educations copyWith({  int? id,
     }
     return map;
   }
-
 }
 
 /// id : 1
@@ -818,8 +867,9 @@ Educations copyWith({  int? id,
 
 class Levels {
   Levels({
-      this.id, 
-      this.name,});
+    this.id,
+    this.name,
+  });
 
   Levels.fromJson(dynamic json) {
     id = json['id'];
@@ -827,19 +877,22 @@ class Levels {
   }
   int? id;
   String? name;
-Levels copyWith({  int? id,
-  String? name,
-}) => Levels(  id: id ?? this.id,
-  name: name ?? this.name,
-);
+  Levels copyWith({
+    int? id,
+    String? name,
+  }) =>
+      Levels(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['name'] = name;
     return map;
   }
-
 }
+
 /// id : 41
 /// category_id : "2"
 /// category_name : "ऑउटडोर्स सेल्स बोय"
@@ -848,7 +901,8 @@ class JobseekerPreferenceCategory {
   JobseekerPreferenceCategory({
     this.id,
     this.categoryId,
-    this.categoryName,});
+    this.categoryName,
+  });
 
   JobseekerPreferenceCategory.fromJson(dynamic json) {
     id = json['id'];
@@ -858,13 +912,16 @@ class JobseekerPreferenceCategory {
   int? id;
   String? categoryId;
   String? categoryName;
-  JobseekerPreferenceCategory copyWith({  int? id,
+  JobseekerPreferenceCategory copyWith({
+    int? id,
     String? categoryId,
     String? categoryName,
-  }) => JobseekerPreferenceCategory(  id: id ?? this.id,
-    categoryId: categoryId ?? this.categoryId,
-    categoryName: categoryName ?? this.categoryName,
-  );
+  }) =>
+      JobseekerPreferenceCategory(
+        id: id ?? this.id,
+        categoryId: categoryId ?? this.categoryId,
+        categoryName: categoryName ?? this.categoryName,
+      );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
@@ -872,5 +929,4 @@ class JobseekerPreferenceCategory {
     map['category_name'] = categoryName;
     return map;
   }
-
 }

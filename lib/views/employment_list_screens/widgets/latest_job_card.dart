@@ -142,7 +142,7 @@ class LatestJobCard extends StatelessWidget {
                         decoration: BoxDecoration(
                             image: 
                             DecorationImage(
-                                image:CachedNetworkImageProvider('${Apis.URL}${latestJobModel.serviceProvider.logo}'))),
+                                image:CachedNetworkImageProvider('${Apis.URL}${latestJobModel.serviceProvider.logo}',))),
                                 
                                 //  NetworkImage(
                                 //     '${Apis.URL}${latestJobModel.serviceProvider.logo}')
