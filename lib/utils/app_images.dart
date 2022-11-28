@@ -18,6 +18,7 @@ class AppImages{
   static const String ic_info_notification = 'assets/image/ic_info_notification.svg';
   static const String ic_clock = 'assets/image/ic_clock.svg';
   static const String ic_demo_person = 'assets/image/ic_demo_person.png';
+   static const String placeHolder = 'assets/image/place_holder.jpg';
   static const String ic_call = 'assets/image/ic_call.svg';
   static const String ic_email = 'assets/image/ic_email.svg';
   static const String ic_point = 'assets/image/ic_point.svg';

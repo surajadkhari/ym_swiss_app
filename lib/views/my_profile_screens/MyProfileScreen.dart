@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lmiis/provider/MyProfileProvider.dart';
@@ -92,7 +93,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           Container(
                             height: 100,
                             width: 100,
-                            child: myProfileProvider.myProfileModel?.data?.file != null ?  Image.network('${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}'): Image.asset(AppImages.ic_demo_person),
+                            child: myProfileProvider.myProfileModel?.data?.file != null ?  CachedNetworkImage(imageUrl:'${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}',placeholder: (context, url) => new CircularProgressIndicator(), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder)): Image.asset(AppImages.ic_demo_person),
                           ),
 
                           SizedBox(height: 5,),
@@ -170,7 +171,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           Container(
                             margin: EdgeInsets.only(left: 00),
                             width: MediaQuery.of(context).size.width,
-                            height: (myProfileProvider.educations?.length)! * 110,
+                            height: (myProfileProvider.educations?.length)! * 160,
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
@@ -194,7 +195,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width,
-                            height: (myProfileProvider.experiences?.length)! * 100,
+                            height: (myProfileProvider.experiences?.length)! * 110,
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,

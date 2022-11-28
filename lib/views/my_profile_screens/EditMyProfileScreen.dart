@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -159,7 +160,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
                                    Container(
                                      height: 100,
                                      width: 100,
-                                     child: myProfileProvider.myProfileModel?.data?.file != null ?  Image.network('${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}'): Image.asset(AppImages.ic_demo_person),
+                                     child: myProfileProvider.myProfileModel?.data?.file != null ?  CachedNetworkImage(imageUrl:'${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}',   placeholder: (context, url) => new CircularProgressIndicator(), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder),): Image.asset(AppImages.ic_demo_person),
                                    ),
                                    SizedBox(height: 10,),
                                    Text('${myProfileProvider.myProfileModel?.data?.name}',
@@ -376,7 +377,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
                            //TODO: add Experiences
                            Container(
                              width: MediaQuery.of(context).size.width,
-                             height: (myProfileProvider.experiences?.length)! * 85,
+                             height: (myProfileProvider.experiences?.length)! * 110,
                              child: ListView.builder(
                                physics: NeverScrollableScrollPhysics(),
                                shrinkWrap: true,

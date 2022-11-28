@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_storage/get_storage.dart';
@@ -137,11 +138,17 @@ class LatestJobCard extends StatelessWidget {
           latestJobModel.serviceProvider.logo.isNotEmpty?   Container(
                         width: 80,
                         height: 80,
-                        padding: const EdgeInsets.all(5),
+                        padding:  EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    '${Apis.URL}${latestJobModel.serviceProvider.logo}')))
+                            image: 
+                            DecorationImage(
+                                image:CachedNetworkImageProvider('${Apis.URL}${latestJobModel.serviceProvider.logo}'))),
+                                
+                                //  NetworkImage(
+                                //     '${Apis.URL}${latestJobModel.serviceProvider.logo}')
+                                //     )
+                                    
+                                //     )
           
                         ):
                          Container(
@@ -202,7 +209,9 @@ class LatestJobCard extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text('${latestJobModel.categoryName}')
+                          SizedBox(
+                                width: MediaQuery.of(context).size.width*0.4,
+                            child: Text('${latestJobModel.address}',maxLines: 2,))
                         ],
                       ),
                       Expanded(child: Container()),
@@ -215,7 +224,7 @@ class LatestJobCard extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text('${latestJobModel.categoryName}')
+                          Text('${latestJobModel.deadline}')
                         ],
                       )
                     ],
