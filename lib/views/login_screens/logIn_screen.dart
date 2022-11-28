@@ -214,7 +214,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                                                   .viewAllTrainingsData!):widget.screenType ==
                                                               "latest-job"?
                                                            LatestJobDetailScreen(widget.latestJobModel!):widget.screenType ==
-                                                              "latest-training-job"?LatestTrainingDetailScreen(widget.latestTrainingModel!):HomeScreen())
+                                                              "latest-training"?LatestTrainingDetailScreen(widget.latestTrainingModel!):HomeScreen())
                                       // MaterialPageRoute(
                                       //   builder: (BuildContext context) =>
                                       //       widget.screenType == "job_description"
@@ -236,7 +236,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           });
                         }),
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         InkWell(
                             onTap: () {
@@ -252,7 +252,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               style: TextStyle(
                                   color: ColorsResource.PRAYMARY_TEXT_COLOR,
                                   fontSize: Dimensions.BODY_14,
-                                  fontWeight: Dimensions.FONT_MEDIUM_NORMUL),
+                                  fontWeight: Dimensions.FONT_BOLD),
                             ))
                       ],
                     ),

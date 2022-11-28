@@ -131,7 +131,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
                      children: [
                        Container(
                          width: MediaQuery.of(context).size.width,
-                         height: 200,
+                         height: 210,
                          margin: EdgeInsets.only(top: 10),
                          padding: EdgeInsets.only(bottom: 4),
                          decoration: BoxDecoration(
@@ -905,7 +905,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
 
   ///Add education
   addEducationDialog(String title,bool isEdit){
-    double height = 320;
+    double height = 330;
     TextEditingController programTextEditingController = TextEditingController();
     TextEditingController passingDateTextEditingController = TextEditingController();
     TextEditingController boardOfEducationTextEditingController = TextEditingController();
@@ -974,7 +974,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
 
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        height: height - 100,
+                        height: height - 95,
                         margin: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
                         child: Column(
                           children: [
@@ -1546,7 +1546,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
 
   ///Add Experience
   addExperienceDialog(String title,bool isEdit){
-    double height = 510;
+    double height = 520;
 
     TextEditingController jobTitleTextEditingController = TextEditingController();
     TextEditingController nameOfTheInstitutionTextEditingController = TextEditingController();

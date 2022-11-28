@@ -52,6 +52,8 @@ class AppConstants {
   static String NAME = 'नाम';
 
   static String Remember_the_password = 'पसवर्ड सुनिच्छित गर्नुहोस';
+  static String enterOtherJobField =
+      'यदी तपाईंको आरु कुनै दक्षताको क्षेत्र भएमा यहाँ लेख्नुहोस';
 
   static String Mobile_number = 'मोबाइल नम्बर';
 

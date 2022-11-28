@@ -6,8 +6,6 @@ import '../../utils/dimensions.dart';
 import '../../utils/app_images.dart';
 
 class CustomTextFieldWithTitle extends StatelessWidget {
-
-
   String hintText;
   TextEditingController controller;
   FocusNode focusNode;
@@ -27,23 +25,27 @@ class CustomTextFieldWithTitle extends StatelessWidget {
   bool isBold;
   bool isPadding;
   double paddingDouble;
-TextInputAction? textInputAction;
-  CustomTextFieldWithTitle(this.hintText,this.controller,this.focusNode,
-      {this.isShowRequrStar = false,this.onChanged,this.height = 54,
-        this.inputTypePassword = false, this.inputType = AppConstants.TEXT,
-        this.isValid = false,
-        this.prefixIcon ='',
-        this.suffixIcon ='',
-        this.isVisibleTopHint=true,
-        this.insideHintText = '',
-        this.isBold = false,
-        this.isPadding = true,
-        this.prefixIconPadding = 10,
-        this.suffixIconPadding = 10,
-        this.fontSize = 15,
-        this.paddingDouble = 5,
-        textInputAction=TextInputAction.next
-      });
+  TextInputAction? textInputAction;
+  TextCapitalization? textCapitalization;
+  CustomTextFieldWithTitle(this.hintText, this.controller, this.focusNode,
+      {this.isShowRequrStar = false,
+      this.onChanged,
+      this.height = 54,
+      this.inputTypePassword = false,
+      this.inputType = AppConstants.TEXT,
+      this.isValid = false,
+      this.prefixIcon = '',
+      this.suffixIcon = '',
+      this.isVisibleTopHint = true,
+      this.insideHintText = '',
+      this.isBold = false,
+      this.isPadding = true,
+      this.prefixIconPadding = 10,
+      this.suffixIconPadding = 10,
+      this.fontSize = 15,
+      this.paddingDouble = 5,
+      this.textInputAction = TextInputAction.next,
+      this.textCapitalization = TextCapitalization.none});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,69 +53,88 @@ TextInputAction? textInputAction;
         Row(
           children: [
             Visibility(
-                visible: isVisibleTopHint,
-                child:
-                Text(hintText,style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight: isBold ? Dimensions.FONT_BOLD :Dimensions.FONT_MEDIUM_NORMUL),),
+              visible: isVisibleTopHint,
+              child: Text(
+                hintText,
+                style: TextStyle(
+                    fontSize: Dimensions.BODY_14,
+                    color: ColorsResource.TEXT_BLACK_COLOR,
+                    fontWeight: isBold
+                        ? Dimensions.FONT_BOLD
+                        : Dimensions.FONT_MEDIUM_NORMUL),
+              ),
             ),
-            const SizedBox(width: 5,),
+            const SizedBox(
+              width: 5,
+            ),
             Visibility(
-              visible: isShowRequrStar,
-                child:
-
-                Text('*',style: TextStyle(fontSize: Dimensions.BODY_16,color:ColorsResource.TEXT_READ_COLOR ,fontWeight: Dimensions.FONT_MEDIUM_NORMUL),)
-
-            )
+                visible: isShowRequrStar,
+                child: Text(
+                  '*',
+                  style: TextStyle(
+                      fontSize: Dimensions.BODY_16,
+                      color: ColorsResource.TEXT_READ_COLOR,
+                      fontWeight: Dimensions.FONT_MEDIUM_NORMUL),
+                ))
           ],
         ),
         SizedBox(
             height: height,
             child: TextField(
-              textInputAction:textInputAction ,
-                style: TextStyle(fontSize: fontSize),
-                obscureText: inputTypePassword,
-                keyboardType: inputType != AppConstants.TEXT ? TextInputType.phone:TextInputType.text,
-                decoration: InputDecoration(
+              textCapitalization: textCapitalization!,
+              textInputAction: textInputAction,
+              style: TextStyle(fontSize: fontSize),
+              obscureText: inputTypePassword,
+              keyboardType: inputType != AppConstants.TEXT
+                  ? TextInputType.phone
+                  : TextInputType.text,
+              decoration: InputDecoration(
                 isDense: true,
-                contentPadding: isPadding ? null:  EdgeInsets.only(left: paddingDouble,top: paddingDouble,bottom: paddingDouble),
+                contentPadding: isPadding
+                    ? null
+                    : EdgeInsets.only(
+                        left: paddingDouble,
+                        top: paddingDouble,
+                        bottom: paddingDouble),
                 filled: true,
                 fillColor: Colors.white,
                 hintText: insideHintText,
-                prefixIcon: prefixIcon != ''? Container(
-                    margin: EdgeInsets.all(prefixIconPadding),
-                    child: SvgPicture.asset(prefixIcon)) : null,
-                suffixIcon: suffixIcon != ''? Container(
-                    margin: EdgeInsets.all(suffixIconPadding),
-                    child: SvgPicture.asset(suffixIcon)) : null,
-                focusedBorder:OutlineInputBorder(
-                    borderSide: isValid ?  BorderSide(color: ColorsResource.TEXT_READ_COLOR,width: 1) :
-                    BorderSide(color: ColorsResource.TEXT_FEILD_STOCK_COLOR,width: 1)
-                  ),
+                prefixIcon: prefixIcon != ''
+                    ? Container(
+                        margin: EdgeInsets.all(prefixIconPadding),
+                        child: SvgPicture.asset(prefixIcon))
+                    : null,
+                suffixIcon: suffixIcon != ''
+                    ? Container(
+                        margin: EdgeInsets.all(suffixIconPadding),
+                        child: SvgPicture.asset(suffixIcon))
+                    : null,
+                focusedBorder: OutlineInputBorder(
+                    borderSide: isValid
+                        ? BorderSide(
+                            color: ColorsResource.TEXT_READ_COLOR, width: 1)
+                        : BorderSide(
+                            color: ColorsResource.TEXT_FEILD_STOCK_COLOR,
+                            width: 1)),
                 enabledBorder: OutlineInputBorder(
-                  borderSide:BorderSide(color: ColorsResource.TEXT_FEILD_STOCK_COLOR ),
+                  borderSide:
+                      BorderSide(color: ColorsResource.TEXT_FEILD_STOCK_COLOR),
                 ),
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: ColorsResource.TEXT_FEILD_STOCK_COLOR,
-                        width: .5
-                    )
-                ),
-
+                    borderSide: BorderSide(
+                        color: ColorsResource.TEXT_FEILD_STOCK_COLOR,
+                        width: .5)),
               ),
-              controller:controller,
+              controller: controller,
               onChanged: onChanged,
               focusNode: focusNode,
-
-            )
-        ),
+            )),
       ],
     );
   }
 }
 
-
-
 class LoginTextFormFiled extends StatelessWidget {
-
-
   String hintText;
   TextEditingController controller;
   FocusNode focusNode;
@@ -134,21 +155,27 @@ class LoginTextFormFiled extends StatelessWidget {
   bool isPadding;
   double paddingDouble;
 
-  LoginTextFormFiled(this.hintText,this.controller,this.focusNode,
-      {this.isShowRequrStar = false,this.onChanged,this.height = 54,
-        this.inputTypePassword = false, this.inputType = AppConstants.TEXT,
-        this.isValid = false,
-        this.prefixIcon ='',
-        this.suffixIcon ,
-        this.isVisibleTopHint=true,
-        this.insideHintText = '',
-        this.isBold = false,
-        this.isPadding = true,
-        this.prefixIconPadding = 10,
-        this.suffixIconPadding = 10,
-        this.fontSize = 15,
-        this.paddingDouble = 5,
-      });
+  LoginTextFormFiled(
+    this.hintText,
+    this.controller,
+    this.focusNode, {
+    this.isShowRequrStar = false,
+    this.onChanged,
+    this.height = 54,
+    this.inputTypePassword = false,
+    this.inputType = AppConstants.TEXT,
+    this.isValid = false,
+    this.prefixIcon = '',
+    this.suffixIcon,
+    this.isVisibleTopHint = true,
+    this.insideHintText = '',
+    this.isBold = false,
+    this.isPadding = true,
+    this.prefixIconPadding = 10,
+    this.suffixIconPadding = 10,
+    this.fontSize = 15,
+    this.paddingDouble = 5,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -156,56 +183,76 @@ class LoginTextFormFiled extends StatelessWidget {
         Row(
           children: [
             Visibility(
-                visible: isVisibleTopHint,
-                child:
-                Text(hintText,style: TextStyle(fontSize: Dimensions.BODY_14,color: ColorsResource.TEXT_BLACK_COLOR,fontWeight: isBold ? Dimensions.FONT_BOLD :Dimensions.FONT_MEDIUM_NORMUL),),
+              visible: isVisibleTopHint,
+              child: Text(
+                hintText,
+                style: TextStyle(
+                    fontSize: Dimensions.BODY_14,
+                    color: ColorsResource.TEXT_BLACK_COLOR,
+                    fontWeight: isBold
+                        ? Dimensions.FONT_BOLD
+                        : Dimensions.FONT_MEDIUM_NORMUL),
+              ),
             ),
-            const SizedBox(width: 5,),
+            const SizedBox(
+              width: 5,
+            ),
             Visibility(
-              visible: isShowRequrStar,
-                child:
-
-                Text('*',style: TextStyle(fontSize: Dimensions.BODY_16,color:ColorsResource.TEXT_READ_COLOR ,fontWeight: Dimensions.FONT_MEDIUM_NORMUL),)
-
-            )
+                visible: isShowRequrStar,
+                child: Text(
+                  '*',
+                  style: TextStyle(
+                      fontSize: Dimensions.BODY_16,
+                      color: ColorsResource.TEXT_READ_COLOR,
+                      fontWeight: Dimensions.FONT_MEDIUM_NORMUL),
+                ))
           ],
         ),
         SizedBox(
             height: height,
             child: TextField(
-                style: TextStyle(fontSize: fontSize),
-                obscureText: inputTypePassword,
-                keyboardType: inputType != AppConstants.TEXT ? TextInputType.phone:TextInputType.text,
-                decoration: InputDecoration(
+              style: TextStyle(fontSize: fontSize),
+              obscureText: inputTypePassword,
+              keyboardType: inputType != AppConstants.TEXT
+                  ? TextInputType.phone
+                  : TextInputType.text,
+              decoration: InputDecoration(
                 isDense: true,
-                contentPadding: isPadding ? null:  EdgeInsets.only(left: paddingDouble,top: paddingDouble,bottom: paddingDouble),
+                contentPadding: isPadding
+                    ? null
+                    : EdgeInsets.only(
+                        left: paddingDouble,
+                        top: paddingDouble,
+                        bottom: paddingDouble),
                 filled: true,
                 fillColor: Colors.white,
                 hintText: insideHintText,
-                prefixIcon: prefixIcon != ''? Container(
-                    margin: EdgeInsets.all(prefixIconPadding),
-                    child: SvgPicture.asset(prefixIcon)) : null,
+                prefixIcon: prefixIcon != ''
+                    ? Container(
+                        margin: EdgeInsets.all(prefixIconPadding),
+                        child: SvgPicture.asset(prefixIcon))
+                    : null,
                 suffixIcon: suffixIcon,
-                focusedBorder:OutlineInputBorder(
-                    borderSide: isValid ?  BorderSide(color: ColorsResource.TEXT_READ_COLOR,width: 1) :
-                    BorderSide(color: ColorsResource.TEXT_FEILD_STOCK_COLOR,width: 1)
-                  ),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: isValid
+                        ? BorderSide(
+                            color: ColorsResource.TEXT_READ_COLOR, width: 1)
+                        : BorderSide(
+                            color: ColorsResource.TEXT_FEILD_STOCK_COLOR,
+                            width: 1)),
                 enabledBorder: OutlineInputBorder(
-                  borderSide:BorderSide(color: ColorsResource.TEXT_FEILD_STOCK_COLOR ),
+                  borderSide:
+                      BorderSide(color: ColorsResource.TEXT_FEILD_STOCK_COLOR),
                 ),
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: ColorsResource.TEXT_FEILD_STOCK_COLOR,
-                        width: .5
-                    )
-                ),
-
+                    borderSide: BorderSide(
+                        color: ColorsResource.TEXT_FEILD_STOCK_COLOR,
+                        width: .5)),
               ),
-              controller:controller,
+              controller: controller,
               onChanged: onChanged,
               focusNode: focusNode,
-
-            )
-        ),
+            )),
       ],
     );
   }

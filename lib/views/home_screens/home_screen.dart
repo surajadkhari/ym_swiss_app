@@ -441,6 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   newsNoticeProvider.newsNoticeModel != null
                       ? Expanded(
+                       
                           child: ListView.builder(
                             shrinkWrap: true,
                             itemCount:
