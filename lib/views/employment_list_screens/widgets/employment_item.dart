@@ -208,7 +208,9 @@ class EmploymentItem extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text('${viewAllJobData.address}')
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width*0.4,
+                            child: Text('${viewAllJobData.address}',maxLines: 2,))
                         ],
                       ),
                       Expanded(child: Container()),

@@ -68,6 +68,71 @@ class _HomeScreenState extends State<HomeScreen> {
     return riverpod.ProviderScope(
       child: Scaffold(
         key: _scaffoldKey,
+        appBar: AppBar(
+           leading: IconButton(
+          onPressed: () => {
+                
+                                    _scaffoldKey.currentState?.openDrawer()
+                                  
+                           
+                                
+          },
+          icon: SizedBox(
+                                    width: 30,
+                                    height: 30,
+                                    child: Container(
+                                        margin: const EdgeInsets.all(6),
+                                        child: SvgPicture.asset(
+                                            AppImages.ic_menu)),
+                                  ),
+        ),
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        actions: [
+                   token.isNotEmpty
+                                    ? InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const NotificationScreen()));
+                                        },
+                                        onHover: (_) {},
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(right: 10),
+                                          child: SvgPicture.asset(
+                                              AppImages.ic_notificaton,height: 28,),
+                                        ))
+                                    : InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      LogInScreen()));
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(right: 10,top: 10),
+                                          child: const Text(
+                                            "लग - इन",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
+                                          ),
+                                        ),
+                                      )
+        ],
+        title:  
+                Text(
+                                  AppConstants.APP_NAME,
+                                  style: TextStyle(
+                                      color: ColorsResource.WHAIT,
+                                      fontSize: Dimensions.BODY_30,
+                                      fontWeight: Dimensions.FONT_BOLD),
+        )),
         backgroundColor: ColorsResource.WHAIT,
         drawer: drawerLayout(),
         body: SingleChildScrollView(
@@ -82,69 +147,69 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     child: Column(
                       children: [
-                        Container(
-                          color: ColorsResource.PRAYMARY_TEXT_COLOR,
-                          height: 90,
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                left: 20, right: 20, top: 30),
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  onHover: (_) {},
-                                  onTap: () {
-                                    _scaffoldKey.currentState?.openDrawer();
-                                  },
-                                  child: SizedBox(
-                                    width: 30,
-                                    height: 30,
-                                    child: Container(
-                                        margin: const EdgeInsets.all(6),
-                                        child: SvgPicture.asset(
-                                            AppImages.ic_menu)),
-                                  ),
-                                ),
-                                Expanded(child: Container()),
-                                Text(
-                                  AppConstants.APP_NAME,
-                                  style: TextStyle(
-                                      color: ColorsResource.WHAIT,
-                                      fontSize: Dimensions.BODY_30,
-                                      fontWeight: Dimensions.FONT_BOLD),
-                                ),
-                                Expanded(child: Container()),
-                                token.isNotEmpty
-                                    ? InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const NotificationScreen()));
-                                        },
-                                        onHover: (_) {},
-                                        child: SvgPicture.asset(
-                                            AppImages.ic_notificaton))
-                                    : InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      LogInScreen()));
-                                        },
-                                        child: const Text(
-                                          "लग - इन",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),
-                                        ),
-                                      )
-                              ],
-                            ),
-                          ),
-                        ),
+                        // Container(
+                        //   color: ColorsResource.PRAYMARY_TEXT_COLOR,
+                        //   height: 90,
+                        //   child: Container(
+                        //     margin: const EdgeInsets.only(
+                        //         left: 20, right: 20, top: 30),
+                        //     child: Row(
+                        //       children: [
+                        //         InkWell(
+                        //           onHover: (_) {},
+                        //           onTap: () {
+                        //             _scaffoldKey.currentState?.openDrawer();
+                        //           },
+                        //           child: SizedBox(
+                        //             width: 30,
+                        //             height: 30,
+                        //             child: Container(
+                        //                 margin: const EdgeInsets.all(6),
+                        //                 child: SvgPicture.asset(
+                        //                     AppImages.ic_menu)),
+                        //           ),
+                        //         ),
+                        //         Expanded(child: Container()),
+                        //         Text(
+                        //           AppConstants.APP_NAME,
+                        //           style: TextStyle(
+                        //               color: ColorsResource.WHAIT,
+                        //               fontSize: Dimensions.BODY_30,
+                        //               fontWeight: Dimensions.FONT_BOLD),
+                        //         ),
+                        //         Expanded(child: Container()),
+                        //         token.isNotEmpty
+                        //             ? InkWell(
+                        //                 onTap: () {
+                        //                   Navigator.push(
+                        //                       context,
+                        //                       MaterialPageRoute(
+                        //                           builder: (context) =>
+                        //                               const NotificationScreen()));
+                        //                 },
+                        //                 onHover: (_) {},
+                        //                 child: SvgPicture.asset(
+                        //                     AppImages.ic_notificaton))
+                        //             : InkWell(
+                        //                 onTap: () {
+                        //                   Navigator.push(
+                        //                       context,
+                        //                       MaterialPageRoute(
+                        //                           builder: (context) =>
+                        //                               LogInScreen()));
+                        //                 },
+                        //                 child: const Text(
+                        //                   "लग - इन",
+                        //                   style: TextStyle(
+                        //                       color: Colors.white,
+                        //                       fontWeight: FontWeight.bold,
+                        //                       fontSize: 18),
+                        //                 ),
+                        //               )
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         //topMenu
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
