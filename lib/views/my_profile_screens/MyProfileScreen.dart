@@ -37,6 +37,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+              appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => {
+            // Navigator.of(context).pushAndRemoveUntil(
+            //     MaterialPageRoute(builder: ((context) => HomeScreen())),
+            //     (route) => false)
+            Navigator.pop(context)
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+          AppConstants.Profile,
+        ),
+      ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Consumer<MyProfileProvider>(
         builder: (context,myProfileProvider,child) =>
@@ -46,43 +67,43 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
-                Container(
-                  color: ColorsResource.PRAYMERY_COLOR,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 40,
-                    margin: EdgeInsets.only(top: 40, left: 10, right: 10),
-                    child: Column(
-                      children: [
-                        //Toolbar
-                        Row(
-                          children: [
-                            InkWell(
-                                onHover: (_) {},
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: SvgPicture.asset(AppImages.ic_back_blue)),
-                            SizedBox(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width - 65,
-                              child: Text(
-                                AppConstants.Profile,
-                                style: TextStyle(
-                                    fontSize: Dimensions.BODY_20,
-                                    fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                    color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // Container(
+                //   color: ColorsResource.PRAYMERY_COLOR,
+                //   child: Container(
+                //     width: MediaQuery.of(context).size.width,
+                //     height: 40,
+                //     margin: EdgeInsets.only(top: 40, left: 10, right: 10),
+                //     child: Column(
+                //       children: [
+                //         //Toolbar
+                //         // Row(
+                //         //   children: [
+                //         //     InkWell(
+                //         //         onHover: (_) {},
+                //         //         onTap: () {
+                //         //           Navigator.of(context).pop();
+                //         //         },
+                //         //         child: SvgPicture.asset(AppImages.ic_back_blue)),
+                //         //     SizedBox(
+                //         //       width: MediaQuery
+                //         //           .of(context)
+                //         //           .size
+                //         //           .width - 65,
+                //         //       child: Text(
+                //         //         AppConstants.Profile,
+                //         //         style: TextStyle(
+                //         //             fontSize: Dimensions.BODY_20,
+                //         //             fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+                //         //             color: ColorsResource.PRAYMARY_TEXT_COLOR),
+                //         //         textAlign: TextAlign.center,
+                //         //       ),
+                //         //     )
+                //         //   ],
+                //         // ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 Container(
                   margin: EdgeInsets.only(left: 10,right: 10,bottom: 20),
                   child: Column(

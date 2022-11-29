@@ -69,56 +69,77 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => {
+            // Navigator.of(context).pushAndRemoveUntil(
+            //     MaterialPageRoute(builder: ((context) => HomeScreen())),
+            //     (route) => false)
+            Navigator.pop(context)
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+          AppConstants.Edit_profile,
+        ),
+      ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Consumer<MyProfileProvider>(
         builder: (context,myProfileProvider,child) =>
         Stack(
          children: [
-          Positioned(
-          top: 20,
-          left: 0,
-          right: 0,
-          child: Container(
-            color: ColorsResource.PRAYMERY_COLOR,
-            child: Container(
-              color: ColorsResource.PRAYMERY_COLOR,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.050,
-              margin: EdgeInsets.only(top: 40, left: 10, right: 10),
-              child: Column(
-                children: [
-                  //Toolbar
-                  Row(
-                    children: [
-                      InkWell(
-                          onHover: (_) {},
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: SvgPicture.asset(AppImages.ic_back_blue)),
-                      SizedBox(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width - 65,
-                        child: Text(
-                          AppConstants.Edit_profile,
-                          style: TextStyle(
-                              fontSize: Dimensions.BODY_20,
-                              fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                              color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ),
+          // Positioned(
+          // top: 20,
+          // left: 0,
+          // right: 0,
+          // child: Container(
+          //   color: ColorsResource.PRAYMERY_COLOR,
+          //   child: Container(
+          //     color: ColorsResource.PRAYMERY_COLOR,
+          //     width: MediaQuery.of(context).size.width,
+          //     height: MediaQuery.of(context).size.height * 0.050,
+          //     margin: EdgeInsets.only(top: 40, left: 10, right: 10),
+          //     child: Column(
+          //       children: [
+          //         //Toolbar
+          //         Row(
+          //           children: [
+          //             InkWell(
+          //                 onHover: (_) {},
+          //                 onTap: () {
+          //                   Navigator.of(context).pop();
+          //                 },
+          //                 child: SvgPicture.asset(AppImages.ic_back_blue)),
+          //             SizedBox(
+          //               width: MediaQuery
+          //                   .of(context)
+          //                   .size
+          //                   .width - 65,
+          //               child: Text(
+          //                 AppConstants.Edit_profile,
+          //                 style: TextStyle(
+          //                     fontSize: Dimensions.BODY_20,
+          //                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+          //                     color: ColorsResource.PRAYMARY_TEXT_COLOR),
+          //                 textAlign: TextAlign.center,
+          //               ),
+          //             )
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // ),
            Positioned(
-             top: 100,
+             top: 0,
              left: 0,
              right: 0,
              bottom: 10,
@@ -4704,9 +4725,9 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
                   int id = myProfileProvider.pleaseTheDistrictWords.indexOf(selectedValue!);
                   myProfileProvider.setDistricts(selectedValue, myProfileProvider.pleaseTheDistrictWordsIdList[id]);
                   locationProvider.setDistricName(selectedValue, id);
-
+  locationProvider.getMunicipalities(id);
                   locationProvider.setMunicipalitiesName(AppConstants.Please_be_a_municipality,0);
-                  locationProvider.getMunicipalities(id);
+               
 
 
                 });
