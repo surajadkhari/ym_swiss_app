@@ -46,44 +46,65 @@ class _ChnagePasswordState extends State<ChnagePassword> {
         }
       },
       child: Scaffold(
+                    appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => {
+            // Navigator.of(context).pushAndRemoveUntil(
+            //     MaterialPageRoute(builder: ((context) => HomeScreen())),
+            //     (route) => false)
+            Navigator.pop(context)
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+        AppConstants.Change_the_password
+        ),
+      ),
         backgroundColor: Theme.of(context).backgroundColor,
         body: Consumer<AuthProvider>(
           builder: (context, authProvider, child) => Column(
             children: [
-              Container(
-                height: 100,
-                color: ColorsResource.PRAYMERY_COLOR,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
-                  child: Column(
-                    children: [
-                      //Toolbar
-                      Row(
-                        children: [
-                          InkWell(
-                              onHover: (_) {},
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: SvgPicture.asset(AppImages.ic_back_blue)),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width - 65,
-                            child: Text(
-                              AppConstants.Change_the_password,
-                              style: TextStyle(
-                                  fontSize: Dimensions.BODY_20,
-                                  fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                  color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                              textAlign: TextAlign.center,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Container(
+              //   height: 100,
+              //   color: ColorsResource.PRAYMERY_COLOR,
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
+              //     child: Column(
+              //       children: [
+              //         //Toolbar
+              //         Row(
+              //           children: [
+              //             InkWell(
+              //                 onHover: (_) {},
+              //                 onTap: () {
+              //                   Navigator.of(context).pop();
+              //                 },
+              //                 child: SvgPicture.asset(AppImages.ic_back_blue)),
+              //             SizedBox(
+              //               width: MediaQuery.of(context).size.width - 65,
+              //               child: Text(
+              //                 AppConstants.Change_the_password,
+              //                 style: TextStyle(
+              //                     fontSize: Dimensions.BODY_20,
+              //                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+              //                     color: ColorsResource.PRAYMARY_TEXT_COLOR),
+              //                 textAlign: TextAlign.center,
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20, top: 60),
                 child: Column(
