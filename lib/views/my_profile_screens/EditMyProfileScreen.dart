@@ -95,49 +95,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
         builder: (context,myProfileProvider,child) =>
         Stack(
          children: [
-          // Positioned(
-          // top: 20,
-          // left: 0,
-          // right: 0,
-          // child: Container(
-          //   color: ColorsResource.PRAYMERY_COLOR,
-          //   child: Container(
-          //     color: ColorsResource.PRAYMERY_COLOR,
-          //     width: MediaQuery.of(context).size.width,
-          //     height: MediaQuery.of(context).size.height * 0.050,
-          //     margin: EdgeInsets.only(top: 40, left: 10, right: 10),
-          //     child: Column(
-          //       children: [
-          //         //Toolbar
-          //         Row(
-          //           children: [
-          //             InkWell(
-          //                 onHover: (_) {},
-          //                 onTap: () {
-          //                   Navigator.of(context).pop();
-          //                 },
-          //                 child: SvgPicture.asset(AppImages.ic_back_blue)),
-          //             SizedBox(
-          //               width: MediaQuery
-          //                   .of(context)
-          //                   .size
-          //                   .width - 65,
-          //               child: Text(
-          //                 AppConstants.Edit_profile,
-          //                 style: TextStyle(
-          //                     fontSize: Dimensions.BODY_20,
-          //                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-          //                     color: ColorsResource.PRAYMARY_TEXT_COLOR),
-          //                 textAlign: TextAlign.center,
-          //               ),
-          //             )
-          //           ],
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // ),
+    
            Positioned(
              top: 0,
              left: 0,
@@ -229,17 +187,17 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
                                ),
                              ),
                              Positioned(
-                                 right: 0,
+                                 right: 10,
                                  top: 0,
-                                 child: InkWell(
+                                 child: GestureDetector(
                                    onTap: (){
                                      Navigator.push(context, MaterialPageRoute(builder: (context) => EditFullProfile(myProfileProvider.myProfileModel!) ));
                                    },
-                                   onHover:(_){},
+                                 
                                    child: Container(
                                      margin: EdgeInsets.only(right: 10,top: 10),
-                                     width: 15,
-                                     height: 15,
+                                     width: 26,
+                                     height: 26,
                                      child: SvgPicture.asset(AppImages.ic_edite_full,color: ColorsResource.PRAYMARY_TEXT_COLOR,),
                                    ),
                                  )
@@ -436,7 +394,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
 
 
                            ///Traning
-                           SizedBox(height: 20,),
+                          //  SizedBox(height: 20,),
                            Container(
                              width: MediaQuery.of(context).size.width,
                              color: ColorsResource.PRAYMARY_TEXT_COLOR,
@@ -464,7 +422,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
 
                            Container(
                              width: MediaQuery.of(context).size.width,
-                             height: (myProfileProvider.trainings?.length)! * 90,
+                             height: (myProfileProvider.trainings?.length)! * 110,
                              child: ListView.builder(
                                physics: NeverScrollableScrollPhysics(),
                                shrinkWrap: true,
@@ -716,7 +674,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
 
                            Container(
                              width: MediaQuery.of(context).size.width,
-                             height: (myProfileProvider.socialAccounts?.length)! * 30,
+                             height: (myProfileProvider.socialAccounts?.length)! * 35,
                              child: ListView.builder(
                                physics: NeverScrollableScrollPhysics(),
                                shrinkWrap: true,
@@ -2494,7 +2452,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
 
   ///Add Training
   addTrainingDialog(String title,bool isEdit){
-    double height = 510;
+    double height = 530;
     const maxLines = 6;
     TextEditingController trainingTitleTextEditingController = TextEditingController();
     TextEditingController periodTextEditingController = TextEditingController();
@@ -3186,7 +3144,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
 
 /// Add Skill
   addSkill(String title,bool isEdit){
-    double height = 370;
+    double height = 380;
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -4803,7 +4761,7 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
     String textTreeName = '';
     TextEditingController textTreeValue = TextEditingController();
 
-    double height = 250;
+    double height = 255;
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -5350,6 +5308,8 @@ class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
   showToast(String title){
     final snackBar = SnackBar(
       content: Text(title),
+      backgroundColor: Colors.red,
+      behavior:SnackBarBehavior.floating
     );
     return ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
