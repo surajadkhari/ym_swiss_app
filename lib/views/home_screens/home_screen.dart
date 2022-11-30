@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 builder: (context) => LogInScreen()));
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 10, top: 10),
+                        padding: const EdgeInsets.only(right: 12, top: 14),
                         child: const Text(
                           "लग - इन",
                           style: TextStyle(
@@ -522,7 +522,7 @@ Text(""),
                                                         ?.file !=
                                                     null
                                                 ? CachedNetworkImage(
-                                                  imageUrl:  '${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}', placeholder: (context, url) => new CircularProgressIndicator(), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder))
+                                                  imageUrl:  '${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}', placeholder: (context, url) => Image.asset(AppImages.ic_demo_person), errorWidget: (context, url, error) => Image.asset(AppImages.ic_demo_person))
                                                 : Image.asset(
                                                     AppImages.ic_demo_person)),
                                       ),

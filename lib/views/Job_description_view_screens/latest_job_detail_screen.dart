@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -175,7 +176,7 @@ class _LatestJobDetailScreenState extends State<LatestJobDetailScreen> {
                                   width: 80,
                                   height: 80,
                                   padding: EdgeInsets.all(5),
-                                  child: jobProvider.viewSingJobsModel?.serviceProvider?.logo != null ? Image.network('${Apis.URL}${jobProvider.viewSingJobsModel?.serviceProvider?.logo}',height: 60,width: 60,fit: BoxFit.fill,):Container(),
+                                  child: jobProvider.viewSingJobsModel?.serviceProvider?.logo != null ? CachedNetworkImage(imageUrl:'${Apis.URL}${jobProvider.viewSingJobsModel?.serviceProvider?.logo}',height: 60,width: 60,fit: BoxFit.fill,placeholder: (context, url) =>  Image.asset(AppImages.placeHolder), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder)):Container(),
                                 )
                               ],
                             ),

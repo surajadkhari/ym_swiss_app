@@ -114,7 +114,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           Container(
                             height: 100,
                             width: 100,
-                            child: myProfileProvider.myProfileModel?.data?.file != null ?  CachedNetworkImage(imageUrl:'${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}',placeholder: (context, url) => new CircularProgressIndicator(), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder)): Image.asset(AppImages.ic_demo_person),
+                            child: myProfileProvider.myProfileModel?.data?.file != null ?  CachedNetworkImage(imageUrl:'${Apis.IMAGE_URL}${myProfileProvider.myProfileModel?.data?.file}',placeholder: (context, url) => new CircularProgressIndicator(), errorWidget: (context, url, error) => Image.asset(AppImages.ic_demo_person)): Image.asset(AppImages.ic_demo_person),
                           ),
 
                           SizedBox(height: 5,),

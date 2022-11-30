@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lmiis/views/employment_support_service_Screens/widgets/employment_service_item.dart';
@@ -41,6 +42,18 @@ class _TrainingServiceDetailsScreenState extends State<TrainingServiceDetailsScr
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+      AppConstants.Training_Service_Provider_Details
+        ),
+      ),
       body: SingleChildScrollView(
         child: Consumer<ESSPProvider>(
           builder: (context,eSSPProvider,child) =>
@@ -49,52 +62,52 @@ class _TrainingServiceDetailsScreenState extends State<TrainingServiceDetailsScr
             height: 850,
             child: Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: ColorsResource.PRAYMERY_COLOR,
-                    child: Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.050,
-                      margin: EdgeInsets.only(top: 50, left: 10, right: 10),
-                      child: Column(
-                        children: [
-                          //Toolbar
-                          Row(
-                            children: [
-                              InkWell(
-                                  onHover: (_) {},
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: SvgPicture.asset(AppImages.ic_back_blue)),
-                              SizedBox(
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width - 65,
-                                child: Text(
-                                  AppConstants.Training_Service_Provider_Details,
-                                  style: TextStyle(
-                                      fontSize: Dimensions.BODY_20,
-                                      fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                      color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                                  textAlign: TextAlign.center,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Expanded(
+                //   flex: 1,
+                //   child: Container(
+                //     color: ColorsResource.PRAYMERY_COLOR,
+                //     child: Container(
+                //       width: MediaQuery
+                //           .of(context)
+                //           .size
+                //           .width,
+                //       height: MediaQuery
+                //           .of(context)
+                //           .size
+                //           .height * 0.050,
+                //       margin: EdgeInsets.only(top: 50, left: 10, right: 10),
+                //       child: Column(
+                //         children: [
+                //           //Toolbar
+                //           Row(
+                //             children: [
+                //               InkWell(
+                //                   onHover: (_) {},
+                //                   onTap: () {
+                //                     Navigator.of(context).pop();
+                //                   },
+                //                   child: SvgPicture.asset(AppImages.ic_back_blue)),
+                //               SizedBox(
+                //                 width: MediaQuery
+                //                     .of(context)
+                //                     .size
+                //                     .width - 65,
+                //                 child: Text(
+                //                   AppConstants.Training_Service_Provider_Details,
+                //                   style: TextStyle(
+                //                       fontSize: Dimensions.BODY_20,
+                //                       fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+                //                       color: ColorsResource.PRAYMARY_TEXT_COLOR),
+                //                   textAlign: TextAlign.center,
+                //                 ),
+                //               )
+                //             ],
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Expanded(
                     flex: 9,
                     child: Container(
@@ -117,7 +130,7 @@ class _TrainingServiceDetailsScreenState extends State<TrainingServiceDetailsScr
                                       width: 80,
                                       height: 80,
                                       padding: EdgeInsets.all(5),
-                                      child: eSSPProvider.tspDetailsModel!.data!.logo != null ? Image.network('${Apis.URL}${eSSPProvider.tspDetailsModel!.data!.logo}',height: 60,width: 60,fit: BoxFit.fill,):Container(),
+                                      child: eSSPProvider.tspDetailsModel!.data!.logo != null ? CachedNetworkImage(imageUrl: '${Apis.URL}${eSSPProvider.tspDetailsModel!.data!.logo}',height: 60,width: 60,fit: BoxFit.fill,placeholder: (context, url) =>  Image.asset(AppImages.placeHolder), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder)):Container(),
                                       //child: Image.network(eSSPProvider.tspDetailsModel!.data!.logo == null ? ,height: 60,width: 60,),
                                     )
                                   ],

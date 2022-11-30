@@ -162,7 +162,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         CustomButton(AppConstants.lag_in, () {
                           // showCustomDialog(context,'Loading');
                           String email = emailTextEditingController.text;
-                          String password = passwordTextEditingController.text;
+                          String password = passwordTextEditingController.text.trim();
 
                           // Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
 

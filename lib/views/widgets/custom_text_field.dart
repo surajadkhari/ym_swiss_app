@@ -154,7 +154,7 @@ class LoginTextFormFiled extends StatelessWidget {
   bool isBold;
   bool isPadding;
   double paddingDouble;
-
+  bool ismaxLenght;
   LoginTextFormFiled(
     this.hintText,
     this.controller,
@@ -175,6 +175,7 @@ class LoginTextFormFiled extends StatelessWidget {
     this.suffixIconPadding = 10,
     this.fontSize = 15,
     this.paddingDouble = 5,
+    this.ismaxLenght=false
   });
   @override
   Widget build(BuildContext context) {
@@ -211,6 +212,7 @@ class LoginTextFormFiled extends StatelessWidget {
         SizedBox(
             height: height,
             child: TextField(
+              maxLength: ismaxLenght?10:null,
               style: TextStyle(fontSize: fontSize),
               obscureText: inputTypePassword,
               keyboardType: inputType != AppConstants.TEXT

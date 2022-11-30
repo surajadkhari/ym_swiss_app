@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
@@ -127,14 +128,15 @@ class EmploymentItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 viewAllJobData.serviceProvider!.logo != null
-                    ? Container(
+                    ? CachedNetworkImage(
+                      imageUrl: '${Apis.URL}${viewAllJobData.serviceProvider!.logo}' ,
                         width: 80,
-                        height: 80,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    '${Apis.URL}${viewAllJobData.serviceProvider!.logo}')))
+                        height: 80,placeholder: (context, url) =>  Image.asset(AppImages.placeHolder), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder)
+                        // padding: const EdgeInsets.all(5),
+                        // decoration: BoxDecoration(
+                        //     image: DecorationImage(
+                        //         image: CachedNetworkImageProvider(
+                        //             '${Apis.URL}${viewAllJobData.serviceProvider!.logo}')))
                         // viewAllJobData.serviceProvider!.logo != null
                         //     ? Image.network(
                         //         '${Apis.URL}${viewAllJobData.serviceProvider!.logo}',
@@ -144,7 +146,7 @@ class EmploymentItem extends StatelessWidget {
                         //       )
 
                         )
-                    : const Text("sd")
+                    :   Image.asset(AppImages.placeHolder)
                 // Container(
                 //     width: 80,
                 //     height: 80,

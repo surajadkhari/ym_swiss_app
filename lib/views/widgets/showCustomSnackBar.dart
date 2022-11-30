@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/dimensions.dart';
 import '../../utils/responsive_helper.dart';
@@ -8,7 +9,7 @@ void showCustomSnackBar(String message, BuildContext context,
   final _width = MediaQuery.of(context).size.width;
   ResponsiveHelper.isDesktop(context)
       ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(message),
+          content: Text(message,style: GoogleFonts.poppins()),
           margin: ResponsiveHelper.isDesktop(context)
               ? EdgeInsets.only(
                   right: _width * 0.75,
@@ -24,7 +25,7 @@ void showCustomSnackBar(String message, BuildContext context,
           backgroundColor: isError ? Colors.red : Colors.green,
           behavior: SnackBarBehavior.floating,
           margin: const EdgeInsets.all(10),
-          content: Text(message),
+          content: Text(message,style: GoogleFonts.poppins(),),
           duration: Duration(seconds: 2),
         ));
 }

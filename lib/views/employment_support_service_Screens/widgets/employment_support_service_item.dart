@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lmiis/utils/AppConstants.dart';
@@ -37,7 +38,7 @@ class EmploymentSupportServiceItem extends StatelessWidget {
                   width: 80,
                   height: 80,
                   padding: EdgeInsets.all(5),
-                  child: esspModelData.logo != null ? Image.network('${Apis.URL}${esspModelData.logo}',height: 60,width: 60,fit: BoxFit.fill,):Container(),
+                  child: esspModelData.logo != null ? CachedNetworkImage(imageUrl:'${Apis.URL}${esspModelData.logo}',height: 60,width: 60,fit: BoxFit.fill,placeholder: (context, url) =>  Image.asset(AppImages.placeHolder), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder)):Container(),
                 )
               ],
             ),

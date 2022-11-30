@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lmiis/views/employment_support_service_Screens/widgets/employment_service_item.dart';
@@ -137,7 +138,7 @@ class _EmploymentSupportServiceDetailsScreenState extends State<EmploymentSuppor
                                       width: 80,
                                       height: 80,
                                       padding: EdgeInsets.all(5),
-                                      child: eSSPProvider.esspServiceDetailsModel!.data!.logo != null ? Image.network('${Apis.URL}${eSSPProvider.esspServiceDetailsModel!.data!.logo}',height: 60,width: 60,fit: BoxFit.fill,):Container(),
+                                      child: eSSPProvider.esspServiceDetailsModel!.data!.logo != null ? CachedNetworkImage(imageUrl:'${Apis.URL}${eSSPProvider.esspServiceDetailsModel!.data!.logo}',height: 60,width: 60,fit: BoxFit.fill,placeholder: (context, url) =>  Image.asset(AppImages.placeHolder), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder)):Container(),
                                     )
                                   ],
                                 ),

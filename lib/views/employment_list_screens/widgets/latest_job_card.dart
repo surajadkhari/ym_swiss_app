@@ -135,22 +135,28 @@ class LatestJobCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-          latestJobModel.serviceProvider.logo.isNotEmpty?   Container(
-                        width: 80,
-                        height: 80,
-                        padding:  EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            image: 
-                            DecorationImage(
-                                image:CachedNetworkImageProvider('${Apis.URL}${latestJobModel.serviceProvider.logo}',))),
-                                
-                                //  NetworkImage(
-                                //     '${Apis.URL}${latestJobModel.serviceProvider.logo}')
-                                //     )
-                                    
-                                //     )
-          
-                        ):
+          latestJobModel.serviceProvider.logo.isNotEmpty?  
+           CachedNetworkImage(
+              width: 80,
+                          height: 80,
+            imageUrl:'${Apis.URL}${latestJobModel.serviceProvider.logo}' ,placeholder: (context, url) =>  Image.asset(AppImages.placeHolder), errorWidget: (context, url, error) => Image.asset(AppImages.placeHolder)
+            //  child: Container(
+            //               width: 80,
+            //               height: 80,
+            //               padding:  EdgeInsets.all(5),
+            //               decoration: BoxDecoration(
+            //                   image: 
+            //                   DecorationImage(
+            //                       image:CachedNetworkImageProvider('${Apis.URL}${latestJobModel.serviceProvider.logo}',))),
+                                  
+            //                       //  NetworkImage(
+            //                       //     '${Apis.URL}${latestJobModel.serviceProvider.logo}')
+            //                       //     )
+                                      
+            //                       //     )
+                     
+            //               ),
+           ):
                          Container(
                         width: 80,
                         height: 80,

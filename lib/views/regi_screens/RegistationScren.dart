@@ -250,12 +250,14 @@ class _RegistationScreenState extends State<RegistationScreen> {
                           const SizedBox(
                             height: 5,
                           ),
-                          CustomTextFieldWithTitle(
+                          LoginTextFormFiled(
+                          height:80,
                             AppConstants.Mobile_number,
                             mobileNumberTextEditingController,
                             mobileNumberFocusNode,
                             inputType: AppConstants.PHONE,
                             isShowRequrStar: true,
+                            ismaxLenght:true,
                           ),
                         ],
                       ),
@@ -534,9 +536,9 @@ class _RegistationScreenState extends State<RegistationScreen> {
                             width: 10,
                           ),
                           Container(
-                            width: 10,
-                            height: 10,
-                            margin: const EdgeInsets.only(right: 10),
+                            width: 20,
+                            height: 20,
+                            margin: const EdgeInsets.only(right: 16),
                             child: Checkbox(
                               checkColor: ColorsResource.WHAIT,
                               activeColor: ColorsResource.PRAYMARY_TEXT_COLOR,
@@ -646,27 +648,38 @@ class _RegistationScreenState extends State<RegistationScreen> {
 
                       if (name == '') {
                         return showCustomSnackBar(
-                            'कृपया आवश्यक फिल्ड भर्नुहोस्', context);
+                            'कृपया नाम प्रविष्ट गर्नुहोस्', context);
                       }
                       if (email == '') {
                         return showCustomSnackBar(
-                            'कृपया आवश्यक फिल्ड भर्नुहोस्', context);
+                            "कृपया इमेल प्रविष्ट गर्नुहोस्", context);
                       }
                       if (password == '') {
                         return showCustomSnackBar(
-                            'कृपया आवश्यक फिल्ड भर्नुहोस्', context);
+                            'कृपया पासवर्ड प्रविष्ट गर्नुहोस्', context);
                       }
                       if (rePassword == '') {
                         return showCustomSnackBar(
-                            'कृपया आवश्यक फिल्ड भर्नुहोस्', context);
+                            'कृपया पासवर्ड पुन: प्रविष्ट गर्नुहोस्', context);
                       }
-                      if (mobileNumber == '') {
-                        return showCustomSnackBar(
-                            'कृपया आवश्यक फिल्ड भर्नुहोस्', context);
-                      }
+                      // if (mobileNumber == '') {
+                      //   return showCustomSnackBar(
+                      //       'कृपया आवश्यक फिल्ड भर्नुहोस्', context);
+                      // }
+                           if (mobileNumber.isEmpty) {
+                          showCustomSnackBar(
+                           'कृपया मोबाइल नम्बर प्रविष्ट गर्नुहोस्', context);
+                          return;
+                        }
+                        if (mobileNumber.length <= 9) {
+                          showCustomSnackBar(
+                           "कृपया दस अंक प्रविष्ट गर्नुहोस्",
+                              context);
+                          return;
+                        }
                       if (gender == 0) {
                         return showCustomSnackBar(
-                            "कृपया आवश्यक फिल्ड भर्नुहोस्", context);
+                            "कृपया लिङ्ग छान्नुहोस्", context);
                       }
                       if (perPradeshId == 0) {
                         return showCustomSnackBar(

@@ -638,7 +638,7 @@ class _EmploymentListScreenState extends State<EmploymentListScreen> {
               Expanded(
                 flex: 1,
                 child: Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 5),
+                  margin: const EdgeInsets.only(top: 0, bottom: 5),
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     width: MediaQuery.of(context).size.width,

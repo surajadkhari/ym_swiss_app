@@ -185,7 +185,7 @@
 //           _myActivitiesString?.clear();
 //           _myActivitiesString?.addAll(myProfileData.jobseekerPreferenceCategory!
 //               .map((e) => e.categoryName));
-       
+
 //         });
 //       }
 
@@ -2171,7 +2171,7 @@
 //                                         locationProvider
 //                                             .viewAllJobCategoryDataListId!
 //                                             .indexOf(int.parse(element))];
-                 
+
 //                                     _myActivitiesString?.addAll(_myActivities!.map((e) => name));
 //                                     print(name);
 //                                   });
@@ -2233,11 +2233,13 @@
 //   }
 // }
 import 'dart:developer';
- 
+
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lmiis/models/ResponsModels/ViewAllJobCategoryModel.dart';
 import 'package:lmiis/provider/MyProfileProvider.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
@@ -2253,15 +2255,16 @@ import '../../utils/dimensions.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custtom_button.dart';
 import '../widgets/showCustomSnackBar.dart';
- 
+import 'EditMyProfileScreen.dart';
+
 class EditFullProfile extends StatefulWidget {
   MyProfileModel myProfileModel;
   EditFullProfile(this.myProfileModel);
- 
+
   @override
   State<EditFullProfile> createState() => _EditFullProfileState();
 }
- 
+
 class _EditFullProfileState extends State<EditFullProfile> {
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController mobileNumberTextEditingController =
@@ -2277,17 +2280,17 @@ class _EditFullProfileState extends State<EditFullProfile> {
   FocusNode dateOfBirthFocusNode = FocusNode();
   FocusNode expectedSummonsFocusNode = FocusNode();
   FocusNode otherJobFocusNode = FocusNode();
- 
+
   bool isVisibleTopHint = true;
- 
+
   var jobCategoryValueWord = AppConstants.Please_stay;
   String jobCategoryHintValueWord = AppConstants.Please_stay;
   int jobCategoryValueWordId = 0;
- 
+
   var castValueWord = AppConstants.SELECT_CAST;
   String castHintValueword = AppConstants.SELECT_CAST;
   int castValueWordId = 0;
- 
+
   var minorGroupValueWord = AppConstants.SELECT_YES_NO;
   String minorGroupHintValueword = AppConstants.SELECT_YES_NO;
   List<String> minorGroupklassenword = [
@@ -2296,7 +2299,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
     AppConstants.SELECT_NO,
   ];
   int minorGroupValueWordId = 0;
- 
+
   var migrantWorkersValueWord = AppConstants.SELECT_YES_NO;
   String migrantWorkersHintValueword = AppConstants.SELECT_YES_NO;
   List<String> migrantWorkersklassenword = [
@@ -2305,7 +2308,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
     AppConstants.SELECT_NO,
   ];
   int migrantWorkersValueWordId = 0;
- 
+
   var disabledValueWord = AppConstants.SELECT_YES_NO;
   String disabledHintValueword = AppConstants.SELECT_YES_NO;
   List<String> disabledklassenword = [
@@ -2314,70 +2317,70 @@ class _EditFullProfileState extends State<EditFullProfile> {
     AppConstants.SELECT_NO,
   ];
   int disabledValueWordId = 0;
- 
+
   //Permanent
   String? pleasePradashValueWord = AppConstants.please_state_channuhos;
   String? pleasePradashHintValueWord = AppConstants.please_state_channuhos;
   int? pradashWordsId = 0;
- 
+
   String? pleaseTheDistrictValueWord = AppConstants.Please_enter_the_district;
   String? pleaseTheDistrictHintValueWord =
       AppConstants.Please_enter_the_district;
   int? pleaseTheDistrictWordsId = 0;
- 
+
   var pleaseMunicipalityValueWord = AppConstants.Please_be_a_municipality;
   String? pleaseMunicipalityHintValueWord =
       AppConstants.Please_be_a_municipality;
   int? pleaseMunicipalityWordsId = 0;
- 
+
   var pleaseSeletcWardValueWord = AppConstants.Please_be_a_ward;
   String? pleaseSeletcWardHintValueWord = AppConstants.Please_be_a_ward;
   int? pleaseSeletcWardValueWordsId = 0;
- 
+
   //Temporal
   bool valuefirst = false;
- 
+
   String? tPleasePradashValueWord = AppConstants.please_state_channuhos;
   String? tPleasePradashHintValueWord = AppConstants.please_state_channuhos;
   int? tPradashWordsId = 0;
- 
+
   String? tPleaseTheDistrictValueWord = AppConstants.Please_enter_the_district;
   String? tPleaseTheDistrictHintValueWord =
       AppConstants.Please_enter_the_district;
   int? tPleaseTheDistrictWordsId = 0;
- 
+
   String? tPleaseMunicipalityValueWord = AppConstants.Please_be_a_municipality;
   String? tPleaseMunicipalityHintValueWord =
       AppConstants.Please_be_a_municipality;
   int? tPleaseMunicipalityWordsId = 0;
- 
+
   String? tPleaseSeletcWardValueWord = AppConstants.Please_be_a_ward;
   String? tpleaseSeletcWardHintValueWord = AppConstants.Please_be_a_ward;
   int? tPleaseSeletcWardValueWordsId = 0;
- 
+
   bool isLoading = true;
   String imageName = '';
   String imageName2 = 'No file Choose ';
   String? imagePath;
   String dobDateTime = 'YYY/MM/DD';
- 
+
   @override
   void initState() {
     for (var element
         in widget.myProfileModel.data!.jobseekerPreferenceCategory!) {
       _myActivities?.add(element.categoryId);
- 
+
       _myActivitiesString?.add(element.categoryName);
     }
- 
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       var myProfile = Provider.of<MyProfileProvider>(context, listen: false);
       var locationProvider =
           Provider.of<LocationProvider>(context, listen: false);
- 
+
       MyProfileModel? myProfileModel = myProfile.myProfileModel!;
       MyProfileData? myProfileData = myProfile.myProfileModel!.data;
- 
+
       nameTextEditingController.text = myProfileModel.data!.name!;
       mobileNumberTextEditingController.text = myProfileModel.data!.mobile!;
       if (myProfileModel.data?.citizenshipNo != null) {
@@ -2394,12 +2397,12 @@ class _EditFullProfileState extends State<EditFullProfile> {
       if (myProfileModel.data?.otherSkills != null) {
         otherjobTextEditingController.text = myProfileModel.data!.otherSkills!;
       }
- 
+
       if (myProfileData?.file != null) {
         String? fileName = myProfileData?.file!.split('/').last;
         imageName2 = fileName!;
       }
- 
+
       if (myProfileModel.data!.gender! == 'पुरुष') {
         locationProvider.setGender(myProfileModel.data!.gender!, 1);
       } else if (myProfileModel.data!.gender! == 'महिला') {
@@ -2407,7 +2410,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       } else if (myProfileModel.data!.gender! == 'अन्य') {
         locationProvider.setGender(myProfileModel.data!.gender!, 3);
       }
- 
+
       if (myProfileData?.jobseekerPreferenceCategory != null) {
         if (myProfileData!.jobseekerPreferenceCategory!.length > 0) {
           String? categoryName = myProfileData
@@ -2424,7 +2427,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
           print('fsfsdf  $id');
         }
       }
- 
+
       if (myProfileModel.data!.differentlyAble != null) {
         if (myProfileModel.data!.differentlyAble == 1) {
           disabledValueWord = AppConstants.SELECT_YES;
@@ -2436,7 +2439,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
           disabledValueWordId = 0;
         }
       }
- 
+
       locationProvider.getCast().then((value) {
         if (myProfileModel.data!.ethnicityType != null) {
           int? id = int.parse(myProfileModel.data!.ethnicityType!);
@@ -2458,7 +2461,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
           migrantWorkersValueWordId = 0;
         }
       }
- 
+
       if (myProfileModel.data!.minorityGroup != null) {
         if (myProfileModel.data!.minorityGroup == 1) {
           minorGroupValueWord = AppConstants.SELECT_YES;
@@ -2470,7 +2473,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
           minorGroupValueWordId = 0;
         }
       }
- 
+
       locationProvider.getPradesh().then((value) {
         pleasePradashValueWord = myProfileData?.perPradeshName!;
         pleasePradashHintValueWord = myProfileData?.perPradeshName!;
@@ -2479,20 +2482,20 @@ class _EditFullProfileState extends State<EditFullProfile> {
           pleaseTheDistrictValueWord = myProfileData.perDistrictName!;
           pleaseTheDistrictHintValueWord = myProfileData.perDistrictName!;
           pleaseTheDistrictWordsId = myProfileData.perDistrictId!;
- 
+
           locationProvider
               .getMunicipalities(pleaseTheDistrictWordsId!)
               .then((value) {
             pleaseMunicipalityValueWord = myProfileData.perMuniName!;
             pleaseMunicipalityHintValueWord = myProfileData.perMuniName!;
             pleaseMunicipalityWordsId = myProfileData.perMuniId!;
- 
+
             pleaseSeletcWardValueWord = myProfileData.perWard!;
             pleaseSeletcWardHintValueWord = myProfileData.perWard!;
             pleaseSeletcWardValueWordsId = int.parse(myProfileData.ward!);
           });
         });
- 
+
         locationProvider.tGetPradesh().then((value) {
           tPleasePradashValueWord = myProfileData.tempPradeshName!;
           tPleasePradashHintValueWord = myProfileData.tempPradeshName!;
@@ -2507,7 +2510,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
               tPleaseMunicipalityValueWord = myProfileData.tempMuniName!;
               tPleaseMunicipalityHintValueWord = myProfileData.tempMuniName!;
               tPleaseMunicipalityWordsId = myProfileData.muniId;
- 
+
               tPleaseSeletcWardValueWord = myProfileData.ward;
               tpleaseSeletcWardHintValueWord = myProfileData.ward;
               tPleaseSeletcWardValueWordsId = int.parse(myProfileData.ward!);
@@ -2515,7 +2518,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
           });
         });
       });
- 
+
       // // tPleasePradashValueWord = pleasePradashValueWord;
       // // tPleasePradashHintValueWord = pleasePradashHintValueWord;
       // // tPradashWordsId = pradashWordsId;
@@ -2545,58 +2548,79 @@ class _EditFullProfileState extends State<EditFullProfile> {
       // tpleaseSeletcWardHintValueWord = pleaseSeletcWardHintValueWord;
       // tPleaseSeletcWardValueWordsId =pleaseSeletcWardValueWordsId;
     });
- 
+
     super.initState();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => {
+            // Navigator.of(context).pushAndRemoveUntil(
+            //     MaterialPageRoute(builder: ((context) => HomeScreen())),
+            //     (route) => false)
+            Navigator.pop(context)
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+        backgroundColor: ColorsResource.PRAYMARY_TEXT_COLOR,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          style: const TextStyle(
+              fontSize: Dimensions.BODY_20,
+              fontWeight: Dimensions.FONT_BOLD,
+              color: Colors.white),
+          AppConstants.Edit_profile,
+        ),
+      ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Consumer2<MyProfileProvider, LocationProvider>(
         builder: (context, myProfileProvider, locationProvider, child) => Stack(
           children: [
+            // Positioned(
+            //     top: 0,
+            //     left: 0,
+            //     right: 0,
+            //     child: Container(
+            //       color: ColorsResource.PRAYMERY_COLOR,
+            //       child: Container(
+            //         width: MediaQuery.of(context).size.width,
+            //         height: MediaQuery.of(context).size.height * 0.050,
+            //         margin: EdgeInsets.only(top: 40, left: 10, right: 10),
+            //         child: Column(
+            //           children: [
+            //             //Toolbar
+            //             Row(
+            //               children: [
+            //                 InkWell(
+            //                     onHover: (_) {},
+            //                     onTap: () {
+            //                       Navigator.of(context).pop();
+            //                     },
+            //                     child:
+            //                         SvgPicture.asset(AppImages.ic_back_blue)),
+            //                 SizedBox(
+            //                   width: MediaQuery.of(context).size.width - 65,
+            //                   child: Text(
+            //                     AppConstants.Edit_profile,
+            //                     style: TextStyle(
+            //                         fontSize: Dimensions.BODY_20,
+            //                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
+            //                         color: ColorsResource.PRAYMARY_TEXT_COLOR),
+            //                     textAlign: TextAlign.center,
+            //                   ),
+            //                 )
+            //               ],
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     )),
             Positioned(
                 top: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  color: ColorsResource.PRAYMERY_COLOR,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.050,
-                    margin: EdgeInsets.only(top: 40, left: 10, right: 10),
-                    child: Column(
-                      children: [
-                        //Toolbar
-                        Row(
-                          children: [
-                            InkWell(
-                                onHover: (_) {},
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child:
-                                    SvgPicture.asset(AppImages.ic_back_blue)),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 65,
-                              child: Text(
-                                AppConstants.Edit_profile,
-                                style: TextStyle(
-                                    fontSize: Dimensions.BODY_20,
-                                    fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
-                                    color: ColorsResource.PRAYMARY_TEXT_COLOR),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-            Positioned(
-                top: 100,
                 left: 0,
                 right: 0,
                 bottom: 2,
@@ -2682,7 +2706,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                             ),
                           ],
                         ),
- 
+
                         InkWell(
                           onTap: () async {
                             // var results = await showCalendarDatePicker2Dialog(
@@ -2705,14 +2729,14 @@ class _EditFullProfileState extends State<EditFullProfile> {
                             //   });
                             // }
                             //
- 
+
                             _selectDate(context).then((results) {
                               if (results != null) {
                                 final values = results.split(' ');
                                 dobDateTime = '${values[0]}';
                               }
                             });
- 
+
                             // showDatePickerF(
                             //   context: context,
                             //   initialDate: DateTime.fromMillisecondsSinceEpoch(),
@@ -2731,7 +2755,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                             ),
                           ),
                         ),
- 
+
                         const SizedBox(
                           height: 5,
                         ),
@@ -2745,7 +2769,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                         const SizedBox(
                           height: 10,
                         ),
- 
+
                         Text(
                           AppConstants.Profile_photo,
                           style: TextStyle(
@@ -2802,7 +2826,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                         const SizedBox(
                           height: 30,
                         ),
- 
+
                         Row(
                           children: [
                             Text(
@@ -2838,7 +2862,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                         text: _myActivitiesString!.length <= 0
                                             ? 'कृपया छन्नुहोस्'
                                             : '',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                             fontSize: Dimensions.BODY_14,
                                             color:
                                                 ColorsResource.TEXT_BLACK_COLOR,
@@ -2903,7 +2927,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                           height: 10,
                         ),
                         pleaseSeletcWardDropdown(),
- 
+
                         const SizedBox(
                           height: 10,
                         ),
@@ -2942,21 +2966,21 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                     tPleasePradashHintValueWord =
                                         pleasePradashHintValueWord;
                                     tPradashWordsId = pradashWordsId;
- 
+
                                     tPleaseTheDistrictValueWord =
                                         pleaseTheDistrictValueWord;
                                     tPleaseTheDistrictHintValueWord =
                                         pleaseTheDistrictHintValueWord;
                                     tPleaseTheDistrictWordsId =
                                         pleaseTheDistrictWordsId;
- 
+
                                     tPleaseMunicipalityValueWord =
                                         pleaseMunicipalityValueWord;
                                     tPleaseMunicipalityHintValueWord =
                                         pleaseMunicipalityHintValueWord;
                                     tPleaseMunicipalityWordsId =
                                         pleaseMunicipalityWordsId;
- 
+
                                     tPleaseSeletcWardValueWord =
                                         pleaseSeletcWardValueWord;
                                     tpleaseSeletcWardHintValueWord =
@@ -2970,19 +2994,19 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                     tPleasePradashHintValueWord =
                                         AppConstants.please_state_channuhos;
                                     tPradashWordsId = 0;
- 
+
                                     tPleaseTheDistrictValueWord =
                                         AppConstants.Please_enter_the_district;
                                     tPleaseTheDistrictHintValueWord =
                                         AppConstants.Please_enter_the_district;
                                     tPleaseTheDistrictWordsId = 0;
- 
+
                                     tPleaseMunicipalityValueWord =
                                         AppConstants.Please_be_a_municipality;
                                     tPleaseMunicipalityHintValueWord =
                                         AppConstants.Please_be_a_municipality;
                                     tPleaseMunicipalityWordsId = 0;
- 
+
                                     tPleaseSeletcWardValueWord =
                                         AppConstants.Please_be_a_ward;
                                     tpleaseSeletcWardHintValueWord =
@@ -3047,7 +3071,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                             ],
                           ),
                         ),
- 
+
                         Visibility(
                           visible: isVisibleTopHint,
                           child: Column(
@@ -3163,7 +3187,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                 MyProfileModel? myProfileModel =
                                     widget.myProfileModel;
                                 MyProfileData? dataww = myProfileModel.data;
- 
+
                                 String name = nameTextEditingController.text;
                                 String mobile =
                                     mobileNumberTextEditingController.text;
@@ -3174,20 +3198,20 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                 String otherskillValue =
                                     otherjobTextEditingController.text;
                                 int gender = locationProvider.genderValueWordId;
- 
+
                                 int? perPradeshId = pradashWordsId;
                                 int? perDistrictId = pleaseTheDistrictWordsId;
                                 int? perMuniId = pleaseMunicipalityWordsId;
                                 int? perWard = pleaseSeletcWardValueWordsId;
- 
+
                                 ///Tem
                                 int? temPradeshId = tPradashWordsId;
                                 int? temDistrictId = tPleaseTheDistrictWordsId;
                                 int? temMuniId = tPleaseMunicipalityWordsId;
                                 int? temWard = tPleaseSeletcWardValueWordsId;
- 
+
                                 int jobCId = jobCategoryValueWordId;
- 
+
                                 if (citizenshipNo == '') {
                                   return showCustomSnackBar(
                                       'citizenshipNo', context);
@@ -3202,9 +3226,9 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                 } else {
                                   showPemOption = 0;
                                 }
- 
+
                                 print(' hgfjsdgjf $jobCId');
- 
+
                                 final data = {
                                   "name": name,
                                   "per_pradesh_id": perPradeshId,
@@ -3228,9 +3252,9 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                   "migrant_worker": migrantWorkersValueWordId,
                                   "minority_group": minorGroupValueWordId
                                 };
- 
+
                                 print('jgkhdfkjghjk $data');
- 
+
                                 if (imagePath != null) {
                                   data['file'] = MultipartFile.fromFileSync(
                                       imagePath!,
@@ -3247,7 +3271,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                       'Authorization': 'Bearer $token'
                                     });
                                 Dio dio = Dio(options);
- 
+
                                 showLoaderDialog(context);
                                 var response = await dio.post(
                                   '${Apis.UPDATE_PROFILE}${widget.myProfileModel.data!.id}',
@@ -3258,10 +3282,10 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                         return status! <= 500;
                                       }),
                                 );
- 
+
                                 print("fdskj   ${response.statusCode}");
                                 print("sfdsf  ${response.data}");
- 
+
                                 if (response.statusCode == 200) {
                                   Navigator.pop(context);
                                   showCustomSnackBar('successful', context,
@@ -3271,7 +3295,6 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                   Provider.of<MyProfileProvider>(context,
                                           listen: false)
                                       .getMyProfile();
-                                 
                                 } else {
                                   Map map = response.data;
                                   String error = map['message'];
@@ -3281,7 +3304,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                   showCustomSnackBar('$error', context);
                                   Navigator.pop(context);
                                 }
- 
+
                                 // successDialog(AppConstants.Your_account_is_successful_has_been_created);
                               })
                             ],
@@ -3296,7 +3319,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   myBoxDecoration() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(3),
@@ -3307,7 +3330,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   genderDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3321,14 +3344,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 locationProvider.genderValueWord,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3341,7 +3365,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   value: dropDownStringItem,
                   child: Text(
                     dropDownStringItem,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                         fontSize: Dimensions.BODY_16,
                         color: dropDownStringItem != AppConstants.select_gender
@@ -3367,7 +3391,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   pleaseStatePradashDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3381,14 +3405,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 pleasePradashHintValueWord!,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3401,7 +3426,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   value: dropDownStringItem,
                   child: Text(
                     dropDownStringItem,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                         fontSize: Dimensions.BODY_16,
                         color: dropDownStringItem !=
@@ -3418,7 +3443,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   pradashWordsId = locationProvider.pradashWordsIdList![
                       locationProvider.pradashWords!.indexOf(selectedValue)];
                   print('11  ${pradashWordsId}');
- 
+
                   if (pradashWordsId != 0) {
                     pleaseTheDistrictValueWord =
                         AppConstants.Please_enter_the_district;
@@ -3434,7 +3459,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   pleaseEnterTheDistrictDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3448,14 +3473,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 pleaseTheDistrictHintValueWord!,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3468,7 +3494,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   value: dropDownStringItem,
                   child: Text(
                     dropDownStringItem,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                         fontSize: Dimensions.BODY_16,
                         color: dropDownStringItem !=
@@ -3483,14 +3509,14 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   if (pradashWordsId == 0) {
                     return showCustomSnackBar("select pradesh", context);
                   }
- 
+
                   if (pleaseTheDistrictWordsId != 0) {
                     pleaseMunicipalityValueWord =
                         AppConstants.Please_be_a_municipality;
                     pleaseMunicipalityHintValueWord =
                         AppConstants.Please_be_a_municipality;
                   }
- 
+
                   pleaseTheDistrictValueWord = selectedValue!;
                   pleaseTheDistrictHintValueWord = selectedValue;
                   pleaseTheDistrictWordsId =
@@ -3507,7 +3533,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   pleaseDeaMunicipalityDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3521,14 +3547,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 pleaseMunicipalityHintValueWord!,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3541,7 +3568,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   value: dropDownStringItem,
                   child: Text(
                     dropDownStringItem,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                         fontSize: Dimensions.BODY_16,
                         color: dropDownStringItem !=
@@ -3558,15 +3585,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   }
                   pleaseMunicipalityValueWord = selectedValue!;
                   pleaseMunicipalityHintValueWord = selectedValue;
- 
+
                   print(
                       '333 1 ${locationProvider.pleaseMunicipalityWords.indexOf(selectedValue)}');
- 
+
                   pleaseMunicipalityWordsId =
                       locationProvider.pleaseMunicipalityWordsIdList[
                           locationProvider.pleaseMunicipalityWords
                               .indexOf(selectedValue)];
- 
+
                   print('333  ${pleaseMunicipalityWordsId}');
                 });
               },
@@ -3576,7 +3603,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   pleaseSeletcWardDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3590,14 +3617,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 pleaseMunicipalityHintValueWord!,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3610,7 +3638,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   value: dropDownStringItem,
                   child: Text(
                     dropDownStringItem,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                         fontSize: Dimensions.BODY_16,
                         color:
@@ -3626,7 +3654,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   pleaseSeletcWardHintValueWord = selectedValue;
                   pleaseSeletcWardValueWordsId =
                       int.parse(pleaseSeletcWardValueWord);
- 
+
                   print('fdgfdg 1 $pleaseSeletcWardValueWordsId');
                 });
               },
@@ -3636,7 +3664,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   tPleasePradashDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3650,14 +3678,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 tPleasePradashHintValueWord!,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3670,7 +3699,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   value: dropDownStringItem,
                   child: Text(
                     dropDownStringItem,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                         fontSize: Dimensions.BODY_16,
                         color: dropDownStringItem !=
@@ -3684,11 +3713,11 @@ class _EditFullProfileState extends State<EditFullProfile> {
                 setState(() {
                   tPleasePradashValueWord = selectedValue!;
                   tPleasePradashHintValueWord = selectedValue;
- 
+
                   tPradashWordsId = locationProvider.pradashWordsIdList![
                       locationProvider.pradashWords!.indexOf(selectedValue)];
                   print(' 44 ${tPradashWordsId}');
- 
+
                   if (tPradashWordsId != 0) {
                     tPleaseTheDistrictValueWord =
                         AppConstants.Please_enter_the_district;
@@ -3704,7 +3733,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   tPleaseEnterTheDistrictDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3718,14 +3747,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 tPleaseTheDistrictHintValueWord!,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3739,7 +3769,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                         value: dropDownStringItem,
                         child: Text(
                           dropDownStringItem,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                               fontSize: Dimensions.BODY_16,
                               color: dropDownStringItem !=
@@ -3755,7 +3785,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                         value: dropDownStringItem,
                         child: Text(
                           dropDownStringItem,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                               fontSize: Dimensions.BODY_16,
                               color: dropDownStringItem !=
@@ -3784,7 +3814,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                     tPleaseMunicipalityHintValueWord =
                         AppConstants.Please_be_a_municipality;
                   }
- 
+
                   locationProvider
                       .tGetMunicipalities(tPleaseTheDistrictWordsId!);
                 });
@@ -3795,7 +3825,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   tPleaseDeaMunicipalityDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3809,14 +3839,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 tPleaseMunicipalityHintValueWord!,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3830,7 +3861,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                         value: dropDownStringItem,
                         child: Text(
                           dropDownStringItem,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                               fontSize: Dimensions.BODY_16,
                               color: dropDownStringItem !=
@@ -3846,7 +3877,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                         value: dropDownStringItem,
                         child: Text(
                           dropDownStringItem,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                               fontSize: Dimensions.BODY_16,
                               color: dropDownStringItem !=
@@ -3873,7 +3904,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   tPleaseSeletcWardDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -3887,14 +3918,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 tpleaseSeletcWardHintValueWord!,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3907,7 +3939,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   value: dropDownStringItem,
                   child: Text(
                     dropDownStringItem,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                         fontSize: Dimensions.BODY_16,
                         color:
@@ -3923,7 +3955,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   tpleaseSeletcWardHintValueWord = selectedValue;
                   tPleaseSeletcWardValueWordsId =
                       int.parse(tPleaseSeletcWardValueWord!);
- 
+
                   print('fdgfdg 2 $tPleaseSeletcWardValueWordsId');
                 });
               },
@@ -3933,7 +3965,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   ///PEMP
   ethnicityDropdown() {
     return Consumer<LocationProvider>(
@@ -3948,14 +3980,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
               ),
               hint: Text(
                 castHintValueword,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                     fontSize: Dimensions.BODY_16,
                     color: ColorsResource.TEXT_GRAY_COLOR),
@@ -3968,7 +4001,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                   value: dropDownStringItem,
                   child: Text(
                     dropDownStringItem,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                         fontSize: Dimensions.BODY_16,
                         color: dropDownStringItem != AppConstants.SELECT_CAST
@@ -3981,7 +4014,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                 setState(() {
                   castValueWord = selectedValue!;
                   castHintValueword = selectedValue;
- 
+
                   castValueWordId = locationProvider.castDataListInt![
                       locationProvider.castDataListString!
                           .indexOf(selectedValue)];
@@ -3994,7 +4027,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   minorGroupDropdown2() {
     return Container(
       height: 54,
@@ -4007,14 +4040,14 @@ class _EditFullProfileState extends State<EditFullProfile> {
           child: DropdownButton<String>(
             elevation: 16,
             isExpanded: true,
-            style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+            style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
             underline: Container(
               height: 2,
               color: Colors.transparent,
             ),
             hint: Text(
               minorGroupHintValueword,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                   fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                   fontSize: Dimensions.BODY_16,
                   color: ColorsResource.TEXT_GRAY_COLOR),
@@ -4026,7 +4059,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                 value: dropDownStringItem,
                 child: Text(
                   dropDownStringItem,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                       fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                       fontSize: Dimensions.BODY_16,
                       color: dropDownStringItem != AppConstants.SELECT_YES_NO
@@ -4039,7 +4072,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
               setState(() {
                 minorGroupValueWord = selectedValue!;
                 minorGroupHintValueword = selectedValue;
- 
+
                 if (selectedValue == 'हो') {
                   minorGroupValueWordId = 1;
                 } else if (selectedValue == 'हैन') {
@@ -4052,7 +4085,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   migrantWorkersDropdown() {
     return Container(
       height: 54,
@@ -4065,14 +4098,14 @@ class _EditFullProfileState extends State<EditFullProfile> {
           child: DropdownButton<String>(
             elevation: 16,
             isExpanded: true,
-            style: TextStyle(color: ColorsResource.TEXT_BLACK_COLOR),
+            style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
             underline: Container(
               height: 2,
               color: Colors.transparent,
             ),
             hint: Text(
               migrantWorkersHintValueword,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                   fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                   fontSize: Dimensions.BODY_16,
                   color: ColorsResource.TEXT_GRAY_COLOR),
@@ -4084,7 +4117,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                 value: dropDownStringItem,
                 child: Text(
                   dropDownStringItem,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                       fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                       fontSize: Dimensions.BODY_16,
                       color: dropDownStringItem != AppConstants.SELECT_YES_NO
@@ -4109,7 +4142,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   disabledDropdown() {
     return Container(
       height: 54,
@@ -4129,7 +4162,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
             ),
             hint: Text(
               disabledHintValueword,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                   fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                   fontSize: Dimensions.BODY_16,
                   color: ColorsResource.TEXT_GRAY_COLOR),
@@ -4141,7 +4174,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                 value: dropDownStringItem,
                 child: Text(
                   dropDownStringItem,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                       fontWeight: Dimensions.FONT_MEDIUM_NORMUL,
                       fontSize: Dimensions.BODY_16,
                       color: dropDownStringItem != AppConstants.SELECT_YES_NO
@@ -4154,7 +4187,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
               setState(() {
                 disabledValueWord = selectedValue!;
                 disabledHintValueword = selectedValue;
- 
+
                 if (selectedValue == 'हो') {
                   disabledValueWordId = 1;
                 } else if (selectedValue == 'हैन') {
@@ -4167,7 +4200,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   ///Dialog
   successDialog(String title) {
     return showDialog(
@@ -4202,8 +4235,8 @@ class _EditFullProfileState extends State<EditFullProfile> {
                           InkWell(
                             onHover: (_) {},
                             onTap: () {
-                              Navigator.pop(context);
-                               
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  CupertinoPageRoute(builder: (context)=>EditMyProfileScreen()), (route) => route.isFirst);
                             },
                             child: Container(
                                 margin: EdgeInsets.only(right: 10),
@@ -4221,7 +4254,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                         child: Text(
                           title,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               fontSize: Dimensions.BODY_20,
                               color: ColorsResource.TEXT_BLACK_COLOR),
                         )),
@@ -4236,7 +4269,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
               ));
         });
   }
- 
+
   jobCategoryDropdown() {
     return Consumer<LocationProvider>(
       builder: (context, locationProvider, child) => Container(
@@ -4296,15 +4329,15 @@ class _EditFullProfileState extends State<EditFullProfile> {
       ),
     );
   }
- 
+
   List? _myActivities = [];
   List? _myActivitiesString = [];
- 
+
   multipleJobCategoryAdd(MyProfileModel myProfileModel) {
     for (var element in myProfileModel.data!.jobseekerPreferenceCategory!) {
       log(element.categoryName.toString());
     }
- 
+
     double height = 370;
     return showDialog(
         context: context,
@@ -4331,7 +4364,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                             width: 1,
                           ),
                         ),
-                        height: 30,
+                        height: 40,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -4341,7 +4374,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                             ),
                             Text(
                               'कृपया छन्नुहोस्',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   color: ColorsResource.PRAYMARY_TEXT_COLOR,
                                   fontSize: Dimensions.BODY_14),
                             ),
@@ -4370,11 +4403,11 @@ class _EditFullProfileState extends State<EditFullProfile> {
                               autovalidate: AutovalidateMode.disabled,
                               chipBackGroundColor:
                                   ColorsResource.TEXT_GRAY_COLOR,
-                              chipLabelStyle: TextStyle(
+                              chipLabelStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
-                              dialogTextStyle:
-                                  TextStyle(fontWeight: FontWeight.bold),
+                              dialogTextStyle: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold),
                               checkBoxActiveColor:
                                   ColorsResource.TEXT_GRAY_COLOR,
                               checkBoxCheckColor: Colors.white,
@@ -4383,7 +4416,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                       BorderRadius.all(Radius.circular(12.0))),
                               title: Text(
                                 'कृपया छन्नुहोस्',
-                                style: const TextStyle(fontSize: 10),
+                                style: GoogleFonts.poppins(fontSize: 10),
                               ),
                               validator: (value) {
                                 if (value == null || value.length == 0) {
@@ -4405,9 +4438,9 @@ class _EditFullProfileState extends State<EditFullProfile> {
                                 setState(() {
                                   _myActivities?.clear();
                                   _myActivities = value;
- 
+
                                   _myActivitiesString?.clear();
- 
+
                                   _myActivities?.forEach((element) {
                                     String name = locationProvider
                                             .viewAllJobCategoryDataListSting![
@@ -4456,7 +4489,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
               ));
         });
   }
- 
+
   DateTime selectedDate = DateTime.now();
   Future<String> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -4469,7 +4502,7 @@ class _EditFullProfileState extends State<EditFullProfile> {
         selectedDate = picked;
       });
     }
- 
+
     print(selectedDate);
     return '${selectedDate}';
   }

@@ -111,7 +111,7 @@ class TrainingItem extends StatelessWidget {
                         TrainingSingleItemDetails(viewAllTrainingsData)));
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+        margin: EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 0),
         decoration: myBoxDecoration(),
         width: MediaQuery.of(context).size.width,
         height: 100,

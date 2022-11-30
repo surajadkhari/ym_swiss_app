@@ -130,258 +130,283 @@ class _TrainingScreenState extends State<TrainingScreen> {
           AppConstants.training,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Consumer<TrainingsProvider>(
-          builder: (context, viewAllTrainingsProvider, child) => SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin:
-                            const EdgeInsets.only(left: 10, right: 10, top: 10),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                                margin: const EdgeInsets.only(
-                                    top: 5, left: 20, right: 20),
-                                width: MediaQuery.of(context).size.width - 80,
-                                child: FutureBuilder<List<NewPradeshModel>>(
-                                    future: fPardesh,
-                                    builder: (context, snap) {
-                                      if (snap.hasData) {
-                                        return Container(
-                                          height: 40,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.1,
-                                          decoration: myBoxDecoration(),
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: DropdownButton<
-                                                  NewPradeshModel>(
-                                                elevation: 16,
-                                                isExpanded: true,
+      body: Consumer<TrainingsProvider>(
+        builder: (context, viewAllTrainingsProvider, child) => SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+         
+              Expanded(
+                flex: 5
+                ,
+                child: Column(
+                  children: [
+                    Container(
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<List<NewPradeshModel>>(
+                                  future: fPardesh,
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      return Container(
+                                        height: 40,
+                                        width: MediaQuery.of(context)
+                                                .size
+                                                .width /
+                                            1.1,
+                                        decoration: myBoxDecoration(),
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: DropdownButton<
+                                                NewPradeshModel>(
+                                              elevation: 16,
+                                              isExpanded: true,
+                                              style: GoogleFonts.poppins(
+                                                  color: ColorsResource
+                                                      .TEXT_BLACK_COLOR),
+                                              underline: Container(
+                                                height: 2,
+                                                color: Colors.transparent,
+                                              ),
+                                              hint: Text(
+                                                "तालीमको वर्ग छान्नुहोस",
                                                 style: GoogleFonts.poppins(
-                                                    color: ColorsResource
-                                                        .TEXT_BLACK_COLOR),
-                                                underline: Container(
-                                                  height: 2,
-                                                  color: Colors.transparent,
-                                                ),
-                                                hint: Text(
-                                                  "तालीमको वर्ग छान्नुहोस",
-                                                  style: GoogleFonts.poppins(
+                                                    fontWeight: Dimensions
+                                                        .FONT_MEDIUM_NORMUL,
+                                                    fontSize:
+                                                        Dimensions.BODY_16,
+                                                    color: locationHintValWord !=
+                                                            AppConstants
+                                                                .Select_the_municipality
+                                                        ? ColorsResource
+                                                            .TEXT_BLACK_COLOR
+                                                        : ColorsResource
+                                                            .TEXT_GRAY_COLOR),
+                                              ),
+                                              iconSize: 30,
+                                              value: newPradeshModel,
+                                              //add this parameter
+                                              items: snap.data!.map(
+                                                  (NewPradeshModel
+                                                      pradeshModel) {
+                                                return DropdownMenuItem(
+                                                  value: pradeshModel,
+                                                  child: Text(
+                                                    pradeshModel.name,
+                                                    style: TextStyle(
                                                       fontWeight: Dimensions
                                                           .FONT_MEDIUM_NORMUL,
                                                       fontSize:
                                                           Dimensions.BODY_16,
-                                                      color: locationHintValWord !=
-                                                              AppConstants
-                                                                  .Select_the_municipality
+                                                      color: isProvinceSelected
                                                           ? ColorsResource
                                                               .TEXT_BLACK_COLOR
                                                           : ColorsResource
-                                                              .TEXT_GRAY_COLOR),
-                                                ),
-                                                iconSize: 30,
-                                                value: newPradeshModel,
-                                                //add this parameter
-                                                items: snap.data!.map(
-                                                    (NewPradeshModel
-                                                        pradeshModel) {
-                                                  return DropdownMenuItem(
-                                                    value: pradeshModel,
-                                                    child: Text(
-                                                      pradeshModel.name,
-                                                      style: TextStyle(
-                                                        fontWeight: Dimensions
-                                                            .FONT_MEDIUM_NORMUL,
-                                                        fontSize:
-                                                            Dimensions.BODY_16,
-                                                        color: isProvinceSelected
-                                                            ? ColorsResource
-                                                                .TEXT_BLACK_COLOR
-                                                            : ColorsResource
-                                                                .TEXT_GRAY_COLOR,
-                                                      ),
+                                                              .TEXT_GRAY_COLOR,
                                                     ),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (selectedValue) {
-                                                  setState(() {
-                                                    isProvinceSelected = true;
-                                                    newPradeshModel =
-                                                        selectedValue;
-                                                    districtNewModel = null;
-                                                  });
-                                                },
-                                              ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedValue) {
+                                                setState(() {
+                                                  isProvinceSelected = true;
+                                                  newPradeshModel =
+                                                      selectedValue;
+                                                  districtNewModel = null;
+                                                });
+                                              },
                                             ),
                                           ),
-                                        );
-                                      } else {
-                                        return const Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      }
-                                    }))
-                          ],
-                        ),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }))
+                        ],
                       ),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(left: 10, right: 10, top: 10),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                                margin: const EdgeInsets.only(
-                                    top: 5, left: 20, right: 20),
-                                width: MediaQuery.of(context).size.width - 80,
-                                child: FutureBuilder<List<DistrictNewModel>>(
-                                    future: fDistrict,
-                                    builder: (context, snap) {
-                                      if (snap.hasData) {
-                                        return Container(
-                                          height: 40,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.1,
-                                          decoration: myBoxDecoration(),
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: DropdownButton<
-                                                  DistrictNewModel>(
-                                                elevation: 16,
-                                                isExpanded: true,
+                    ),
+                    Container(
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<List<DistrictNewModel>>(
+                                  future: fDistrict,
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      return Container(
+                                        height: 40,
+                                        width: MediaQuery.of(context)
+                                                .size
+                                                .width /
+                                            1.1,
+                                        decoration: myBoxDecoration(),
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: DropdownButton<
+                                                DistrictNewModel>(
+                                              elevation: 16,
+                                              isExpanded: true,
+                                              style: GoogleFonts.poppins(
+                                                  color: ColorsResource
+                                                      .TEXT_BLACK_COLOR),
+                                              underline: Container(
+                                                height: 2,
+                                                color: Colors.transparent,
+                                              ),
+                                              hint: Text(
+                                                "कृपया जिल्ला छान्नुहोस",
                                                 style: GoogleFonts.poppins(
-                                                    color: ColorsResource
-                                                        .TEXT_BLACK_COLOR),
-                                                underline: Container(
-                                                  height: 2,
-                                                  color: Colors.transparent,
-                                                ),
-                                                hint: Text(
-                                                  "कृपया जिल्ला छान्नुहोस",
-                                                  style: GoogleFonts.poppins(
+                                                    fontWeight: Dimensions
+                                                        .FONT_MEDIUM_NORMUL,
+                                                    fontSize:
+                                                        Dimensions.BODY_16,
+                                                    color: isDistrictSelected
+                                                        ? ColorsResource
+                                                            .TEXT_BLACK_COLOR
+                                                        : ColorsResource
+                                                            .TEXT_GRAY_COLOR),
+                                              ),
+                                              iconSize: 30,
+                                              value: districtNewModel,
+                                              //add this parameter
+                                              items: snap.data!
+                                                  .where((element) =>
+                                                      element.pradeshId ==
+                                                      newPradeshModel?.id)
+                                                  .map((DistrictNewModel
+                                                      districtModel) {
+                                                return DropdownMenuItem(
+                                                  value: districtModel,
+                                                  child: Text(
+                                                    districtModel.name,
+                                                    style: TextStyle(
                                                       fontWeight: Dimensions
                                                           .FONT_MEDIUM_NORMUL,
                                                       fontSize:
                                                           Dimensions.BODY_16,
-                                                      color: isDistrictSelected
+                                                      color: isProvinceSelected
                                                           ? ColorsResource
                                                               .TEXT_BLACK_COLOR
                                                           : ColorsResource
-                                                              .TEXT_GRAY_COLOR),
-                                                ),
-                                                iconSize: 30,
-                                                value: districtNewModel,
-                                                //add this parameter
-                                                items: snap.data!
-                                                    .where((element) =>
-                                                        element.pradeshId ==
-                                                        newPradeshModel?.id)
-                                                    .map((DistrictNewModel
-                                                        districtModel) {
-                                                  return DropdownMenuItem(
-                                                    value: districtModel,
-                                                    child: Text(
-                                                      districtModel.name,
-                                                      style: TextStyle(
-                                                        fontWeight: Dimensions
-                                                            .FONT_MEDIUM_NORMUL,
-                                                        fontSize:
-                                                            Dimensions.BODY_16,
-                                                        color: isProvinceSelected
-                                                            ? ColorsResource
-                                                                .TEXT_BLACK_COLOR
-                                                            : ColorsResource
-                                                                .TEXT_GRAY_COLOR,
-                                                      ),
+                                                              .TEXT_GRAY_COLOR,
                                                     ),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (selectedValue) {
-                                                  setState(() {
-                                                    isDistrictSelected = true;
-                                                    districtNewModel =
-                                                        selectedValue;
-                                                    newMuniModel = null;
-                                                  });
-                                                },
-                                              ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedValue) {
+                                                setState(() {
+                                                  isDistrictSelected = true;
+                                                  districtNewModel =
+                                                      selectedValue;
+                                                  newMuniModel = null;
+                                                });
+                                              },
                                             ),
                                           ),
-                                        );
-                                      } else {
-                                        return const Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      }
-                                    }))
-                          ],
-                        ),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }))
+                        ],
                       ),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(left: 10, right: 10, top: 10),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                                margin: const EdgeInsets.only(
-                                    top: 5, left: 20, right: 20),
-                                width: MediaQuery.of(context).size.width - 80,
-                                child: FutureBuilder<List<NewMuniModel>>(
-                                    future: fMunicipalities,
-                                    builder: (context, snap) {
-                                      if (snap.hasData) {
-                                        return Container(
-                                          height: 40,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.1,
-                                          decoration: myBoxDecoration(),
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child:
-                                                  DropdownButton<NewMuniModel>(
-                                                elevation: 16,
-                                                isExpanded: true,
+                    ),
+                    Container(
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<List<NewMuniModel>>(
+                                  future: fMunicipalities,
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      return Container(
+                                        height: 40,
+                                        width: MediaQuery.of(context)
+                                                .size
+                                                .width /
+                                            1.1,
+                                        decoration: myBoxDecoration(),
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child:
+                                                DropdownButton<NewMuniModel>(
+                                              elevation: 16,
+                                              isExpanded: true,
+                                              style: GoogleFonts.poppins(
+                                                  color: ColorsResource
+                                                      .TEXT_BLACK_COLOR),
+                                              underline: Container(
+                                                height: 2,
+                                                color: Colors.transparent,
+                                              ),
+                                              hint: Text(
+                                                "कृपया नगरपालिका छान्नुहोस",
                                                 style: GoogleFonts.poppins(
-                                                    color: ColorsResource
-                                                        .TEXT_BLACK_COLOR),
-                                                underline: Container(
-                                                  height: 2,
-                                                  color: Colors.transparent,
-                                                ),
-                                                hint: Text(
-                                                  "कृपया नगरपालिका छान्नुहोस",
-                                                  style: GoogleFonts.poppins(
+                                                    fontWeight: Dimensions
+                                                        .FONT_MEDIUM_NORMUL,
+                                                    fontSize:
+                                                        Dimensions.BODY_16,
+                                                    color: isMuniSelcted
+                                                        ? ColorsResource
+                                                            .TEXT_BLACK_COLOR
+                                                        : ColorsResource
+                                                            .TEXT_GRAY_COLOR),
+                                              ),
+                                              iconSize: 30,
+                                              value: newMuniModel,
+                                              //add this parameter
+                                              items: snap.data!
+                                                  .where((element) =>
+                                                      element.districtId ==
+                                                      districtNewModel?.id)
+                                                  .map((NewMuniModel
+                                                      muniModel) {
+                                                return DropdownMenuItem(
+                                                  value: muniModel,
+                                                  child: Text(
+                                                    muniModel.name,
+                                                    style: TextStyle(
                                                       fontWeight: Dimensions
                                                           .FONT_MEDIUM_NORMUL,
                                                       fontSize:
@@ -390,408 +415,317 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                                           ? ColorsResource
                                                               .TEXT_BLACK_COLOR
                                                           : ColorsResource
-                                                              .TEXT_GRAY_COLOR),
-                                                ),
-                                                iconSize: 30,
-                                                value: newMuniModel,
-                                                //add this parameter
-                                                items: snap.data!
-                                                    .where((element) =>
-                                                        element.districtId ==
-                                                        districtNewModel?.id)
-                                                    .map((NewMuniModel
-                                                        muniModel) {
-                                                  return DropdownMenuItem(
-                                                    value: muniModel,
-                                                    child: Text(
-                                                      muniModel.name,
-                                                      style: TextStyle(
-                                                        fontWeight: Dimensions
-                                                            .FONT_MEDIUM_NORMUL,
-                                                        fontSize:
-                                                            Dimensions.BODY_16,
-                                                        color: isMuniSelcted
-                                                            ? ColorsResource
-                                                                .TEXT_BLACK_COLOR
-                                                            : ColorsResource
-                                                                .TEXT_GRAY_COLOR,
-                                                      ),
+                                                              .TEXT_GRAY_COLOR,
                                                     ),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (selectedValue) {
-                                                  setState(() {
-                                                    isMuniSelcted = true;
-                                                    newMuniModel =
-                                                        selectedValue;
-                                                  });
-                                                },
-                                              ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedValue) {
+                                                setState(() {
+                                                  isMuniSelcted = true;
+                                                  newMuniModel =
+                                                      selectedValue;
+                                                });
+                                              },
                                             ),
                                           ),
-                                        );
-                                      } else {
-                                        return const Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      }
-                                    }))
-                          ],
-                        ),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }))
+                        ],
                       ),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(left: 10, right: 10, top: 10),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                                margin: const EdgeInsets.only(
-                                    top: 5, left: 20, right: 20),
-                                width: MediaQuery.of(context).size.width - 80,
-                                child: FutureBuilder<
-                                        List<NewTrainingCategoryModel>>(
-                                    future: ftrainingCategory,
-                                    builder: (context, snap) {
-                                      if (snap.hasData) {
-                                        return Container(
-                                          height: 40,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.1,
-                                          decoration: myBoxDecoration(),
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: DropdownButton<
-                                                  NewTrainingCategoryModel>(
-                                                elevation: 16,
-                                                isExpanded: true,
+                    ),
+                    Container(
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                              margin: const EdgeInsets.only(
+                                  top: 5, left: 20, right: 20),
+                              width: MediaQuery.of(context).size.width - 80,
+                              child: FutureBuilder<
+                                      List<NewTrainingCategoryModel>>(
+                                  future: ftrainingCategory,
+                                  builder: (context, snap) {
+                                    if (snap.hasData) {
+                                      return Container(
+                                        height: 40,
+                                        width: MediaQuery.of(context)
+                                                .size
+                                                .width /
+                                            1.1,
+                                        decoration: myBoxDecoration(),
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: DropdownButton<
+                                                NewTrainingCategoryModel>(
+                                              elevation: 16,
+                                              isExpanded: true,
+                                              style: GoogleFonts.poppins(
+                                                  color: ColorsResource
+                                                      .TEXT_BLACK_COLOR),
+                                              underline: Container(
+                                                height: 2,
+                                                color: Colors.transparent,
+                                              ),
+                                              hint: Text(
+                                                "कृपया प्रदेश छान्नुहोस",
                                                 style: GoogleFonts.poppins(
-                                                    color: ColorsResource
-                                                        .TEXT_BLACK_COLOR),
-                                                underline: Container(
-                                                  height: 2,
-                                                  color: Colors.transparent,
-                                                ),
-                                                hint: Text(
-                                                  "कृपया प्रदेश छान्नुहोस",
-                                                  style: GoogleFonts.poppins(
+                                                    fontWeight: Dimensions
+                                                        .FONT_MEDIUM_NORMUL,
+                                                    fontSize:
+                                                        Dimensions.BODY_16,
+                                                    color: locationHintValWord !=
+                                                            AppConstants
+                                                                .Select_the_municipality
+                                                        ? ColorsResource
+                                                            .TEXT_BLACK_COLOR
+                                                        : ColorsResource
+                                                            .TEXT_GRAY_COLOR),
+                                              ),
+                                              iconSize: 30,
+                                              value: newTrainingCategoryModel,
+                                              //add this parameter
+                                              items: snap.data!.map(
+                                                  (NewTrainingCategoryModel
+                                                      trainingCategoryModel) {
+                                                return DropdownMenuItem(
+                                                  value:
+                                                      trainingCategoryModel,
+                                                  child: Text(
+                                                    trainingCategoryModel
+                                                        .name,
+                                                    style: TextStyle(
                                                       fontWeight: Dimensions
                                                           .FONT_MEDIUM_NORMUL,
                                                       fontSize:
                                                           Dimensions.BODY_16,
-                                                      color: locationHintValWord !=
-                                                              AppConstants
-                                                                  .Select_the_municipality
+                                                      color: isProvinceSelected
                                                           ? ColorsResource
                                                               .TEXT_BLACK_COLOR
                                                           : ColorsResource
-                                                              .TEXT_GRAY_COLOR),
-                                                ),
-                                                iconSize: 30,
-                                                value: newTrainingCategoryModel,
-                                                //add this parameter
-                                                items: snap.data!.map(
-                                                    (NewTrainingCategoryModel
-                                                        trainingCategoryModel) {
-                                                  return DropdownMenuItem(
-                                                    value:
-                                                        trainingCategoryModel,
-                                                    child: Text(
-                                                      trainingCategoryModel
-                                                          .name,
-                                                      style: TextStyle(
-                                                        fontWeight: Dimensions
-                                                            .FONT_MEDIUM_NORMUL,
-                                                        fontSize:
-                                                            Dimensions.BODY_16,
-                                                        color: isProvinceSelected
-                                                            ? ColorsResource
-                                                                .TEXT_BLACK_COLOR
-                                                            : ColorsResource
-                                                                .TEXT_GRAY_COLOR,
-                                                      ),
+                                                              .TEXT_GRAY_COLOR,
                                                     ),
-                                                  );
-                                                }).toList(),
-                                                onChanged: (selectedValue) {
-                                                  setState(() {
-                                                    isProvinceSelected = true;
-                                                    newTrainingCategoryModel =
-                                                        selectedValue;
-                                                    // districtNewModel = null;
-                                                  });
-                                                },
-                                              ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (selectedValue) {
+                                                setState(() {
+                                                  isProvinceSelected = true;
+                                                  newTrainingCategoryModel =
+                                                      selectedValue;
+                                                  // districtNewModel = null;
+                                                });
+                                              },
                                             ),
                                           ),
-                                        );
-                                      } else {
-                                        return Container(
-                                          child: const Align(
-                                            alignment: Alignment.center,
-                                            child: CircularProgressIndicator(),
-                                          ),
-                                        );
-                                      }
-                                    }))
-                          ],
-                        ),
+                                        ),
+                                      );
+                                    } else {
+                                      return Container(
+                                        child: const Align(
+                                          alignment: Alignment.center,
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      );
+                                    }
+                                  }))
+                        ],
                       ),
+                    ),
 
-                      // Container(
-                      //   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                      //   child: Row(
-                      //     children: [
-                      //       const SizedBox(
-                      //         width: 10,
-                      //       ),
-                      //       Container(
-                      //         margin: EdgeInsets.only(top: 5,left: 20,right: 20),
-                      //         width: MediaQuery.of(context).size.width - 80,
-                      //         child: selectLocationDropdown(),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
+                    // Container(
+                    //   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    //   child: Row(
+                    //     children: [
+                    //       const SizedBox(
+                    //         width: 10,
+                    //       ),
+                    //       Container(
+                    //         margin: EdgeInsets.only(top: 5,left: 20,right: 20),
+                    //         width: MediaQuery.of(context).size.width - 80,
+                    //         child: selectLocationDropdown(),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
 
-                      // Container(
-                      //   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                      //   child: Row(
-                      //     children: [
-                      //       const SizedBox(
-                      //         width: 10,
-                      //       ),
-                      //       Container(
-                      //         margin:
-                      //             EdgeInsets.only(top: 5, left: 20, right: 20),
-                      //         width: MediaQuery.of(context).size.width - 80,
-                      //         child: selectGradeDropdown(),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 5, left: 20, right: 20),
-                        width: MediaQuery.of(context).size.width - 80,
-                        child: Row(
-                          children: [
-                            Expanded(child: Container()),
-                            CustomSearchButton(AppConstants.search_for, () {
-                              showLoaderDialog(context);
+                    // Container(
+                    //   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    //   child: Row(
+                    //     children: [
+                    //       const SizedBox(
+                    //         width: 10,
+                    //       ),
+                    //       Container(
+                    //         margin:
+                    //             EdgeInsets.only(top: 5, left: 20, right: 20),
+                    //         width: MediaQuery.of(context).size.width - 80,
+                    //         child: selectGradeDropdown(),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 5, left: 20, right: 20),
+                      width: MediaQuery.of(context).size.width - 80,
+                      child: Row(
+                        children: [
+                          Expanded(child: Container()),
+                          CustomSearchButton(AppConstants.search_for, () {
+                            showLoaderDialog(context);
 
-                              if (locationListId == 0 && gradListId == 0) {
-                                viewAllTrainingsProvider
-                                    .getVewAllTraining(
-                                        pageCount,
-                                        newTrainingCategoryModel?.id,
-                                        newPradeshModel?.id,
-                                        districtNewModel?.id,
-                                        newMuniModel?.muniId)
-                                    .then((value) {
-                                  if (value.isSuccess) {
-                                    isSearching = false;
-                                    Navigator.of(context).pop();
-                                  } else {
-                                    isSearching = false;
-                                    Navigator.of(context).pop();
-                                  }
-                                });
-
-                                return;
-                              }
-
-                              String url = '';
-                              if (locationListId != 0) {
-                                url = '&muni_id=$locationListId';
-                              }
-
-                              if (gradListId != 0) {
-                                url = '$url&category_id=$gradListId';
-                              }
-                              print('shfgshjfghsd $url');
-
+                            if (locationListId == 0 && gradListId == 0) {
                               viewAllTrainingsProvider
-                                  .getSearchAllJob(url, sPageCount)
+                                  .getVewAllTraining(
+                                      pageCount,
+                                      newTrainingCategoryModel?.id,
+                                      newPradeshModel?.id,
+                                      districtNewModel?.id,
+                                      newMuniModel?.muniId)
                                   .then((value) {
                                 if (value.isSuccess) {
-                                  isSearching = true;
+                                  isSearching = false;
                                   Navigator.of(context).pop();
                                 } else {
                                   isSearching = false;
                                   Navigator.of(context).pop();
                                 }
                               });
-                            },
-                                height: 25,
-                                wight: 100,
-                                textSize: Dimensions.BODY_14,
-                                padding: 2)
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                        width: MediaQuery.of(context).size.width,
-                        child: Text(
-                          'सम्बन्धित तालिमहरू',
-                          style: TextStyle(
-                              color: ColorsResource.PRAYMARY_TEXT_COLOR,
-                              fontSize: Dimensions.BODY_16),
-                        ),
-                      ),
-                      Container(
-                        height: 1,
-                        color: ColorsResource.PRAYMARY_TEXT_COLOR,
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: viewAllTrainingsProvider.viewAllTrainingsModel != null
-                      ? ListView.builder(
-                          padding: EdgeInsets.zero,
-                          itemCount: viewAllTrainingsProvider
-                              .viewAllTrainingsDataList!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            ViewAllTrainingsData viewAllTrainingsData =
-                                viewAllTrainingsProvider
-                                    .viewAllTrainingsDataList![index];
 
-                            return TrainingItem(
-                              viewAllTrainingsData,
-                              // ()
-                              // {
+                              return;
+                            }
 
-                              //   Navigator.push(context, MaterialPageRoute(builder:(context) => TrainingSingleItemDetails(viewAllTrainingsData)));
-                              // }
-                            );
+                            String url = '';
+                            if (locationListId != 0) {
+                              url = '&muni_id=$locationListId';
+                            }
+
+                            if (gradListId != 0) {
+                              url = '$url&category_id=$gradListId';
+                            }
+                            print('shfgshjfghsd $url');
+
+                            viewAllTrainingsProvider
+                                .getSearchAllJob(url, sPageCount)
+                                .then((value) {
+                              if (value.isSuccess) {
+                                isSearching = true;
+                                Navigator.of(context).pop();
+                              } else {
+                                isSearching = false;
+                                Navigator.of(context).pop();
+                              }
+                            });
                           },
-                        )
-                      : Container(
-                          child: const Align(
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    margin: EdgeInsets.only(top: 15, bottom: 10),
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 10),
+                              height: 25,
+                              wight: 100,
+                              textSize: Dimensions.BODY_14,
+                              padding: 2)
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                       width: MediaQuery.of(context).size.width,
-                      height: 33,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: viewAllTrainingsProvider.viewAllTrainingsModel !=
-                                null
-                            ? ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemCount: viewAllTrainingsProvider
-                                    .viewAllTrainingsModel!.meta!.links!.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  List<LinksMeta>? linkList =
-                                      viewAllTrainingsProvider
-                                          .viewAllTrainingsModel!.meta!.links!;
-                                  LinksMeta linkMeta = viewAllTrainingsProvider
-                                      .viewAllTrainingsModel!
-                                      .meta!
-                                      .links![index];
-                                  int lastItemIndexNumber = linkList.length - 1;
-                                  if (index == 0) {
-                                    return InkWell(
-                                      onTap: () {
-                                        if (linkMeta.url != null) {
-                                          // pageCount = pageCount - 1;
-                                          isSearching == true
-                                              ? sPageCount = sPageCount - 1
-                                              : pageCount = pageCount - 1;
-                                          Provider.of<TrainingsProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .getVewAllTraining(
-                                                  pageCount,
-                                                  newTrainingCategoryModel?.id,
-                                                  newPradeshModel?.id,
-                                                  districtNewModel?.id,
-                                                  newMuniModel?.muniId);
-                                        } else {
-                                          showCustomSnackBar(
-                                              'No more page', context);
-                                        }
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.all(5),
-                                        decoration:
-                                            selectNextButtonBoxDecoration(),
-                                        width: 20,
-                                        height: 15,
-                                        child: Container(
-                                            width: 10,
-                                            height: 10,
-                                            margin: EdgeInsets.all(3),
-                                            child: SvgPicture.asset(
-                                              AppImages.ic_back_forword,
-                                              width: 10,
-                                              height: 10,
-                                            )),
-                                      ),
-                                    );
-                                  } else if (index == lastItemIndexNumber) {
-                                    return InkWell(
-                                      onTap: () {
-                                        if (linkMeta.url != null) {
-                                          isSearching == true
-                                              ? sPageCount = sPageCount + 1
-                                              : pageCount = pageCount + 1;
-                                          print('fshdghdsh${pageCount}');
-                                          Provider.of<TrainingsProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .getVewAllTraining(
-                                                  pageCount,
-                                                  newTrainingCategoryModel?.id,
-                                                  newPradeshModel?.id,
-                                                  districtNewModel?.id,
-                                                  newMuniModel?.muniId);
-                                        } else {
-                                          showCustomSnackBar(
-                                              'No more page', context);
-                                        }
-                                      },
-                                      child: Container(
-                                          margin: EdgeInsets.all(5),
-                                          decoration:
-                                              unselectNextButtonBoxDecoration(),
-                                          width: 22,
-                                          height: 22,
-                                          child: Container(
-                                              margin: EdgeInsets.all(2),
-                                              child: SvgPicture.asset(
-                                                AppImages.ic_forword,
-                                              ))),
-                                    );
-                                  } else {
-                                    return InkWell(
-                                      onTap: () {
-                                        pageCount = int.parse(linkMeta.label!);
-                                        Provider.of<TrainingsProvider>(context,
+                      child: Text(
+                        'सम्बन्धित तालिमहरू',
+                        style: TextStyle(
+                            color: ColorsResource.PRAYMARY_TEXT_COLOR,
+                            fontSize: Dimensions.BODY_16),
+                      ),
+                    ),
+                    Container(
+                      height: 1,
+                      color: ColorsResource.PRAYMARY_TEXT_COLOR,
+                    )
+                  ],
+                ),
+              ),
+                  Expanded(
+                flex: 9,
+                child: viewAllTrainingsProvider.viewAllTrainingsModel != null
+                    ? ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: viewAllTrainingsProvider
+                            .viewAllTrainingsDataList!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          ViewAllTrainingsData viewAllTrainingsData =
+                              viewAllTrainingsProvider
+                                  .viewAllTrainingsDataList![index];
+
+                          return TrainingItem(
+                            viewAllTrainingsData,
+                            // ()
+                            // {
+
+                            //   Navigator.push(context, MaterialPageRoute(builder:(context) => TrainingSingleItemDetails(viewAllTrainingsData)));
+                            // }
+                          );
+                        },
+                      )
+                    : Container(
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+              ),
+            
+             Expanded(
+                flex: 1,
+                child: Container(
+                  margin: EdgeInsets.only(top: 15, bottom: 10),
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    width: MediaQuery.of(context).size.width,
+                    height: 33,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: viewAllTrainingsProvider.viewAllTrainingsModel !=
+                              null
+                          ? ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: viewAllTrainingsProvider
+                                  .viewAllTrainingsModel!.meta!.links!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                List<LinksMeta>? linkList =
+                                    viewAllTrainingsProvider
+                                        .viewAllTrainingsModel!.meta!.links!;
+                                LinksMeta linkMeta = viewAllTrainingsProvider
+                                    .viewAllTrainingsModel!
+                                    .meta!
+                                    .links![index];
+                                int lastItemIndexNumber = linkList.length - 1;
+                                if (index == 0) {
+                                  return InkWell(
+                                    onTap: () {
+                                      if (linkMeta.url != null) {
+                                        // pageCount = pageCount - 1;
+                                        isSearching == true
+                                            ? sPageCount = sPageCount - 1
+                                            : pageCount = pageCount - 1;
+                                        Provider.of<TrainingsProvider>(
+                                                context,
                                                 listen: false)
                                             .getVewAllTraining(
                                                 pageCount,
@@ -799,47 +733,117 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                                 newPradeshModel?.id,
                                                 districtNewModel?.id,
                                                 newMuniModel?.muniId);
-                                      },
+                                      } else {
+                                        showCustomSnackBar(
+                                            'No more page', context);
+                                      }
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.all(5),
+                                      decoration:
+                                          selectNextButtonBoxDecoration(),
+                                      width: 20,
+                                      height: 15,
                                       child: Container(
+                                          width: 10,
+                                          height: 10,
+                                          margin: EdgeInsets.all(3),
+                                          child: SvgPicture.asset(
+                                            AppImages.ic_back_forword,
+                                            width: 10,
+                                            height: 10,
+                                          )),
+                                    ),
+                                  );
+                                } else if (index == lastItemIndexNumber) {
+                                  return InkWell(
+                                    onTap: () {
+                                      if (linkMeta.url != null) {
+                                        isSearching == true
+                                            ? sPageCount = sPageCount + 1
+                                            : pageCount = pageCount + 1;
+                                        print('fshdghdsh${pageCount}');
+                                        Provider.of<TrainingsProvider>(
+                                                context,
+                                                listen: false)
+                                            .getVewAllTraining(
+                                                pageCount,
+                                                newTrainingCategoryModel?.id,
+                                                newPradeshModel?.id,
+                                                districtNewModel?.id,
+                                                newMuniModel?.muniId);
+                                      } else {
+                                        showCustomSnackBar(
+                                            'No more page', context);
+                                      }
+                                    },
+                                    child: Container(
                                         margin: EdgeInsets.all(5),
-                                        decoration: linkMeta.active == true
-                                            ? selectPossitionButtonBoxDecoration()
-                                            : unselectPossitionButtonBoxDecoration(),
+                                        decoration:
+                                            unselectNextButtonBoxDecoration(),
                                         width: 22,
                                         height: 22,
                                         child: Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: MediaQuery.of(context)
-                                                .size
-                                                .height,
-                                            child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  '${linkMeta.label}',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: ColorsResource
-                                                          .PRAYMARY_TEXT_COLOR),
-                                                ))),
-                                      ),
-                                    );
-                                  }
-                                },
-                              )
-                            : Container(
-                                child: const Align(
-                                  alignment: Alignment.center,
-                                  child: CircularProgressIndicator(),
-                                ),
+                                            margin: EdgeInsets.all(2),
+                                            child: SvgPicture.asset(
+                                              AppImages.ic_forword,
+                                            ))),
+                                  );
+                                } else {
+                                  return InkWell(
+                                    onTap: () {
+                                      pageCount = int.parse(linkMeta.label!);
+                                      Provider.of<TrainingsProvider>(context,
+                                              listen: false)
+                                          .getVewAllTraining(
+                                              pageCount,
+                                              newTrainingCategoryModel?.id,
+                                              newPradeshModel?.id,
+                                              districtNewModel?.id,
+                                              newMuniModel?.muniId);
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.all(5),
+                                      decoration: linkMeta.active == true
+                                          ? selectPossitionButtonBoxDecoration()
+                                          : unselectPossitionButtonBoxDecoration(),
+                                      width: 22,
+                                      height: 22,
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width,
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height,
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                '${linkMeta.label}',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: ColorsResource
+                                                        .PRAYMARY_TEXT_COLOR),
+                                              ))),
+                                    ),
+                                  );
+                                }
+                              },
+                            )
+                          : Container(
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator(),
                               ),
-                      ),
+                            ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            
+             
+             
+            ],
           ),
         ),
       ),
