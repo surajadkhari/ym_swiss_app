@@ -167,7 +167,7 @@ class ApiClient {
   final dio = Dio();
 
   Future<List<NewPradeshModel>> getPradeshData() async {
-    final result = await dio.get("http://139.59.21.174/api/pradesh");
+    final result = await dio.get("http://103.175.192.138/api/pradesh");
     final responseData = result.data;
     return List.from(responseData['data'])
         .map((e) => NewPradeshModel.fromMap(e))
@@ -175,7 +175,7 @@ class ApiClient {
   }
 
   Future<List<DistrictNewModel>> getDistricts() async {
-    final result = await dio.get("http://139.59.21.174/api/districts");
+    final result = await dio.get("http://103.175.192.138/api/districts");
     final responseData = result.data;
     return List.from(responseData['data'])
         .map((e) => DistrictNewModel.fromMap(e))
@@ -183,7 +183,7 @@ class ApiClient {
   }
 
   Future<List<NewMuniModel>> getMunicipalities() async {
-    final result = await dio.get("http://139.59.21.174/api/municipalities");
+    final result = await dio.get("http://103.175.192.138/api/municipalities");
     final responseData = result.data;
     return List.from(responseData['data'])
         .map((e) => NewMuniModel.fromMap(e))
@@ -191,7 +191,7 @@ class ApiClient {
   }
 
   Future<List<NewGradeModel>> getGrades() async {
-    final result = await dio.get("http://139.59.21.174/api/category");
+    final result = await dio.get("http://103.175.192.138/api/category");
     final responseData = result.data;
     return List.from(responseData['data'])
         .map((e) => NewGradeModel.fromMap(e))
@@ -199,7 +199,7 @@ class ApiClient {
   }
 
   Future<List<NewTrainingCategoryModel>> getTrainingCategory() async {
-    final result = await dio.get("http://139.59.21.174/api/training/category");
+    final result = await dio.get("http://103.175.192.138/api/training/category");
     final responseData = result.data;
 
     return List.from(responseData["data"])
@@ -208,7 +208,7 @@ class ApiClient {
   }
 
   Future<List<LatestTrainingModel>> newgetLatestTraining() async {
-    final result = await dio.get("http://139.59.21.174/api/latest/trainings");
+    final result = await dio.get("http://103.175.192.138/api/latest/trainings");
     final responseData = result.data;
 
     return List.from(responseData["data"])
@@ -217,7 +217,7 @@ class ApiClient {
   }
 
   Future<List<LatestJobModel>> newgetLatestJobs() async {
-    final result = await dio.get("http://139.59.21.174/api/latest/jobs");
+    final result = await dio.get("http://103.175.192.138/api/latest/jobs");
 
     log(result.data.toString());
     final responseData = result.data;

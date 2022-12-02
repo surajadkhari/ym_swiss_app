@@ -48,6 +48,9 @@ class AppConstants {
   static String Create_a_new_account = 'नयाँ खाता सिर्जना गर्नुहोस्';
   static String Register = 'दर्ता गर्नुहोस्';
 
+//No data available
+static String noLatestTrainingAndJob="कुनै रोजगारीहरु/तालिम उपलब्ध छैन";
+static String noNewsAvailable="कुनै समाचार / सूचना उपलब्ध छैन";
   //Registation Screen
   static String NAME = 'नाम';
 
