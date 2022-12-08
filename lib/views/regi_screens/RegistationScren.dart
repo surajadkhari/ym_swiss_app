@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ import 'package:lmiis/views/home_screens/home_screen.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/datasource/remote/dio/dio_client.dart';
+import '../../models/ResponsModels/caste_model.dart';
 import '../../models/SendDataModels/RegistationSendModel.dart';
 import '../../provider/LocationProvider.dart';
 import '../../utils/Apis.dart';
@@ -46,8 +49,12 @@ class _RegistationScreenState extends State<RegistationScreen> {
   FocusNode otherJobFocusNode = FocusNode();
   var genderValueWord = AppConstants.select_gender;
   String genderHintValueword = AppConstants.select_gender;
+   String castHintValueword = AppConstants.caste;
 //  final genderWord = [AppConstants.select_gender, AppConstants.male,AppConstants.female,AppConstants.other];
   int genderId = 0;
+  int casetId = 0;
+  bool isCasteSelected = false;
+  NewCasteModel? newCasteModel;
 
   var jobCategoryValueWord = AppConstants.Please_stay;
   String jobCategoryHintValueWord = AppConstants.Please_stay;
@@ -102,9 +109,10 @@ class _RegistationScreenState extends State<RegistationScreen> {
 
   String imageName = '';
   String? imagePath;
-
+  late Future<List<NewCasteModel>> fnewCaste;
   @override
   void initState() {
+    fnewCaste = ApiClient().newsCasteList();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // Provider.of<LocationProvider>(context, listen: false).getPradesh();
       // Provider.of<LocationProvider>(context, listen: false).tGetPradesh();
@@ -206,6 +214,7 @@ class _RegistationScreenState extends State<RegistationScreen> {
                           const SizedBox(
                             height: 5,
                           ),
+
                           CustomTextFieldWithTitle(
                             AppConstants.E_mail,
                             emailTextEditingController,
@@ -251,14 +260,182 @@ class _RegistationScreenState extends State<RegistationScreen> {
                             height: 5,
                           ),
                           LoginTextFormFiled(
-                          height:80,
+                            height: 80,
                             AppConstants.Mobile_number,
                             mobileNumberTextEditingController,
                             mobileNumberFocusNode,
                             inputType: AppConstants.PHONE,
                             isShowRequrStar: true,
-                            ismaxLenght:true,
+                            ismaxLenght: true,
                           ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 0, left: 0, bottom: 5),
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                Text(
+                                  AppConstants.caste,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontSize: Dimensions.BODY_14,
+                                      color: ColorsResource.TEXT_BLACK_COLOR,
+                                      fontWeight:
+                                          Dimensions.FONT_MEDIUM_NORMUL),
+                                ),
+                                Text(
+                                  ' *',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontSize: Dimensions.BODY_14,
+                                      color: ColorsResource.TEXT_READ_COLOR,
+                                      fontWeight:
+                                          Dimensions.FONT_MEDIUM_NORMUL),
+                                ),
+                              ],
+                            ),
+                          ),
+                          FutureBuilder<List<NewCasteModel>>(
+                              future: fnewCaste,
+                              builder: (context, snap) {
+                                if (snap.hasData) {
+                                  return Container(
+                                    height: 54,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.1,
+                                    decoration: myBoxDecoration(),
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 10, right: 10),
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: DropdownButton<NewCasteModel>(
+                                          elevation: 16,
+                                          isExpanded: true,
+                                          style: GoogleFonts.poppins(
+                                              color: ColorsResource
+                                                  .TEXT_BLACK_COLOR),
+                                          underline: Container(
+                                            height: 2,
+                                            color: Colors.transparent,
+                                          ),
+                                          hint: Text(
+                                            castHintValueword+"छान्नुहोस",
+                                            style: GoogleFonts.poppins(
+                                                fontWeight: Dimensions
+                                                    .FONT_MEDIUM_NORMUL,
+                                                fontSize: Dimensions.BODY_16,
+                                                color: ColorsResource
+                                                    .TEXT_GRAY_COLOR),
+                                          ),
+                                          iconSize: 30,
+                                          value:
+                                              newCasteModel, //add this parameter
+                                          items: snap.data!.map(
+                                              (NewCasteModel newcasteModel) {
+                                            return DropdownMenuItem(
+                                              value: newcasteModel,
+                                              child: Text(
+                                                newcasteModel.name,
+                                                style: TextStyle(
+                                                  fontWeight: Dimensions
+                                                      .FONT_MEDIUM_NORMUL,
+                                                  fontSize: Dimensions.BODY_16,
+                                                  color: isCasteSelected
+                                                      ? ColorsResource
+                                                          .TEXT_BLACK_COLOR
+                                                      : ColorsResource
+                                                          .TEXT_GRAY_COLOR,
+                                                ),
+                                              ),
+                                            );
+                                          }).toList(),
+
+                                          onChanged: (selectedValue) {
+                                            setState(() {
+                                              isCasteSelected = true;
+                                              newCasteModel = selectedValue;
+                                              casetId = newCasteModel!.id;
+                                              log(casetId.toString());
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                  //  Container(
+                                  //   height: 50,
+                                  //   width:
+                                  //       MediaQuery.of(context).size.width / 1.1,
+                                  //   decoration: myBoxDecoration(),
+                                  //   child: Container(
+                                  //     margin: const EdgeInsets.only(
+                                  //         left: 10, right: 10),
+                                  //     child: Align(
+                                  //       alignment: Alignment.centerRight,
+                                  //       child: DropdownButton<NewCasteModel>(
+                                  //         elevation: 16,
+                                  //         isExpanded: true,
+                                  //         style: GoogleFonts.poppins(
+                                  //             color: ColorsResource
+                                  //                 .TEXT_BLACK_COLOR),
+                                  //         underline: Container(
+                                  //           height: 2,
+                                  //           color: Colors.transparent,
+                                  //         ),
+                                  //         hint: Text(
+                                  //           "जातियता छान्नुहोस",
+                                  //           style: GoogleFonts.poppins(
+                                  //               fontWeight: Dimensions
+                                  //                   .FONT_MEDIUM_NORMUL,
+                                  //               fontSize: Dimensions.BODY_16,
+                                  //               color: isCasteSelected
+                                  //                   ? ColorsResource
+                                  //                       .TEXT_BLACK_COLOR
+                                  //                   : ColorsResource
+                                  //                       .TEXT_GRAY_COLOR),
+                                  //         ),
+                                  //         iconSize: 30,
+                                  //         value: newCasteModel,
+                                  //         //add this parameter
+                                  //         items:
+                                  // snap.data!.map(
+                                  //             (NewCasteModel newcasteModel) {
+                                  //           return DropdownMenuItem(
+                                  //             value: newcasteModel,
+                                  //             child: Text(
+                                  //               newcasteModel.name,
+                                  //               style: TextStyle(
+                                  //                 fontWeight: Dimensions
+                                  //                     .FONT_MEDIUM_NORMUL,
+                                  //                 fontSize: Dimensions.BODY_16,
+                                  //                 color: isCasteSelected
+                                  //                     ? ColorsResource
+                                  //                         .TEXT_BLACK_COLOR
+                                  //                     : ColorsResource
+                                  //                         .TEXT_GRAY_COLOR,
+                                  //               ),
+                                  //             ),
+                                  //           );
+                                  //         }).toList(),
+                                  //         onChanged: (selectedValue) {
+                                  //           setState(() {
+                                  //             isCasteSelected = true;
+                                  //             newCasteModel = selectedValue;
+                                  //             casetId = newCasteModel!.id;
+                                  //             log(casetId.toString());
+                                  //           });
+                                  //         },
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // );
+                                } else {
+                                  return Center(
+                                    child: Container(),
+                                  );
+                                }
+                              })
                         ],
                       ),
                     ),
@@ -297,7 +474,7 @@ class _RegistationScreenState extends State<RegistationScreen> {
                                 width: MediaQuery.of(context).size.width - 90,
                                 child: RichText(
                                   text: TextSpan(
-                                    text: _myActivitiesString!.length < 0
+                                    text: _myActivitiesString!.isEmpty
                                         ? 'कृपया छन्नुहोस्'
                                         : '',
                                     style: GoogleFonts.poppins(
@@ -326,7 +503,6 @@ class _RegistationScreenState extends State<RegistationScreen> {
                           AppConstants.enterOtherJobField,
                           otherjobTextEditingController,
                           otherJobFocusNode,
-                         
                           isShowRequrStar: false,
                         )),
 
@@ -632,7 +808,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
                       String mobileNumber =
                           mobileNumberTextEditingController.text;
                       int gender = genderId;
-                         String otherJob = otherjobTextEditingController.text;
+                      int cast= casetId;
+                      String otherJob = otherjobTextEditingController.text;
 
                       ///Per
                       int perPradeshId = pradashWordsId;
@@ -666,20 +843,24 @@ class _RegistationScreenState extends State<RegistationScreen> {
                       //   return showCustomSnackBar(
                       //       'कृपया आवश्यक फिल्ड भर्नुहोस्', context);
                       // }
-                           if (mobileNumber.isEmpty) {
-                          showCustomSnackBar(
-                           'कृपया मोबाइल नम्बर प्रविष्ट गर्नुहोस्', context);
-                          return;
-                        }
-                        if (mobileNumber.length <= 9) {
-                          showCustomSnackBar(
-                           "कृपया दस अंक प्रविष्ट गर्नुहोस्",
-                              context);
-                          return;
-                        }
+                      if (mobileNumber.isEmpty) {
+                        showCustomSnackBar(
+                            'कृपया मोबाइल नम्बर प्रविष्ट गर्नुहोस्', context);
+                        return;
+                      }
+                      if (mobileNumber.length <= 9) {
+                        showCustomSnackBar(
+                            "कृपया दस अंक प्रविष्ट गर्नुहोस्", context);
+                        return;
+                      }
                       if (gender == 0) {
                         return showCustomSnackBar(
                             "कृपया लिङ्ग छान्नुहोस्", context);
+                            
+                      }  if (cast == 0) {
+                        return showCustomSnackBar(
+                            "कृपया जातियता  छान्नुहोस्", context);
+                            
                       }
                       if (perPradeshId == 0) {
                         return showCustomSnackBar(
@@ -781,8 +962,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
                         "preference_job_cat[]": _myActivities,
                         "document_type": docType,
                         "gender": gender,
-                        "other_skills":otherJob
-                        
+                        "other_skills": otherJob,
+                        "ethnicity_type":cast
                       };
                       if (imagePath != null) {
                         data['document_type_file'] = MultipartFile.fromFileSync(
@@ -880,7 +1061,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -998,7 +1180,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1058,7 +1241,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1125,7 +1309,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1198,7 +1383,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1267,7 +1453,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1327,7 +1514,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1395,7 +1583,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1486,7 +1675,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1564,7 +1754,8 @@ class _RegistationScreenState extends State<RegistationScreen> {
             child: DropdownButton<String>(
               elevation: 16,
               isExpanded: true,
-              style: GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
+              style:
+                  GoogleFonts.poppins(color: ColorsResource.TEXT_BLACK_COLOR),
               underline: Container(
                 height: 2,
                 color: Colors.transparent,
@@ -1754,6 +1945,7 @@ class _RegistationScreenState extends State<RegistationScreen> {
                           height: 250,
                           child: SingleChildScrollView(
                             child: MultiSelectFormField(
+                              
                               autovalidate: AutovalidateMode.disabled,
                               chipBackGroundColor:
                                   ColorsResource.TEXT_GRAY_COLOR,

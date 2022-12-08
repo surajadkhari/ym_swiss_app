@@ -505,10 +505,10 @@ class LocationProvider with ChangeNotifier {
 
   Future<ResponseModel> getJobCategory() async {
     allJobCategoryDataList = [
-      {
-        "display": AppConstants.Please_stay,
-        "value": "${0}",
-      }
+      // {
+      //   "display": AppConstants.Please_stay,
+      //   "value": "${0}",
+      // }
     ];
     viewAllJobCategoryDataList = [];
     viewAllJobCategoryDataListSting = [AppConstants.Please_stay];

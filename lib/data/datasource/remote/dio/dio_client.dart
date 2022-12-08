@@ -11,6 +11,7 @@ import 'package:lmiis/models/new_grade_model.dart';
 import 'package:lmiis/models/new_muni_model.dart';
 import 'package:lmiis/models/pradeshModel.dart';
 
+import '../../../../models/ResponsModels/caste_model.dart';
 import '../../../../models/ResponsModels/latest_training_model.dart';
 import '../../../../utils/AppConstants.dart';
 import 'logging_interceptor.dart';
@@ -199,7 +200,8 @@ class ApiClient {
   }
 
   Future<List<NewTrainingCategoryModel>> getTrainingCategory() async {
-    final result = await dio.get("http://103.175.192.138/api/training/category");
+    final result =
+        await dio.get("http://103.175.192.138/api/training/category");
     final responseData = result.data;
 
     return List.from(responseData["data"])
@@ -225,5 +227,18 @@ class ApiClient {
     return List.from(responseData["data"])
         .map((e) => LatestJobModel.fromJson(e))
         .toList();
+  }
+
+  Future<List<NewCasteModel>> newsCasteList() async {
+    final result = await dio.get("http://103.175.192.138/api/cast");
+
+    log(result.data.toString());
+    final responseData = result.data;
+    List value = responseData["data"];
+    return value.map((e) => NewCasteModel.fromMap(e)).toList();
+
+    // return List.from(responseData["data"])
+    //     .map((e) => fromMap.fromJson(e))
+    //     .toList();
   }
 }

@@ -44,17 +44,17 @@ class AppConstants {
   static String lag_in = 'लग - इन';
   static String E_mail = 'ईमेल';
   static String Password = 'पासवर्ड';
-  static String Forgot_your_password = 'पसवर्ड बिर्सनु भयो?';
+  static String Forgot_your_password = 'पासवर्ड बिर्सनु भयो?';
   static String Create_a_new_account = 'नयाँ खाता सिर्जना गर्नुहोस्';
   static String Register = 'दर्ता गर्नुहोस्';
 
 //No data available
-static String noLatestTrainingAndJob="कुनै रोजगारीहरु/तालिम उपलब्ध छैन";
-static String noNewsAvailable="कुनै समाचार / सूचना उपलब्ध छैन";
+  static String noLatestTrainingAndJob = "कुनै रोजगारीहरु/तालिम उपलब्ध छैन";
+  static String noNewsAvailable = "कुनै समाचार / सूचना उपलब्ध छैन";
   //Registation Screen
   static String NAME = 'नाम';
 
-  static String Remember_the_password = 'पसवर्ड सुनिच्छित गर्नुहोस';
+  static String Remember_the_password = 'पासवर्ड सुनिच्छित गर्नुहोस';
   static String enterOtherJobField =
       'यदी तपाईंको आरु कुनै दक्षताको क्षेत्र भएमा यहाँ लेख्नुहोस';
 
@@ -62,7 +62,7 @@ static String noNewsAvailable="कुनै समाचार / सूचना
 
   static String Permanent_address = 'स्थायी ठेगाना';
 
-  static String Your_area_of_expertise = 'तपाईंको दक्ष्यताको क्षेत्र';
+  static String Your_area_of_expertise = 'तपाईंको दक्षताको क्षेत्र';
 
   static String Identification_card = 'परिचय पत्र';
 
@@ -76,7 +76,7 @@ static String noNewsAvailable="कुनै समाचार / सूचना
   static String other = 'अन्य';
   static String male = 'पुरुष';
   static String female = 'महिला';
-
+  static String caste = "जातियता ";
   static String Temporary_address = 'अस्थायी ठेगाना';
 
   static String please_state_channuhos = 'कृपया प्रदेश छन्नुहोस ';
