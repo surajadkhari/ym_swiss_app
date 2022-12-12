@@ -29,7 +29,7 @@ import '../widgets/custom_text_field.dart';
 import '../widgets/custtom_button.dart';
 
 class LogInScreen extends StatefulWidget {
-  LogInScreen(
+  const LogInScreen(
       {Key? key,
       this.doCheckLastScreen = false,
       this.screenType,
@@ -58,7 +58,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void dimisskeyboard() {
     FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) ;
+    if (!currentFocus.hasPrimaryFocus) {}
     return currentFocus.unfocus();
   }
 
@@ -214,7 +214,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                                                   .viewAllTrainingsData!):widget.screenType ==
                                                               "latest-job"?
                                                            LatestJobDetailScreen(widget.latestJobModel!):widget.screenType ==
-                                                              "latest-training"?LatestTrainingDetailScreen(widget.latestTrainingModel!):HomeScreen())
+                                                              "latest-training"?LatestTrainingDetailScreen(widget.latestTrainingModel!):const HomeScreen())
                                       // MaterialPageRoute(
                                       //   builder: (BuildContext context) =>
                                       //       widget.screenType == "job_description"

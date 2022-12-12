@@ -1,6 +1,11 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lmiis/utils/colors_resource.dart';
+import 'package:lmiis/views/home_screens/home_screen.dart';
+import 'package:lmiis/views/login_screens/logIn_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/SendDataModels/ForegetPasswordSendModel.dart';
@@ -23,17 +28,15 @@ class _PasswordResetState extends State<PasswordReset> {
   TextEditingController emailTextEditingController = TextEditingController();
   FocusNode emailFocusNode = FocusNode();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsResource.PRAYMERY_COLOR,
       body: SingleChildScrollView(
         child: Consumer<AuthProvider>(
-          builder: (context,authProvider,child) =>
-          Container(
+          builder: (context, authProvider, child) => Container(
             width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(top: 40,left: 10,right: 10),
+            margin: EdgeInsets.only(top: 40, left: 10, right: 10),
             color: ColorsResource.PRAYMERY_COLOR,
             child: Column(
               children: [
@@ -41,62 +44,78 @@ class _PasswordResetState extends State<PasswordReset> {
                 Row(
                   children: [
                     InkWell(
-                        onHover: (_){},
-                        onTap: (){
-
-
-
-
-
+                        onHover: (_) {},
+                        onTap: () {
                           Navigator.of(context).pop();
                         },
-
                         child: SvgPicture.asset(AppImages.ic_back_blue)),
                     SizedBox(
                       width: MediaQuery.of(context).size.width - 65,
                       child: Text(
                         AppConstants.password_reset,
-                        style: TextStyle(fontSize: Dimensions.BODY_30,fontWeight: Dimensions.FONT_MEDIUM,color: ColorsResource.PRAYMARY_TEXT_COLOR),
+                        style: TextStyle(
+                            fontSize: Dimensions.BODY_30,
+                            fontWeight: Dimensions.FONT_MEDIUM,
+                            color: ColorsResource.PRAYMARY_TEXT_COLOR),
                         textAlign: TextAlign.center,
-
                       ),
                     )
                   ],
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(left: 10,right: 10),
+                    margin: EdgeInsets.only(left: 10, right: 10),
                     child: Column(
-                        children: [
-                          SizedBox(height: 70,),
-                          CustomTextFieldWithTitle(AppConstants.Enter_your_email,emailTextEditingController,emailFocusNode,insideHintText:AppConstants.E_mail),
-                          SizedBox(height: 50,),
-                          CustomButton(AppConstants.Get_the_password,(){
+                      children: [
+                        SizedBox(
+                          height: 70,
+                        ),
+                        CustomTextFieldWithTitle(AppConstants.Enter_your_email,
+                            emailTextEditingController, emailFocusNode,
+                            insideHintText: AppConstants.E_mail),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        CustomButton(
+                          AppConstants.Get_the_password,
+                          () {
                             String email = emailTextEditingController.text;
 
-
-                            if(email == ''){
-                              return showCustomSnackBar(AppConstants.Enter_your_email,context);
+                            if (email == '') {
+                              return showCustomSnackBar(
+                                  AppConstants.Enter_your_email, context);
                             }
 
-                            ForgetPasswordSendModel forgetPasswordSendModel = ForgetPasswordSendModel(email: email);
+                            ForgetPasswordSendModel forgetPasswordSendModel =
+                                ForgetPasswordSendModel(email: email);
 
-                            authProvider.forgetPassword(forgetPasswordSendModel).then((value) {
-                              if(value.isSuccess){
+                            authProvider
+                                .forgetPassword(forgetPasswordSendModel)
+                                .then((value) {
+                              if (value.isSuccess) {
                                 emailTextEditingController.text = '';
 
-                                showCustomSnackBar(value.message,context,isError: false);
-                                successDialog(AppConstants.Your_password_to_your_email_has_been_sent);
-                              }else{
-                                showCustomSnackBar(value.message,context);
+                                // showCustomSnackBar(value.message,context,isError: false);
+                                successDialog(AppConstants
+                                    .Your_password_to_your_email_has_been_sent);
+                                Duration(seconds: 4);
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (ctx) => LogInScreen()),
+                                    (route) => false);
+                              } else {
+                                // log(value.message)
+                                showCustomSnackBar(value.message, context);
                               }
                             });
-
-
-
-                          },wight: 230,),
-                        ],
+                          },
+                          wight: 230,
+                        ),
+                      ],
                     )),
               ],
             ),
@@ -106,13 +125,13 @@ class _PasswordResetState extends State<PasswordReset> {
     );
   }
 
-
-  successDialog(String title){
+  successDialog(String title) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)), //this right here
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3.0)), //this right here
               child: Container(
                 height: 200,
                 child: Column(
@@ -137,30 +156,39 @@ class _PasswordResetState extends State<PasswordReset> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
-                            onHover: (_){},
-                            onTap: (){
+                            onHover: (_) {},
+                            onTap: () {
                               Navigator.of(context).pop();
                             },
                             child: Container(
                                 margin: EdgeInsets.only(right: 10),
-                                child: SvgPicture.asset(AppImages.ic_close,color: ColorsResource.TEXT_BLACK_COLOR,)),
+                                child: SvgPicture.asset(
+                                  AppImages.ic_close,
+                                  color: ColorsResource.TEXT_BLACK_COLOR,
+                                )),
                           )
                         ],
                       ),
                     ),
                     Container(
-                        margin: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
-                        child: Text(title,textAlign:TextAlign.center, style: TextStyle(fontSize: Dimensions.BODY_20,color: ColorsResource.TEXT_BLACK_COLOR),)),
-                    SizedBox(height: 20,),
+                        margin: EdgeInsets.only(
+                            left: 10, right: 10, top: 10, bottom: 10),
+                        child: Text(
+                          title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: Dimensions.BODY_20,
+                              color: ColorsResource.TEXT_BLACK_COLOR),
+                        )),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Align(
                         alignment: Alignment.center,
                         child: SvgPicture.asset(AppImages.ic_sucses))
                   ],
                 ),
-              )
-          );
-        }
-    );
+              ));
+        });
   }
-
 }
