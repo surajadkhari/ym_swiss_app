@@ -27,7 +27,7 @@ class PasswordReset extends StatefulWidget {
 class _PasswordResetState extends State<PasswordReset> {
   TextEditingController emailTextEditingController = TextEditingController();
   FocusNode emailFocusNode = FocusNode();
-
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,42 +79,58 @@ class _PasswordResetState extends State<PasswordReset> {
                         SizedBox(
                           height: 50,
                         ),
-                        CustomButton(
-                          AppConstants.Get_the_password,
-                          () {
-                            String email = emailTextEditingController.text;
+                        isLoading
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : CustomButton(
+                                AppConstants.Get_the_password,
+                                ()async {
+                                  String email =
+                                      emailTextEditingController.text;
 
-                            if (email == '') {
-                              return showCustomSnackBar(
-                                  AppConstants.Enter_your_email, context);
-                            }
+                                  if (email == '') {
+                                    return showCustomSnackBar(
+                                        AppConstants.Enter_your_email, context);
+                                  }
 
-                            ForgetPasswordSendModel forgetPasswordSendModel =
-                                ForgetPasswordSendModel(email: email);
+                                  ForgetPasswordSendModel
+                                      forgetPasswordSendModel =
+                                      ForgetPasswordSendModel(email: email);
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                               await   authProvider
+                                      .forgetPassword(forgetPasswordSendModel)
+                                      .then((value) {
+                                    if (value.isSuccess) {
+                                      emailTextEditingController.text = '';
 
-                            authProvider
-                                .forgetPassword(forgetPasswordSendModel)
-                                .then((value) {
-                              if (value.isSuccess) {
-                                emailTextEditingController.text = '';
-
-                                // showCustomSnackBar(value.message,context,isError: false);
-                                successDialog(AppConstants
-                                    .Your_password_to_your_email_has_been_sent);
-                                Duration(seconds: 4);
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    CupertinoPageRoute(
-                                        builder: (ctx) => LogInScreen()),
-                                    (route) => false);
-                              } else {
-                                // log(value.message)
-                                showCustomSnackBar(value.message, context);
-                              }
-                            });
-                          },
-                          wight: 230,
-                        ),
+                                      // showCustomSnackBar(value.message,context,isError: false);
+                                      // successDialog(AppConstants
+                                      //     .Your_password_to_your_email_has_been_sent);
+                                 
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          CupertinoPageRoute(
+                                              builder: (ctx) => LogInScreen()),
+                                          (route) => false);  
+                                             showCustomSnackBar(
+                                         AppConstants
+                                          .Your_password_to_your_email_has_been_sent, context,isError :false);
+                                          //  successDialog(AppConstants
+                                          // .Your_password_to_your_email_has_been_sent);
+                                    } else {
+                                      // log(value.message)
+                                      showCustomSnackBar(
+                                          value.message, context);
+                                    }  setState(() {
+                                    isLoading = false;
+                                  });
+                                  });
+                                },
+                                wight: 230,
+                              ),
                       ],
                     )),
               ],
