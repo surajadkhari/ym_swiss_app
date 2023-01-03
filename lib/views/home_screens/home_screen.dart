@@ -907,6 +907,46 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
+                  ),  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const TrainingServiceProvider()));
+                    },
+                    onHover: (_) {},
+                    child: ListTile(
+                      title: Container(
+                        child: Row(
+                          children: [
+                            ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minWidth: 20,
+                                minHeight: 20,
+                                maxWidth: 20,
+                                maxHeight: 20,
+                              ),
+                              child: SvgPicture.asset(
+                                AppImages
+                                    .ic_employment_support_service_provider,
+                                width: 20,
+                                height: 20,
+                              ),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  AppConstants.aboutUs,
+                                  style: TextStyle(
+                                      fontSize: Dimensions.BODY_16,
+                                      color:
+                                          ColorsResource.PRAYMARY_TEXT_COLOR),
+                                ))
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                   Expanded(child: Container()),
                   token.isNotEmpty

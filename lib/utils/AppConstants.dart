@@ -107,6 +107,7 @@ class AppConstants {
   static String information_news = 'सूचना/समाचार';
   static String see_more = 'अझ धेरै हेर्नुहोस्';
   static String information = 'सूचना';
+  static String aboutUs = "हाम्रोबारे";
 
 //Search Screen
   static String search_by_title = 'शीर्षक अनुसार खोज्नुहोस';
