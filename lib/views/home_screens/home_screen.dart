@@ -12,6 +12,7 @@ import 'package:lmiis/utils/AppConstants.dart';
 import 'package:lmiis/utils/app_images.dart';
 import 'package:lmiis/utils/colors_resource.dart';
 import 'package:lmiis/utils/dimensions.dart';
+import 'package:lmiis/views/download_screen/presentation/download_screen.dart';
 import 'package:lmiis/views/employment_list_screens/employment_list_screen.dart';
 import 'package:lmiis/views/home_screens/widgets/news_infomation_item.dart';
 import 'package:lmiis/views/login_screens/logIn_screen.dart';
@@ -26,6 +27,7 @@ import '../../models/ResponsModels/NewsNoticeModel.dart';
 import '../../models/ResponsModels/latest_training_model.dart';
 import '../../provider/MyProfileProvider.dart';
 import '../../provider/NewNoticePrvide.dart';
+import '../about_us/presentation/about_us_screen.dart';
 import '../employment_list_screens/widgets/latest_job_card.dart';
 import '../employment_support_service_Screens/employment_support_service_screen.dart';
 import '../my_profile_screens/ChnagePassword.dart';
@@ -867,7 +869,47 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  InkWell(
+                InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const TrainingServiceProvider()));
+                    },
+                    onHover: (_) {},
+                    child: ListTile(
+                      title: Container(
+                        child: Row(
+                          children: [
+                            ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minWidth: 20,
+                                minHeight: 20,
+                                maxWidth: 20,
+                                maxHeight: 20,
+                              ),
+                              child: SvgPicture.asset(
+                                AppImages
+                                    .ic_employment_support_service_provider,
+                                width: 20,
+                                height: 20,
+                              ),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  AppConstants.training_service_provider,
+                                  style: TextStyle(
+                                      fontSize: Dimensions.BODY_16,
+                                      color:
+                                          ColorsResource.PRAYMARY_TEXT_COLOR),
+                                ))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),    InkWell(
                     onTap: () {
                       Navigator.push(
                           context,
@@ -913,7 +955,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const TrainingServiceProvider()));
+                                  const AboutUsScreen()));
                     },
                     onHover: (_) {},
                     child: ListTile(
@@ -938,6 +980,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text(
                                   AppConstants.aboutUs,
+                                  style: TextStyle(
+                                      fontSize: Dimensions.BODY_16,
+                                      color:
+                                          ColorsResource.PRAYMARY_TEXT_COLOR),
+                                ))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const DownloadScreen()));
+                    },
+                    onHover: (_) {},
+                    child: ListTile(
+                      title: Container(
+                        child: Row(
+                          children: [
+                            ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minWidth: 20,
+                                minHeight: 20,
+                                maxWidth: 20,
+                                maxHeight: 20,
+                              ),
+                              child: SvgPicture.asset(
+                                AppImages
+                                    .ic_employment_support_service_provider,
+                                width: 20,
+                                height: 20,
+                              ),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  AppConstants.download,
                                   style: TextStyle(
                                       fontSize: Dimensions.BODY_16,
                                       color:
