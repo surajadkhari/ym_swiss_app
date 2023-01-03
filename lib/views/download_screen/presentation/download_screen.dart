@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lmiis/data/datasource/remote/dio/dio_client.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../utils/AppConstants.dart';
 import '../../../utils/colors_resource.dart';
@@ -102,7 +107,12 @@ class _DownloadScreenState extends State<DownloadScreen> {
                                   Icons.file_download_outlined,
                                   color: ColorsResource.PRAYMARY_TEXT_COLOR,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  openFile(
+                                    url:
+                                        "http://103.175.192.138${e.download_file}",
+                                  );
+                                },
                               ),
                             )
                           ],
@@ -135,6 +145,32 @@ class _DownloadScreenState extends State<DownloadScreen> {
             }
           },
         ));
+  }
+
+  Future openFile({required String url, String? fileName}) async {
+    final name = fileName ?? url.split("/").last;
+    final file = await downloadFile(url, name);
+    if (file == null) return;
+    print("paht${file.path}");
+    OpenFile.open(file.path);
+  }
+
+  Future<File?> downloadFile(String url, String name) async {
+    final appStorage = await getApplicationDocumentsDirectory();
+    final file = File("${appStorage.path}/$name");
+    try {
+      final response = await Dio().get(url,
+          options: Options(
+              responseType: ResponseType.bytes,
+              followRedirects: false,
+              receiveTimeout: 0));
+      final raf = file.openSync(mode: FileMode.write);
+      raf.writeFromSync(response.data);
+      await raf.close();
+      return file;
+    } catch (e) {
+      return null;
+    }
   }
 }
 

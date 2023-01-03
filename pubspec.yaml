@@ -39,12 +39,14 @@ dependencies:
   loading_gifs: ^0.3.0
   flutter_html: ^2.2.1
   image_picker: ^0.8.5+3
-  file_picker: ^5.1.0
+  file_picker: 
   http: ^0.13.5
   intl: ^0.17.0
   flutter_riverpod: ^2.1.1
   shimmer: ^2.0.0
   cached_network_image: ^3.2.3
+  open_file: ^3.2.1
+  path_provider: ^2.0.11
 
 
 

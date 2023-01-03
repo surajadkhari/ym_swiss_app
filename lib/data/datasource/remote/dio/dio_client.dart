@@ -260,7 +260,7 @@ class ApiClient {
   Future<List<DownloadModel>> downloadFile() async {
     final result = await dio.get("http://103.175.192.138/api/download");
 
-    log(result.data.toString());
+    // log(result.data.toString());
     final responseData = result.data;
     List value = responseData["data"];
     return value.map((e) => DownloadModel.fromJson(e)).toList();
