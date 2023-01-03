@@ -10,6 +10,7 @@ import 'package:lmiis/models/district_new_model.dart';
 import 'package:lmiis/models/new_grade_model.dart';
 import 'package:lmiis/models/new_muni_model.dart';
 import 'package:lmiis/models/pradeshModel.dart';
+import 'package:lmiis/views/about_us/data/model/about_us_model.dart';
 
 import '../../../../models/ResponsModels/caste_model.dart';
 import '../../../../models/ResponsModels/latest_training_model.dart';
@@ -236,6 +237,19 @@ class ApiClient {
     final responseData = result.data;
     List value = responseData["data"];
     return value.map((e) => NewCasteModel.fromMap(e)).toList();
+
+    // return List.from(responseData["data"])
+    //     .map((e) => fromMap.fromJson(e))
+    //     .toList();
+  }
+
+  Future<AboutUsModel> aboutUs() async {
+    final result = await dio.get("http://103.175.192.138/api/about-us");
+
+    log(result.data.toString());
+    final responseData = result.data;
+    var value = responseData["data"];
+    return AboutUsModel.fromJson(value);
 
     // return List.from(responseData["data"])
     //     .map((e) => fromMap.fromJson(e))
