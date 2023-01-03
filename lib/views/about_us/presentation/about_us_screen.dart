@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:lmiis/data/datasource/remote/dio/dio_client.dart';
 import 'package:lmiis/views/about_us/data/model/about_us_model.dart';
 
@@ -38,32 +37,43 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             AppConstants.aboutUs,
           ),
         ),
-        body: FutureBuilder<AboutUsModel>(
-          future: _future,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Html(
-                shrinkWrap: true,
-                data: snapshot.data!.aboutUs,
-                style: {
-                  "p": Style(
-                    lineHeight: const LineHeight(1.2),
-                    fontSize: const FontSize(20.0),
+        body: SingleChildScrollView(
+          child: FutureBuilder<AboutUsModel>(
+            future: _future,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                String description =
+                    snapshot.data!.aboutUs.replaceAll(RegExp(r'<[^>]*>'), '');
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    description,
+                    style: const TextStyle(height: 2),
                   ),
-                  "body": Style(
-                    lineHeight: const LineHeight(1),
-                    fontSize: const FontSize(22.0),
-                  )
-                },
-              );
-            } else if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
-            } else {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(),
-              );
-            }
-          },
+                );
+                // Html(
+                //   shrinkWrap: true,
+                //   data: snapshot.data!.aboutUs,
+                //   style: {
+                //     "p": Style(
+                //       lineHeight: const LineHeight(1.2),
+                //       fontSize: const FontSize(20.0),
+                //     ),
+                //     "body": Style(
+                //       lineHeight: const LineHeight(1),
+                //       fontSize: const FontSize(22.0),
+                //     )
+                //   },
+                // );
+              } else if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              }
+            },
+          ),
         ));
   }
 }
