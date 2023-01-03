@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class DownloadModel {
-  final String id;
+  final int id;
   final String title;
   final String published_at;
   final String description;
@@ -18,12 +18,12 @@ class DownloadModel {
   });
   factory DownloadModel.fromJson(Map<String, dynamic> json) {
     return DownloadModel(
-        id: json["id"],
-        title: json["title"],
-        published_at: json["published_at"],
-        description: json["description"],
-        download_file: json["download_file"],
-        created_at: json["created_at"],
-        updated_at: json["updated_at"]);
+        id: json["id"] ?? 0,
+        title: json["title"] ?? "",
+        published_at: json["published_at"] ?? "",
+        description: json["description"] ?? "",
+        download_file: json["download_file"] ?? "",
+        created_at: json["created_at"] ?? "",
+        updated_at: json["updated_at"] ?? "");
   }
 }

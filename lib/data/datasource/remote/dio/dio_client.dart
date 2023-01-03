@@ -15,6 +15,7 @@ import 'package:lmiis/views/about_us/data/model/about_us_model.dart';
 import '../../../../models/ResponsModels/caste_model.dart';
 import '../../../../models/ResponsModels/latest_training_model.dart';
 import '../../../../utils/AppConstants.dart';
+import '../../../../views/download_screen/data/model/download_model.dart';
 import 'logging_interceptor.dart';
 
 class DioClient {
@@ -222,7 +223,7 @@ class ApiClient {
   Future<List<LatestJobModel>> newgetLatestJobs() async {
     final result = await dio.get("http://103.175.192.138/api/latest/jobs");
 
-    log(result.data.toString());
+    // log(result.data.toString());
     final responseData = result.data;
 
     return List.from(responseData["data"])
@@ -233,7 +234,7 @@ class ApiClient {
   Future<List<NewCasteModel>> newsCasteList() async {
     final result = await dio.get("http://103.175.192.138/api/cast");
 
-    log(result.data.toString());
+    // log(result.data.toString());
     final responseData = result.data;
     List value = responseData["data"];
     return value.map((e) => NewCasteModel.fromMap(e)).toList();
@@ -246,10 +247,23 @@ class ApiClient {
   Future<AboutUsModel> aboutUs() async {
     final result = await dio.get("http://103.175.192.138/api/about-us");
 
-    log(result.data.toString());
+    // log(result.data.toString());
     final responseData = result.data;
     var value = responseData["data"];
     return AboutUsModel.fromJson(value);
+
+    // return List.from(responseData["data"])
+    //     .map((e) => fromMap.fromJson(e))
+    //     .toList();
+  }
+
+  Future<List<DownloadModel>> downloadFile() async {
+    final result = await dio.get("http://103.175.192.138/api/download");
+
+    log(result.data.toString());
+    final responseData = result.data;
+    List value = responseData["data"];
+    return value.map((e) => DownloadModel.fromJson(e)).toList();
 
     // return List.from(responseData["data"])
     //     .map((e) => fromMap.fromJson(e))
